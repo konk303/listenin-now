@@ -1,0 +1,346 @@
+@charset "utf-8";
+/* ============================================================
+listenin_now.css
+ stylesheet for mixi app "listenin' now"
+ http://mixi.jp/view_appli.pl?id=7793
+============================================================ */
+
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.7.0
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;font-weight:inherit;}del,ins{text-decoration:none;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:baseline;}sub{vertical-align:baseline;}legend{color:#000;}input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}input,button,textarea,select{*font-size:100%;}body{font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}select,input,button,textarea,button{font:99% arial,helvetica,clean,sans-serif;}table{font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+
+/* global */
+body {
+    margin-bottom:10px;
+    background:#eeeeee;
+}
+body > div {
+    max-width:600px;
+    margin-right:auto;
+}
+a {
+    color:#0187c5;
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+div.loading {
+    padding:5px;
+    text-align:center;
+}
+
+/* templates, don't show them. */
+div#templates {
+    display:none;
+}
+
+/* formAccount */
+form#formAccount {
+    padding:5px;
+    font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;
+}
+form#formAccount p {
+    padding-bottom:3px;
+}
+
+/* infoArea */
+div#infoArea {
+    padding:5px 5px 0;
+    border-bottom-left-radius:10px;
+    -moz-border-radius-bottomleft:10px;
+    -webkit-border-bottom-left-radius:10px;
+/*     border-bottom-right-radius:10px; */
+/*     -moz-border-radius-bottomright:10px; */
+/*     -webkit-border-bottom-right-radius:10px; */
+    box-shadow:2px 2px 2px #777777;
+    -webkit-box-shadow:2px 2px 2px #777777;
+    -moz-box-shadow:2px 2px 2px #777777;
+    background:#d10039;
+    text-align:right;
+    color:#e4e6d9;
+}
+div#infoArea a {
+    font-weight:bold;
+    color:#ffffff;
+}
+div#infoArea span.button_edit {
+    display:inline-block;
+    width:13px;
+    height:13px;
+    margin-left:0.5em;
+    vertical-align:baseline;
+    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/icons.png) no-repeat;
+    background-position:-60px 0;
+    cursor:pointer;
+}
+div#infoArea span.button_edit:hover {
+    background-position:-60px -20px;
+}
+
+/* tracksArea */
+div#tracksArea {
+    padding-left:10px;
+}
+div#tracksArea dl.track {
+    position:relative;
+    margin:5px 0;
+    padding:5px 10px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    background:#ffffff;
+    box-shadow:2px 2px 2px #777777;
+    -webkit-box-shadow:2px 2px 2px #777777;
+    -moz-box-shadow:2px 2px 2px #777777;
+}
+/* div#tracksArea dl.track:first-child { */
+/*     margin-top:0; */
+/* } */
+div#tracksArea dl.track:after {
+    content:".";
+    display:block;
+    visibility:hidden;
+    height:0.1px;
+    font-size:0.1em;
+    line-height:0;
+    clear:both;
+}
+/* div#tracksArea dl.track:nth-child(odd) { */
+/*     background:gray; */
+/* } */
+div#tracksArea dl.track:hover {
+    background:#e4e6d9;
+}
+div#tracksArea dl.track > dt.image {
+    float:left;
+    width:40px;
+}
+div#tracksArea dl.track > dt.image img {
+    width:34px;
+    height:34px;
+    vertical-align:top;
+    box-shadow:2px 2px 2px #000000;
+    -webkit-box-shadow:2px 2px 2px #000000;
+    -moz-box-shadow:2px 2px 2px #000000;
+}
+div#tracksArea dl.track > dd {
+    margin-left:40px;
+}
+div#tracksArea dl.track > dd > p {
+    white-space:nowrap;
+    overflow:hidden;
+}
+div#tracksArea dl.track > dd > p.name,
+div#tracksArea dl.track > dd > p.artist {
+}
+div#tracksArea dl.track > dd > p.name a {
+    color:#d10039;
+}
+div#tracksArea dl.track > dd > p.album,
+div#tracksArea dl.track > dd > p.date {
+    display:none;
+    position:absolute;
+    padding:0 5px;
+    color:#777777;
+    font-size:85%;
+}
+div#tracksArea dl.track > dd > p.album {
+    right:0;
+    top:5px;
+}
+div#tracksArea dl.track > dd > p.date {
+    right:0;
+    bottom:5px;
+}
+body.canvas div#tracksArea dl.track > dd > p.album,
+body.canvas div#tracksArea dl.track > dd > p.date {
+    display:block;
+}
+/* div#tracksArea dl.track:hover > dd > p.album, */
+/* div#tracksArea dl.track:hover > dd > p.date { */
+/*     display:block; */
+/*     background:#e4e6d9; */
+/* } */
+
+/* iTS, community */
+div#tracksArea dl.track dd div.button_iTS,
+div#tracksArea dl.track dd div.button_community {
+    display:none;
+    position:absolute;
+    top:0;
+    width:20px;
+    height:20px;
+    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/icons.png) no-repeat;
+    cursor:pointer;
+}
+div#tracksArea dl.track:hover dd div.button_iTS,
+div#tracksArea dl.track:hover dd div.button_community {
+    display:block;
+}
+div#tracksArea dl.track dd div.button_iTS {
+    left:2px;
+    background-position:-20px 0;
+}
+div#tracksArea dl.track dd div.button_community {
+    left:24px;
+    background-position:0 0;
+}
+div#tracksArea dl.track dd div.button_iTS:hover {
+    background-position:-20px -20px;
+}
+div#tracksArea dl.track dd div.button_community:hover {
+    background-position:-0 -20px;
+}
+div#tracksArea dl.track dd div.result_iTS {
+    position:absolute;
+    top:0px;
+    left:12px;
+    z-index:10;
+    width:130px;
+    padding:2px 10px 10px;
+    background:#6884ab;
+    border-radius:0 10px 10px 10px;
+    -moz-border-radius:0 10px 10px 10px;
+    -webkit-border-top-right-radius:5px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
+    box-shadow:4px 4px 4px #000000;
+    -webkit-box-shadow:4px 4px 4px #000000;
+    -moz-box-shadow:4px 4px 4px #000000;
+}
+div#tracksArea dl.track dd div.result_iTS h2 {
+    text-align:center;
+    margin:0 10px 5px;
+    border:1px solid #aec0d8;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    color:#ffffff;
+}
+div#tracksArea dl.track dd div.result_iTS div.close_button {
+    position:absolute;
+    top:0;
+    right:0;
+    width:18px;
+    height:18px;
+    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/icons.png) no-repeat;
+    background-position:-40px 0;
+    cursor:pointer;
+}
+div#tracksArea dl.track dd div.result_iTS div.close_button:hover {
+    background-position:-40px -20px;
+}
+div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS {
+    max-height:200px;
+    overflow:auto;
+    font-size:85%;
+}
+div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS a {
+    color:#000000;
+}
+div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dt {
+    background:#aec0d8;
+    border-radius:5px 5px 0 0;
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    padding:5px 5px 0;
+    text-align:center;
+}
+div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dt img {
+    max-width:100px;
+}
+div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd {
+    margin-bottom:5px;
+    padding:0 5px 5px;
+    background:#aec0d8;
+    border-radius:0 0 5px 5px;
+    -moz-border-radius:0 0 5px 5px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
+}
+div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd p.album {
+    border-top:1px dotted #6884ab;
+}
+div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd p a span.price{
+    margin-left:0.5em;
+    display:inline-block;
+    color:#d10039;
+}
+
+/* accountArea */
+div#accountArea {
+    padding:5px 0 10px 10px;
+    text-align:right;
+}
+div#accountArea p.account a {
+    padding-right:15px;
+    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/ext_link.png) right center no-repeat;
+}
+div#accountArea p.account a span.link_button {
+    display:inline-block;
+    width:13px;
+    height:13px;
+    vertical-align:baseline;
+    background-position:80px 0;
+}
+div#accountArea p.account a:hover span.link_button {
+    background-position:80px 20px;
+}
+
+/* navigationArea */
+body.home div#navigationArea,
+body.profile div#navigationArea {
+    display:none;
+    position:fixed;
+    bottom:0;
+    right:0;
+    z-index:20;
+}
+body.home div#navigationArea p,
+body.profile div#navigationArea p {
+    padding:3px;
+    background:#d10039;
+    line-height:1;
+    color:#e4e6d9;
+    cursor:pointer;
+}
+body.home div#navigationArea p:hover,
+body.profile div#navigationArea p:hover {
+    color:#ffffff;
+}
+body.canvas div#navigationArea:after {
+    content:".";
+    display:block;
+    visibility:hidden;
+    height:0.1px;
+    font-size:0.1em;
+    line-height:0;
+    clear:both;
+}
+body.canvas div#navigationArea {
+    padding-left:10px;
+}
+body.canvas div#navigationArea p {
+    float:right;
+    margin:0 0 1px 3px;
+    padding:3px 7px;
+    background:#6884ab;
+    line-height:1;
+    color:#e4e6d9;
+    cursor:pointer;
+    border-top-left-radius:10px;
+    -moz-border-radius-topleft:10px;
+    -webkit-border-top-left-radius:10px;
+/*     box-shadow:2px 2px 2px #777777; */
+/*     -webkit-box-shadow:2px 2px 2px #777777; */
+/*     -moz-box-shadow:2px 2px 2px #777777; */
+}
+body.canvas div#navigationArea p:hover {
+    color:#ffffff;
+}

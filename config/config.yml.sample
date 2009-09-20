@@ -1,0 +1,9 @@
+common:
+  last_fm:
+    api_key: XXX #your last.fm api key
+
+development:
+  base_uri: http://example.com # development base_uri. used for api location from js.
+
+production:
+  base_uri: http://example.com # production base_uri. used for api location from js.

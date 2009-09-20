@@ -1,0 +1,4 @@
+config/config.yml
+.gems
+WEB-INF
+.DS_Store

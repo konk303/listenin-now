@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* ============================================================
+ie.css
+ additional stylesheet for IE in mixi app "listenin' now"
+ http://mixi.jp/view_appli.pl?id=7793
+============================================================ */
+
+/* content:after, ng in ie67. */
+div#ie67 div#tracksArea dl.track {
+    zoom:1;
+}
+body.canvas div#ie67 div#navigationArea {
+    zoom:1;
+}
+
+/* background verticaly center to inline doesn't work well, in ie67. */
+div#ie67 div#accountArea p.account a {
+    background-position:right bottom;
+}
+
+/* child selector, ng in ie6. */
+body.canvas div#ie6 {
+    width:600px;
+    margin-right:auto;
+}
+div#ie6 div#tracksArea dl.track  dt.image {
+    float:left;
+    width:40px;
+}
+div#ie6 div#tracksArea dl.track  dt.image img {
+    width:34px;
+    height:34px;
+    vertical-align:top;
+}
+div#ie6 div#tracksArea dl.track dd {
+    margin-left:40px;
+}
+div#ie6 div#tracksArea dl.track dd p {
+    white-space:nowrap;
+    overflow:hidden;
+}
+div#ie6 div#tracksArea dl.track dd p.name,
+div#ie6 div#tracksArea dl.track dd p.artist {
+}
+div#ie6 div#tracksArea dl.track dd p.name a {
+    color:#d10039;
+}
+div#ie6 div#tracksArea dl.track dd p.album,
+div#ie6 div#tracksArea dl.track dd p.date {
+    display:none;
+    position:absolute;
+    padding:0 5px;
+    color:#777777;
+    font-size:85%;
+}
+div#ie6 div#tracksArea dl.track dd p.album {
+    right:0;
+    top:5px;
+}
+div#ie6 div#tracksArea dl.track dd p.date {
+    right:0;
+    bottom:5px;
+}
+body.canvas div#ie6 div#tracksArea dl.track dd p.album,
+body.canvas div#ie6 div#tracksArea dl.track dd p.date {
+    display:block;
+}
+
+/* white-space:nowrap & overflow:hidden needs width, ng in ie6. */
+body.home div#ie6 div#tracksArea dl.track dd p,
+body.profile div#ie6 div#tracksArea dl.track dd p {
+    width:135px;
+}
+
+/* also have to cancel above changes for childs, in ie6. */
+div#ie6 div#tracksArea dl.track dd div.result_iTS dd {
+/*     margin-left:40px; */
+    margin-left:0;
+}
+div#ie6 div#tracksArea dl.track dd div.result_iTS p {
+/*     white-space:nowrap; */
+/*     overflow:hidden; */
+    width:auto;
+    white-space:normal;
+    overflow:visible;
+}
+div#ie6 div#tracksArea dl.track dd div.result_iTS p.album {
+/*     position:absolute; */
+/*     padding:0 5px; */
+    position:static;
+    padding:0;
+}
+
+/* cascading order has changed due to above changes, in ie6. */
+div#ie6 div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS a {
+    color:#000000;
+}
+
+/* position:fixed, ng in ie6. */
+body.home div#ie6 div#navigationArea,
+body.profile div#ie6 div#navigationArea {
+    position:absolute;
+    bottom:auto;
+    right:auto;
+    top:0;
+    left:0;
+}
+body.home div#ie6 div#navigationArea p,
+body.profile div#ie6 div#navigationArea p {
+    background:#000000;
+}
+
+/* content:hover to dl,p,etc..., ng in ie6. */
+div#ie6 div#tracksArea dl.track.hover {
+    background:#e4e6d9;
+}
+div#ie6 div#tracksArea dl.track.hover dd div.button_iTS,
+div#ie6 div#tracksArea dl.track.hover dd div.button_community {
+    display:block;
+}
+
+/* max-width to dl,p,etc..., ng in ie6. */
+div#ie6 div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS {
+    height:200px;
+}
+div#ie6 div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dt img {
+    width:100px;
+}
+
+/* anti hover background flicker, in ie6. */
+div#ie6 {
+    filter: expression(document.execCommand("BackgroundImageCache", false, true));
+}

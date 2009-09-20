@@ -1,0 +1,20 @@
+%style{:type => 'text/css'}= File.open('public/stylesheets/app/listenin_now.css') {|f|f.read}
+/[if lte IE 7]
+  %style{:type => 'text/css'}= File.open('public/stylesheets/app/ie.css') {|f|f.read}
+  <div id="ie67">
+/[if lte IE 6]
+  <div id="ie6">
+#navigationArea
+#infoArea
+#tracksArea
+#accountArea
+/[if lte IE 6]
+  </div>
+/[if lte IE 7]
+  </div>
+= haml :'app/templates', :layout => false
+-# send environment info to js
+%script{:type => 'text/javascript'}== var ListeninNowConfig = {}; |
+ListeninNowConfig.base_uri = "#{options.base_uri}"; |
+%script{:type => 'text/javascript', :charset => 'utf-8', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'}
+%script{:type => 'text/javascript'}= File.open('public/javascripts/app/listenin_now.js') {|f|f.read}
