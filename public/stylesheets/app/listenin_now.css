@@ -74,7 +74,7 @@ div#infoArea span.button_edit {
     height:13px;
     margin-left:0.5em;
     vertical-align:baseline;
-    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/icons.png) no-repeat;
+    background:url(http://listenin_now.konk303.com/images/app/icons.png) no-repeat;
     background-position:-60px 0;
     cursor:pointer;
 }
@@ -175,7 +175,7 @@ div#tracksArea dl.track dd div.button_community {
     top:0;
     width:20px;
     height:20px;
-    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/icons.png) no-repeat;
+    background:url(http://listenin_now.konk303.com/images/app/icons.png) no-repeat;
     cursor:pointer;
 }
 div#tracksArea dl.track:hover dd div.button_iTS,
@@ -228,7 +228,7 @@ div#tracksArea dl.track dd div.result_iTS div.close_button {
     right:0;
     width:18px;
     height:18px;
-    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/icons.png) no-repeat;
+    background:url(http://listenin_now.konk303.com/images/app/icons.png) no-repeat;
     background-position:-40px 0;
     cursor:pointer;
 }
@@ -280,7 +280,7 @@ div#accountArea {
 }
 div#accountArea p.account a {
     padding-right:15px;
-    background:url(http://dl.getdropbox.com/u/1035457/opensocial/mixi/listenin_now/static/ext_link.png) right center no-repeat;
+    background:url(http://listenin_now.konk303.com/images/app/ext_link.png) right center no-repeat;
 }
 div#accountArea p.account a span.link_button {
     display:inline-block;
