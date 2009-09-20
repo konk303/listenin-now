@@ -556,7 +556,7 @@ listenin_now.js
     //last.fm api
     Class.LastFm = $.myUtil.createClass({
         init: function() {
-            this.lf_apiUrl = ListeninNowConfig.base_uri + "/api/lastfm/?";
+            this.lf_apiUrl = ListeninNowConfig.base_uri + "/api/lastfm?";
 
             this.responseHandler = $.myUtil.createHandler(this, this.response);
         },
