@@ -1,6 +1,7 @@
 appengine:
-  application: 'your application name'
+  application: #your application name
   version: 1 #your application version
+  environment: #development/production. leave this blank to use AppEngine::Rack.environment, which is development in local and production in gae.
 
 common:
   last_fm:

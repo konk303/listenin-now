@@ -5,7 +5,6 @@ AppEngine::Rack.configure_app(
   :version => config_from_file['appengine']['version']
 )
 
-ENV['RACK_ENV'] = AppEngine::Rack.environment
-#ENV['RACK_ENV'] = "production"
+ENV['RACK_ENV'] = config_from_file['appengine']['environment'] || AppEngine::Rack.environment
 require 'app/ln'
 run Sinatra::Application
