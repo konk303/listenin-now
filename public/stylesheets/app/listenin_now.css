@@ -81,6 +81,17 @@ div#infoArea span.button_edit {
 div#infoArea span.button_edit:hover {
     background-position:-60px -20px;
 }
+/* dirty fix for fx2 */
+/* Target FireFox 2 and older [!] */
+html>/**/body div#infoArea span.button_edit, x:-moz-any-link {
+    display:-moz-inline-box;
+    vertical-align:top;
+}
+/* Target FireFox 3 [!] */
+html>/**/body div#infoArea span.button_edit, x:-moz-any-link, x:default {
+    display:inline-block;
+    vertical-align:baseline;
+}
 
 /* tracksArea */
 div#tracksArea {
