@@ -556,22 +556,17 @@ listenin_now.js
     //last.fm api
     Class.LastFm = $.myUtil.createClass({
         init: function() {
-            this.lf_apiUrl = "http://ws.audioscrobbler.com/2.0/?";
-            this.lf_apiKey = "bb45e1d92de4286e253b258a8cace577";
+            this.lf_apiUrl = ListeninNowConfig.base_uri + "/api/lastfm/?";
 
             this.responseHandler = $.myUtil.createHandler(this, this.response);
         },
         request: function(queries, callback) {
             this.callback = callback;
-            var query = $.extend({
-                api_key: this.lf_apiKey,
-                format: "json"
-            },queries);
             var params = {};
             params[gadgets.io.RequestParameters.METHOD] =  gadgets.io.MethodType.GET;
             params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
             params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-            var requestUrl = this.lf_apiUrl + $.param(query);
+            var requestUrl = this.lf_apiUrl + $.param(queries);
             gadgets.io.makeRequest(requestUrl, this.responseHandler, params);
         },
         response: function(res) {
