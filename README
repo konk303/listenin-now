@@ -1,0 +1,7 @@
+Source code of opensocial application "listenin' now", mashing up last.fm with opensocial sns.
+
+you need to
+1. 'sudo gem install google-appengine'. (in cruby)
+2. cd to your checkout directry,then do
+   'appcfg.rb gem install sinatra haml builder appengine-apis'
+3. create your own config/config.yml from config.config.yml.sample

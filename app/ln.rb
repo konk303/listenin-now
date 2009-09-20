@@ -40,7 +40,7 @@ end
 
 #before filter
 before do
-  Log.warn [options.environment,options.last_fm['api_key']].join(", ")
+#  Log.warn [options.environment,options.last_fm['api_key']].join(", ")
 end
 
 

@@ -1,3 +1,7 @@
+appengine:
+  application: 'your application name'
+  version: 1 #your application version
+
 common:
   last_fm:
     api_key: XXX #your last.fm api key
