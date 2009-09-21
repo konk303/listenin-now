@@ -64,10 +64,7 @@ end
 
 get '/xml/listenin-now.xml' do
   content_type 'application/xml', :charset => 'utf-8'
-  builder :listenin-now
-#   File.open('app/views/listenin-now.xml') do |f|
-#     f.read
-#   end
+  builder :ln
 end
 
 get '/admin/:path' do
