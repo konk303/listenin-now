@@ -62,10 +62,10 @@ end
 get '/api/amazon' do
 end
 
-get '/xml/listenin_now.xml' do
+get '/xml/listenin-now.xml' do
   content_type 'application/xml', :charset => 'utf-8'
-  builder :listenin_now
-#   File.open('app/views/listenin_now.xml') do |f|
+  builder :listenin-now
+#   File.open('app/views/listenin-now.xml') do |f|
 #     f.read
 #   end
 end

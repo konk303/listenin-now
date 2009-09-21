@@ -1,5 +1,5 @@
 /* ============================================================
-listenin_now.js
+listenin-now.js
  javascripts for mixi app "listenin' now"
  http://mixi.jp/view_appli.pl?id=7793
 ============================================================ */
@@ -118,7 +118,7 @@ listenin_now.js
             //image
             //                 var a = $('<a class="external" />').attr("href", data.url);
             $('<img />').attr({
-                "src": data.image[0]["#text"] || "http://listenin_now.konk303.com/images/app/noimage.png",
+                "src": data.image[0]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
                 "alt": data.artist["#text"] + " - " + data.name,
                 "title": data.artist["#text"] + " - " + data.name
             })
@@ -291,7 +291,7 @@ listenin_now.js
             .text(data.artistName).appendTo(dt);
             $('<br />').appendTo(dt);
             //image
-            var img = data.artworkUrl100 || "http://listenin_now.konk303.com/images/app/noimage.png";
+            var img = data.artworkUrl100 || "http://listenin-now.konk303.com/images/app/noimage.png";
             var a = $('<a class="image" />').attr({"href": data.collectionViewUrl || data.trackViewUrl, "target": "_blank"})
             $('<img />').attr({
                 "src": img,
@@ -324,7 +324,7 @@ listenin_now.js
     Class.LoadingImage = $.myUtil.createClassSingleton({
         init: function() {
             this.img = $('<img />').attr({
-                src: "http://listenin_now.konk303.com/images/app/ajax-loader.gif",
+                src: "http://listenin-now.konk303.com/images/app/ajax-loader.gif",
                 alt: "now loading",
                 titile: "now loading"
             })
