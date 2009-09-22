@@ -13,8 +13,8 @@ configure do
   Log = AppEngine::Logger.new
   Log.level = AppEngine::Logger::DEBUG
   #set config from yaml
-  @config_from_file = YAML::load_file 'config/config.yml'
-  @config_from_file['common'].each {|key,val| set key.to_sym => val}
+  @config = ConfigFile.instance.config
+  @config['common'].each {|key,val| set key.to_sym => val}
   #locations
   set :app_file => __FILE__
   #logs can be retrieved from gae

@@ -1,10 +1,12 @@
 require 'appengine-rack'
-config_from_file = YAML::load_file 'config/config.yml'
+require 'lib/config'
+
+config = ConfigFile.instance.config
 AppEngine::Rack.configure_app(
-  :application => config_from_file['appengine']['application'],
-  :version => config_from_file['appengine']['version']
+  :application => config['appengine']['application'],
+  :version => config['appengine']['version']
 )
 
-ENV['RACK_ENV'] = config_from_file['appengine']['environment'] || AppEngine::Rack.environment
+ENV['RACK_ENV'] = config['appengine']['environment'] || AppEngine::Rack.environment
 require 'app/ln'
 run Sinatra::Application
