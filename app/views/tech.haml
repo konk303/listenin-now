@@ -1,24 +1,59 @@
 %h1 技術情報
 %h2 mixiアプリについて
 %ul
-  %li opensocial
-  %li jQuery
-  %li last.fm api
-
+  %li<
+    %a{:href => 'http://code.google.com/intl/ja/apis/opensocial/'}> opensocial api
+    準拠の
+    %a{:href => 'http://developer.mixi.co.jp/appli'}> mixiアプリ
+    です。
+  %li<
+    データの取得に、
+    %a{:href => 'http://www.lastfm.jp/api'}> Last.fm Web Serice
+    を使用しています。
+  %li<
+    javascriptライブラリーの
+    %a{:href => 'http://jquery.com/'}> jQuery
+    を使用しています。
 %h2 当サイトについて
 %ul
-  %li html5
-  %li sinatra ruby
-  %li template engin, haml/sass/builder
+  %li<
+    勉強も兼ねて、
+    %a{:href => 'http://www.w3.org/TR/html5/'}> html5
+    で記述しています。文法・表示がおかしいと思ったら、是非ご一報ください。
+  %li<
+    rubyのweb application framework 、
+    %a{:href => 'http://www.sinatrarb.com/'}> Sinatra
+    で作成しています。
+  %li<
+    template engineには以下を使用しています。
+    %dl
+      %dt html
+      %dd<
+        %a{:href => 'http://haml-lang.com/'}> haml
+      %dt css
+      %dd<
+        %a{:href => 'http://sass-lang.com/'}> sass
+      %dt xml
+      %dd<
+        %a{:href => 'http://builder.rubyforge.org/'}> builder
 %h2 ホスティング
 %ul
-  %li google app engine
-  %li jruby, google-appengine
-%h2 フィードバックフォーラム
+  %li<
+    %a{:href => 'http://code.google.com/intl/ja/appengine/'}> Google App Engine
+    を使用しています。
+  %li<
+    rubyを動かすため、
+    %a{:href => 'http://code.google.com/p/appengine-jruby/'}> appengine-jruby
+    を使用しjRuby on java 環境で動作させています。
 %h2 ソースコード
-%p github
-%h1 作者について
-%p konk303と申します。前職を2009年7月に退職した後、暇つぶしと勉強をかねて作っています。
-%a{:href => 'http://mixi.jp/show_profile.pl?id=1224854'}> mixi
-%a{:href => 'http://mixi.jp/show_profile.pl?id=1224854'}> last.fm
-%a{:href => 'http://mixi.jp/show_profile.pl?id=1224854'}> twitter
+%p<
+  %a{:href => 'http://github.com/'}> github
+  にて
+  %a{:href => 'http://github.com/konk303/listenin-now'}> 公開
+  しています。
+%h2 フィードバックフォーラム
+%p<
+  %a{:href => 'http://uservoice.com/'}> UserVoice
+  にて
+  %a{:href => 'http://listenin.uservoice.com/'}> 展開
+  しています。

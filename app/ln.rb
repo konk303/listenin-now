@@ -102,6 +102,11 @@ get '/tech' do
   haml @body_id.intern
 end
 
+get '/author' do
+  @page_title[0,0] = "作者について"
+  haml @body_id.intern
+end
+
 get '/api/lastfm' do
   require 'app/models/lastfm'
   response = LastFm.new(options.last_fm['api_key']).get(params)

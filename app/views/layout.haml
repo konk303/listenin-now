@@ -8,27 +8,40 @@
     %link{:rel => 'stylesheet',
           :href => '/stylesheets/site.css',
           :type => 'text/css'}
+    %link{:rel => 'shortcut icon',
+          :href => '/images/logo.png',
+          :type => 'image/png'}
   %body{:id=> @body_id}
     %header
       %h1<
-        %a{:href => '/'}> logo
+        %a{:href => '/'}>
+          %img{:src => '/images/logo.png', :alt =>'logo', :title => 'mixiアプリ「リスニンなう」'}>
+          %span> listenin'
+          \ NOW
       %nav
         %ul
           %li
-            %a{:href => '/help'}> ヘルプ
+            %a{:href => '/'}> トップ
           %li
             %a{:href => '/demo'}> デモ
+          %li
+            %a{:href => '/help'}> ヘルプ
           %li
             %a{:href => '/updates'}> 更新履歴
           %li
             %a{:href => '/feedback'}> フィードバック
           %li
             %a{:href => '/tech'}> 技術情報
+          %li
+            %a{:href => '/author'}> 作者
     #content
       = yield
     %footer
-      %p
-        %small> &#169;2009 Kimihiko NAKAMURA. Some rights reserved.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.1/jp/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/2.1/jp/88x31.png" /></a>
+      %p<
+        %small<
+          &#169;2009&#x000A;
+          %a{:href => 'mailto:support@konk303.com'}> Kimihiko NAKAMURA
+          \. Some rights reserved.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.1/jp/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/2.1/jp/88x31.png" /></a>
       <img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />
     %script{:type => 'text/javascript',
             :src =>'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'}
@@ -46,9 +59,9 @@
       host: 'listenin.uservoice.com', 
       forum: '29420', 
       /* optional */
-      alignment: 'left',
-      background_color:'#f00', 
+      alignment: 'right',
+      background_color:'#0187c5',
       text_color: 'white',
-      hover_color: '#06C',
+      hover_color: '#d10039', 
       lang: 'ja'
       })

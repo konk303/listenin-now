@@ -1,12 +1,12 @@
 %h1 ヘルプ
-%nav
+%nav.tabArea
   %ul
     %li
       %a{:href => '#readme'}> 使い方
     %li
       %a{:href => '#details'}> 各種機能
     %li
-      %a{:href => '#lastfm'}> last.fmとは
+      %a{:href => '#lastfm'}> last.fmとは？
     %li
       %a{:href => '#spec'}> 推奨環境
     %li
@@ -23,8 +23,8 @@
       でアカウントを取得して下さい。
       %br>
       （
-      %a{:href => '#lastfm'}> last.fmとは
-      ）
+      %a{:href => '#lastfm'}> last.fmとは？
+      もお読みください）
     %li<
       %a{:href => 'http://mixi.jp/'}> mixi
       にログインして、
@@ -52,11 +52,11 @@
     %li Tunesボタンをクリックすると iTunes Store での検索結果が表示されます。
 
 %section#lastfm
-  %h1 last.fmとは
+  %h1 last.fmとは？
   %blockquote{:cite => 'http://www.lastfm.jp/'}
     %p Last.fm はあなたの聴いてる音楽に基づいて、動画、コンサート、音楽をオススメします。
     %cite
-      %a{:href => 'http://www.lastfm.jp/'}> Last.fm - インターネットラジオと世界最大オンライン・ミュージック・カタログでを楽しもう
+      %a{:href => 'http://www.lastfm.jp/'}> Last.fm
   %p<
     自分が聴いた音楽の履歴をベースにしたSNSです。
     %br>
@@ -88,7 +88,7 @@
     %li Internet Explorer 6は推奨しませんが、動作します。
     %li OS は問いません。
   %p<
-    %a{:href => '/faq'}> FAQ
+    %a{:href => '#faq'}> FAQ
     もご確認ください。
 
 %section#faq
@@ -121,7 +121,8 @@
     %dt ○○が見えない、表示されてない、表示がおかしい
     %dd
       %p
-        %a{:href => '#spec'}> 推奨環境を一度ご確認ください。
+        %a{:href => '#spec'}> 推奨環境
+        を一度ご確認ください。
       %ul.notes
         %li IE6は推奨しません。この機会にIE7以降や他のブラウザに乗り換えてみては？
         %li Mac OS 10.3 をお使いの方、Opera 9.6 がお勧めです。
