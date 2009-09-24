@@ -11,11 +11,11 @@ class LastFm
       :api_key => @api_key,
       :format => "json",
     }.merge(query)
-    case @query[:method]
+    case @query["method"]
       when "user.getRecentTracks"
-      ttl = 60*10 #10 minutes
+      ttl = Time.new + 60*5 #5 minutes
       else
-      ttl = 60*60*24*7 #1 week
+      ttl = Time.new + 60*60*24*7 #1 week
     end
     handler = Proc.new {fetch}
     response = @memcache.get_or_set @query, ttl, &handler

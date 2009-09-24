@@ -89,7 +89,7 @@ listenin-now.js
             var queries = {
                 method: "user.getRecentTracks",
                 user: this.account,
-                limit: Class.View().name == "canvas"? 40: 5
+                limit: 40
             };
             Class.LastFm().request(queries, this.responseHandler);
         },
@@ -98,6 +98,13 @@ listenin-now.js
             if (status) {
                 this.trackDatas = res.recenttracks.track;
                 if (this.trackDatas) {
+                    //reduce data to 5 in home/profile
+                    if (Class.View().name != 'canvas') {
+                        this.trackDatas = $.map(this.trackDatas, function(item, i) {
+                            if (i > 4) return null;
+                            else return item;
+                        })
+                    }
                     $.each(this.trackDatas, this.createEachDomHandler);
                 }
                 else this.showArea.append('<p>データがありません。<br>last.fm側の「設定」->「プライバシー」->「リアルタイム再生データ」の「リアルタイム再生情報を隠す」にチェックがついていないか、又はアカウント名が違わないかご確認ください。</p>');
