@@ -138,6 +138,9 @@ a:hover {
     color:#d10039;
     text-decoration:none;
 }
+strong {
+    font-weight:bold;
+}
 .ui-tabs-hide {
      display: none;
 }
