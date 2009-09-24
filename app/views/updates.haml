@@ -1,0 +1,4 @@
+%h1 更新履歴
+- updates.each do |data|
+  = haml :'partial/update', :layout => false, :locals => {:data => data}
+

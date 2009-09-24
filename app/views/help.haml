@@ -1,0 +1,147 @@
+%h1 ヘルプ
+%nav
+  %ul
+    %li
+      %a{:href => '#readme'}> 使い方
+    %li
+      %a{:href => '#details'}> 各種機能
+    %li
+      %a{:href => '#lastfm'}> last.fmとは
+    %li
+      %a{:href => '#spec'}> 推奨環境
+    %li
+      %a{:href => '#faq'}> FAQ
+    %li
+      %a{:href => '#todo'}> ToDo
+
+%section#readme
+  %h1 使い方
+  %ol
+    %li<
+      last.fmを使っていない人は、まずアカウントが必要です。
+      %a{:href => 'http://www.lastfm.jp/'}> last.fm
+      でアカウントを取得して下さい。
+      %br>
+      （
+      %a{:href => '#lastfm'}> last.fmとは
+      ）
+    %li<
+      %a{:href => 'http://mixi.jp/'}> mixi
+      にログインして、
+      %a{:href => 'http://mixi.jp/view_appli.pl?id=7793'}> アプリのページ
+      の「今すぐはじめる」をクリックします。
+    %li<
+      初めにlast.fmのアカウント名を入力します。<strong>パスワードは必要ありません</strong>。
+    %li<
+      自分のプロフィールにページに再生履歴を表示するには、
+      %a{:href => 'http://mixi.jp/list_appli.pl?mode=manage'}> アプリ管理
+      画面で、「アプリガジェットを表示する」にチェックをつけてください。
+    %li<
+      %a{:href => '#faq'}> FAQ
+      によくある質問をまとめています。分からないことがある場合、一度ご覧ください。
+    %li<
+      要望等は
+      %a{:href => '/feedback'}> フィードバックのフォーラム
+      で受け付けています。発言お待ちしています！
+
+%section#details
+  %h1 各種機能
+  %p 曲にマウスを持って行くと、左上に各種アイコンが表示されます（現在２種類）。
+  %ul
+    %li コミュボタンをクリックすると、アーティスト名でコミュニティを検索します。
+    %li Tunesボタンをクリックすると iTunes Store での検索結果が表示されます。
+
+%section#lastfm
+  %h1 last.fmとは
+  %blockquote{:cite => 'http://www.lastfm.jp/'}
+    %p Last.fm はあなたの聴いてる音楽に基づいて、動画、コンサート、音楽をオススメします。
+    %cite
+      %a{:href => 'http://www.lastfm.jp/'}> Last.fm - インターネットラジオと世界最大オンライン・ミュージック・カタログでを楽しもう
+  %p<
+    自分が聴いた音楽の履歴をベースにしたSNSです。
+    %br>
+    あなたの再生履歴から、お勧めのバンドやイベントを紹介してくれます。
+  %p 友達が行く予定のイベントを見たりも出来るので、好みの近い友達を増やすと気になるライブ情報を見逃さなくなります！
+  %p mixiミュージックが今年中に終了するようなので、乗り換えてみては？
+
+  %h2 登録のしかた
+  %ol
+    %li<
+      %a{:href => 'http://www.lastfm.jp/'}> サイト
+      の右上の「登録」からアカウントを作成してください。
+    %li<
+      %a{:href => 'http://www.lastfm.jp/download'}> ダウンロード
+      から、PC/Mac用の <strong>Last.fm Scrobbler</strong> をダウンロードしてインストールしましょう。
+      %br>
+      iTunes や Windows Media Player で聴いた音楽が last.fm に送信されるようになります。
+
+%section#spec
+  %h1 推奨環境
+  %ul
+    %li Mozilla Firefox 3以降
+    %li Google Chrome
+    %li Safari
+    %li Opera 9.6以降
+    %li Internet Explorer 7 以降
+
+  %ul.notes
+    %li Internet Explorer 6は推奨しませんが、動作します。
+    %li OS は問いません。
+  %p<
+    %a{:href => '/faq'}> FAQ
+    もご確認ください。
+
+%section#faq
+  %h1 FAQ - よくある質問と回答
+  %dl
+    %dt アカウント名を間違えて入力した
+    %dd<
+      %a{:href => 'http://mixi.jp/run_appli.pl?id=7793'}> ページ
+      上部の赤いコーナーにある「last.fm id:XXXX」の右に鉛筆アイコンがあります。
+      %br>
+      クリックすると、入力欄が出てきます。
+      %br>
+      （本人のページにのみ出るようになってます。）
+    %dt<
+      データが見えない。
+      %br>
+      「last.fm側の設定を…」と表示される。
+    %dd
+      %ol
+        %li まずはlast.fmアカウント名が間違っていないかご確認ください。
+        %li
+          %p last.fm側で設定が必要な箇所があります。
+          %ul.notes
+            %li<
+              %a{:href => 'http://www.lastfm.jp/settings/inboxoptions'}> プライバシー管理
+              のページで、一番上の「リアルタイム再生情報を隠す」をオフにする必要があります（チェックがついて<strong>いない</strong>状態にする）。
+            %li<
+              または、自分のプロフィールページ（http://www.lastfm.jp/user/アカウント名 ）の「最近聴いたトラック」右横の「設定」を押すと出てくる小窓（ログインしてないと出てきません）の中の「プライベート設定にする」をオフにしてみて下さい（チェックがついて<strong>いない</strong>状態にする）。
+          %p どちらか（実際にはどちらも同じ設定）を試してみて下さい。
+    %dt ○○が見えない、表示されてない、表示がおかしい
+    %dd
+      %p
+        %a{:href => '#spec'}> 推奨環境を一度ご確認ください。
+      %ul.notes
+        %li IE6は推奨しません。この機会にIE7以降や他のブラウザに乗り換えてみては？
+        %li Mac OS 10.3 をお使いの方、Opera 9.6 がお勧めです。
+    %dt 曲の画像が思ったのと違う。no imageが多い。
+    %dd<
+      現状、
+      %a{:href => 'http://www.lastfm.jp/widgets'}> last.fmのブログウィジェット
+      と同じ画像を表示しています（あまり精度が良くないですね…）。
+      %br>
+      上手いやり方がないか、ちょっと考えてみます。
+
+%section#todo
+  %h1 ToDo - そのうち実現したい機能
+  %ul
+    %li アプリを使ってるマイミク一覧を表示
+    %li 個人ランキングやloveアイテムもページに載せたい
+    %li 気に入った曲をマーク。マイミクにお知らせできる機能
+    %li 同じ曲を聴いたアプリ使用ユーザーや、同じアーティストを気に入ってるアプリ使用ユーザーを表示する
+    %li 他のアプリ使用ユーザーにコメント・メッセージを送信
+  %p<
+    要望等は
+    %a{:href => '/feedback'}> フィードバックのフォーラム
+    で受け付けています。発言お待ちしています！

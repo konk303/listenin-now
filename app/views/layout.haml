@@ -1,8 +1,54 @@
 !!!
-%html
+%html{:lang => 'ja'}
   %head
-    %title hoge
-  %body
-    #container
+    %meta{:charset => 'UTF-8'}
+    %title= @page_title
+    %meta{:description => @description}
+    %meta{:generator => 'haml. http://haml-lang.com/'}
+    %link{:rel => 'stylesheet',
+          :href => '/stylesheets/site.css',
+          :type => 'text/css'}
+  %body{:id=> @body_id}
+    %header
+      %h1<
+        %a{:href => '/'}> logo
+      %nav
+        %ul
+          %li
+            %a{:href => '/help'}> ヘルプ
+          %li
+            %a{:href => '/demo'}> デモ
+          %li
+            %a{:href => '/updates'}> 更新履歴
+          %li
+            %a{:href => '/feedback'}> フィードバック
+          %li
+            %a{:href => '/tech'}> 技術情報
+    #content
       = yield
-
+    %footer
+      %p
+        %small> &#169;2009 Kimihiko NAKAMURA. Some rights reserved.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.1/jp/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/2.1/jp/88x31.png" /></a>
+      <img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />
+    %script{:type => 'text/javascript',
+            :src =>'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'}
+    %script{:type => 'text/javascript',
+            :src =>'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js'}
+    %script{:type => 'text/javascript',
+            :src =>'/javascripts/site.js'}
+    :javascript
+      var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
+      document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
+    :javascript
+      UserVoice.Tab.show({ 
+      /* required */
+      key: 'listenin',
+      host: 'listenin.uservoice.com', 
+      forum: '29420', 
+      /* optional */
+      alignment: 'left',
+      background_color:'#f00', 
+      text_color: 'white',
+      hover_color: '#06C',
+      lang: 'ja'
+      })
