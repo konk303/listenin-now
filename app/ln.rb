@@ -109,10 +109,14 @@ end
 
 get '/api/lastfm' do
   require 'app/models/lastfm'
-  response = LastFm.new(options.last_fm['api_key']).get(params)
-  content_type response.content_type, :charset => response.type_params['charset']
-  status response.code
-  response.body
+  #memcache doesn't expire as I expected. use redirect
+#   response = LastFm.new(options.last_fm['api_key']).get(params)
+#   content_type response.content_type, :charset => response.type_params['charset']
+#   status response.code
+#   response.body
+  url = LastFm.new(options.last_fm['api_key']).build_target_url params
+  redirect url.to_s, 302
+
 end
 
 get '/api/amazon' do

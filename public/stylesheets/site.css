@@ -217,10 +217,10 @@ div#content {
     margin:0 auto;
     padding:0 20px 20px;
     background:#ffffff;
-    border-top:2px solid #444444;
-    box-shadow:4px 10px  20px #333333;
-    -webkit-box-shadow:4px 10px  20px #333333;
-    -moz-box-shadow:4px 10px  20px #333333;
+    border-top:1px solid #eeeeee;
+    box-shadow:4px 10px  4px #333333;
+    -webkit-box-shadow:4px 4px  20px #333333;
+    -moz-box-shadow:4px 4px  20px #333333;
 }
 div#content > h1:first-child {
     padding-top:0;

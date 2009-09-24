@@ -5,6 +5,7 @@ class Memcache < AppEngine::Memcache
     #sort by param.key to make the key
     key = Marshal.dump(param.to_a.sort{|a,b| a[0].to_s <=> b[0].to_s})
     val = self[key]
+    Log.warn time
     if val
       Log.warn 'hit!'
       val
