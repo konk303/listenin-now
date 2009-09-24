@@ -7,14 +7,14 @@ class LastFm
     @api_key = api_key
   end
   def get(query)
-    @query = build_query query
+    build_query query
     #sort by query.key, クエリの順番が変わってもヒットするように
     @key = Marshal.dump(@query.to_a.sort{|a,b| a[0].to_s <=> b[0].to_s})
     handler = Proc.new {|i|fetch i}
     response = Memcache.new.get_or_set @key, &handler
   end
   def build_query query
-    {
+    @query = {
       :api_key => @api_key,
       :format => "json",
     }.merge(query)
