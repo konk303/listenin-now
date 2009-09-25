@@ -20,6 +20,8 @@ site.js
         wrap_until_next($("header").add("div#content").add("footer"));
         // section
         wrap_until_next($("section"));
+        // article
+        wrap_until_next($("article"));
         // nav
         $("nav").each(function(i) {
             $(this).next("ul,ol").appendTo(this);

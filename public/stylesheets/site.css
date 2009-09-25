@@ -24,7 +24,7 @@ article {
 /* font */
 @font-face {
     font-family: WebFont;
-    src: url('/fonts/Ronda Regular.ttf')
+    src: url('/fonts/Ronda Regular.ttf');
 }
 
 /* global */
@@ -192,6 +192,7 @@ body > header ul {
     padding:0;
 }
 body > header ul li {
+    display:-moz-inline-box;
     display:inline-block;
     margin:0 0.5em;
 }
@@ -284,6 +285,7 @@ div#content nav.tabArea ul {
     border-bottom:1px solid #333333;
 }
 div#content nav.tabArea ul li {
+    display:-moz-inline-box;
     display:inline-block;
     margin:5px 0 0;
     padding:0 1em;

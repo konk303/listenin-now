@@ -11,6 +11,17 @@
     %link{:rel => 'shortcut icon',
           :href => '/images/logo.png',
           :type => 'image/png'}
+    /[if IE]
+      %script{:type => 'text/javascript',
+            :src =>'/javascripts/html5.js'}
+    /[if lte IE 6]
+      %link{:rel => 'stylesheet',
+            :href => '/stylesheets/ie6.css',
+            :type => 'text/css'}
+    /[if lte IE 7]
+      %link{:rel => 'stylesheet',
+            :href => '/stylesheets/ie67.css',
+            :type => 'text/css'}
   %body{:id=> @body_id}
     %header
       %h1<
