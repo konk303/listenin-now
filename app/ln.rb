@@ -50,6 +50,11 @@ end
 
 
 
+#for maintainance
+# get '/*' do
+#   redirect 'http://d.hatena.ne.jp/konk303/', 302
+# end
+
 #controllers
 get '/' do
   @page_title[0,0] = "listenin' now"
