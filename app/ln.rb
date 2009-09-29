@@ -56,14 +56,23 @@ end
 # end
 
 #controllers
+# redirect *.html to *
+get %r{(.*)\.html$} do |c|
+  redirect c, 301
+end
+# redirect */index  to */
+get %r{(.*/)index$} do |c|
+  redirect c, 301
+end
+# redirect */  to *
+get %r{(.+)/$} do |c|
+  redirect c, 301
+end
+
 get '/' do
   @page_title[0,0] = "listenin' now"
   haml :index, :locals => {
   }
-end
-#fix me. どのページでも動くようにする
-get '/index.html' do
-  redirect '/', 301
 end
 
 get '/help' do
