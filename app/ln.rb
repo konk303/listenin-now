@@ -143,6 +143,17 @@ get '/xml/listenin-now.xml' do
   builder :ln
 end
 
+#sitemap, rss
+get '/sitemap.xml' do
+  content_type 'application/xml', :charset => 'utf-8'
+  builder :sitemap
+end
+get '/updates/rss' do
+  content_type 'application/xml', :charset => 'utf-8'
+  @posts
+  builder :updates
+end
+
 get '/admin/:path' do
   #auth処理
   p params[:path]
