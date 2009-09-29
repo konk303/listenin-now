@@ -1,7 +1,7 @@
 xml.instruct!
 xml.urlset(:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9") do
-  xml.url do
-    %w[/ /help /demo /updates /feedback /tech /author].each do |loc|
+  %w[/ /help /demo /updates /feedback /tech /author].each do |loc|
+    xml.url do
       xml.loc(request.scheme + '://' + request.host + loc)
     end
   end
