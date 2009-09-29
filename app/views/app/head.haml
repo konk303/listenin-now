@@ -23,3 +23,11 @@ ListeninNowConfig.base_uri = "#{options.base_uri}"; |
 %script{:type => 'text/javascript'}= File.open('public/javascripts/app/jquery.classUtil.js') {|f|f.read}
 %script{:type => 'text/javascript'}= File.open('public/javascripts/app/listenin-now_class.js') {|f|f.read}
 %script{:type => 'text/javascript'}= File.open('public/javascripts/app/listenin-now.js') {|f|f.read}
+/ MIXI AD PROGRAM
+%script{:type => 'text/javascript'}
+  (function(){
+  var url = "http://mixi.jp/ad_application_program_invoker.pl?appli_id=7793&ad_id=f4e2f7d7959bc36341a75ee2a251ecd0a2b4781f";
+  document.writeln(['<scri','pt src="',url,'&ts=',(new Date).getTime(),'">','</scri','pt>'].join(''));
+  })();
+/ END
+
