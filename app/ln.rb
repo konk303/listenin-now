@@ -4,6 +4,7 @@ require 'haml'
 require 'yaml'
 require 'builder'
 require 'appengine-apis/logger'
+require 'appengine-apis/users'
 
 
 
@@ -45,7 +46,13 @@ before do
   @body_id = request.path_info.split('/')[1] || 'index'
   @page_title = " - mixiアプリ「リスニンなう」"
   @description = "opensocial gadget / mixiアプリ 「リスニンなう」の紹介です。"
-#  Log.warn [options.environment,options.last_fm['api_key']].join(", ")
+  #auth処理 for /admin
+  if request.path_info =~ %r{^/admin}
+    @user = AppEngine::Users.current_user
+    @admin = @user ? AppEngine::Users.admin? : nil
+    redirect AppEngine::Users.create_login_url('/admin'), 302 unless @admin
+  end
+#  p @admin, request.path_info, options.environment
 end
 
 
@@ -143,10 +150,14 @@ get '/xml/listenin-now.xml' do
   builder :ln
 end
 
-get '/admin/:path' do
-  #auth処理
-  p params[:path]
-  if 'cron/memcache_stat'
-    Memcache.new.log_stat
-  end
+#admin
+get '/admin' do
+  @page_title[0,0] = "admin"
+  haml :admin
+end
+get '/admin/updates' do
+  @page_title[0,0] = "更新履歴 編集"
+  haml :admin
+end
+post '/admin/updates' do
 end

@@ -1,0 +1,10 @@
+%h1 admin
+%ul
+  %li
+    %a{:href => '/admin/updates'}> 更新情報
+  %li
+    %a{:href => '/admin/stats'}> 稼働状況
+%p
+%a{:href => AppEngine::Users.create_logout_url('/')}> ログアウト
+
+
