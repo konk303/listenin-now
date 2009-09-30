@@ -1,0 +1,17 @@
+%h1 admin
+%h2 更新情報
+%ol
+- updates.each do |update|
+  %li
+    %a{:href => "/admin/updates/#{update.id}"}>= update.title
+    #{h update.body}
+%form{:method => "post", :action => request.path_info}
+  %dl
+    %dt title
+    %dd
+      %input{:name => "title", :type => "text"}>
+    %dt body
+    %dd
+      %textarea{:name => "body"}>
+  %p
+    %input{:type => "submit"}>

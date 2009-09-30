@@ -1,7 +1,6 @@
 require 'lib/memcache'
 require 'uri'
 class LastFm
-  Net::HTTP = AppEngine::URLFetch::HTTP
   def initialize (api_key)
     @api_url = "http://ws.audioscrobbler.com/2.0/"
     @api_key = api_key
@@ -29,7 +28,6 @@ class LastFm
   end
   def fetch memcache
     #fix me, create a base urlfetch class?
-    require 'appengine-apis/urlfetch'
     @target_uri = build_target_uri
     res = nil
     Net::HTTP.start(@target_uri.host, @target_uri.port) do |http|

@@ -1,0 +1,19 @@
+%h1 admin
+%h2 更新情報
+%ol
+%form{:method => "post", :action => request.path_info}
+  %input{:name => "_method", :value =>"put", :type => "hidden"}
+  %dl
+    %dt title
+    %dd
+      %input{:name => "title", :type => "text", :value => update.title}>
+  %dl
+    %dt body
+    %dd
+      %textarea{:name => "body"}>= update.body
+  %p
+    %input{:type => "submit"}>
+%form{:method => "post", :action => request.path_info}
+  %input{:name => "_method", :value =>"delete", :type => "hidden"}
+  %p
+    %input{:type => "submit", :value => "削除"}>

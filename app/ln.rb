@@ -4,15 +4,23 @@ require 'haml'
 require 'yaml'
 require 'builder'
 require 'appengine-apis/logger'
+require 'appengine-apis/urlfetch'
 require 'appengine-apis/users'
-
-
+require 'dm-core'
+# Load all the ruby files in app/models
+Dir.glob(::File.join(%w[app models ** *.rb])).each {|fn|require fn}
+# datastore lang patch
+require 'lib/datastore_patch'
 
 #configure
 configure do
   #gae logger
   Log = AppEngine::Logger.new
   Log.level = AppEngine::Logger::DEBUG
+  #overwrite Net::HTTP with appengine-urlfetch
+  Net::HTTP = AppEngine::URLFetch::HTTP
+  #data-mapper
+  DataMapper.setup(:default, "appengine://auto")
   #set config from yaml
   @config = ConfigFile.instance.config
   @config['common'].each {|key,val| set key.to_sym => val}
@@ -41,6 +49,14 @@ end
 
 
 
+#helpers
+helpers do
+  include Rack::Utils
+  alias_method :h, :escape_html
+end
+
+
+
 #before filter
 before do
   @body_id = request.path_info.split('/')[1] || 'index'
@@ -57,24 +73,22 @@ end
 
 
 
-#for maintenance
-# get '/*' do
-#   redirect 'http://d.hatena.ne.jp/konk303/', 302
-# end
-
 #controllers
-# redirect *.html to *
-get %r{(.*)\.html$} do |c|
-  redirect c, 301
-end
-# redirect */index  to */
-get %r{(.*/)index$} do |c|
-  redirect c, 301
-end
-# redirect */  to *
-get %r{(.+)/$} do |c|
-  redirect c, 301
-end
+
+#for maintenance
+#load 'app/controllers/maintenance.rb'
+
+#url optimize
+load 'app/controllers/url_optimize.rb'
+
+#app urls
+load 'app/controllers/app.rb'
+
+#sitemap, rss
+load 'app/controllers/xml.rb'
+
+#admin
+load 'app/controllers/admin.rb'
 
 get '/' do
   @page_title[0,0] = "listenin' now"
@@ -113,6 +127,9 @@ EOF
   }
 end
 
+get '/updates/:id' do
+end
+
 get '/feedback' do
   @page_title[0,0] = "フィードバック"
   haml @body_id.intern
@@ -128,47 +145,40 @@ get '/author' do
   haml @body_id.intern
 end
 
-get '/api/lastfm' do
-  require 'app/models/lastfm'
-#   response = LastFm.new(options.last_fm['api_key']).get(params)
-#   content_type response[:content_type], :charset => response[:charset]
-#   status response[:code]
-#   response[:body]
-  #memcache doesn't expire as I expected. use redirect
-  lastfm = LastFm.new(options.last_fm['api_key'])
-  lastfm.build_query(params)
-  url = lastfm.build_target_uri
-  redirect url.to_s, 302
 
-end
 
-get '/api/amazon' do
-end
 
-get '/xml/listenin-now.xml' do
-  content_type 'application/xml', :charset => 'utf-8'
-  builder :ln
-end
-
-#sitemap, rss
-get '/sitemap.xml' do
-  content_type 'application/xml', :charset => 'utf-8'
-  builder :sitemap
-end
-get '/updates/rss' do
-  content_type 'application/xml', :charset => 'utf-8'
-  @posts
-  builder :updates
-end
-
-#admin
 get '/admin' do
   @page_title[0,0] = "admin"
   haml :admin
 end
+
 get '/admin/updates' do
-  @page_title[0,0] = "更新履歴 編集"
-  haml :admin
+  @page_title[0,0] = "更新情報"
+  updates = Update.all(:order => [:id.desc])
+  haml :'admin/updates', :locals => {
+    :updates => updates
+  }
 end
+
 post '/admin/updates' do
+  Update.create(:title => params[:title], :body => params[:body], :created_at => Time.now)
+  redirect request.path_info
+end
+
+get '/admin/updates/:id' do
+  update = Update.get(params[:id])
+  haml :'admin/update', :locals => {
+    :update => update
+  }
+end
+
+put '/admin/updates/:id' do
+  Update.get(params[:id]).update(:title => params[:title], :body => params[:body])
+  redirect '/admin/updates'
+end
+
+delete '/admin/updates/:id' do
+  Update.get(params[:id]).destroy
+  redirect '/admin/updates'
 end
