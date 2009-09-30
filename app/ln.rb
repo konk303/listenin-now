@@ -114,6 +114,7 @@ end
 
 get '/updates/:id' do
   update = Update.get(params[:id])
+  @page_title[0,0] = "#{h update.title} - 更新履歴"
   haml :update, :locals => {:update => update}
 end
 
