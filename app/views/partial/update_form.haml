@@ -1,0 +1,17 @@
+%dl
+  %dt display?
+  %dd
+    %input{:name => "display", :type => "checkbox", :value => "1", :checked => update.display}>
+  %dt title
+  %dd
+    %input{:name => "title", :type => "text", :value => update.title}>
+  %dt date
+  %dd
+    %input{:name => "date_y", :type => "text", :value => update.date ? update.date.year : false}>
+    %input{:name => "date_m", :type => "text", :value => update.date ? update.date.month : false}>
+    %input{:name => "date_d", :type => "text", :value => update.date ? update.date.day : false}>
+  %dt body
+  %dd
+    %textarea{:name => "body"}>= update.body
+  %p
+    %input{:type => "submit", :value => '登録'}>

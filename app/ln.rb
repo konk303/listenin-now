@@ -108,26 +108,13 @@ end
 
 get '/updates' do
   @page_title[0,0] = "更新履歴"
-  # todo: datastore使ってcms化
-  haml :updates, :locals => {
-    :updates => [
-                 {:date => Time.local(2009,9,25),
-                   :title =>'説明サイトをオープンしました',
-                   :content => <<"EOF"
-<p>説明サイトを作成し、オープンしました。</p>
-EOF
-                 },
-                 {:date => Time.local(2009,9,25),
-                   :title =>'サーバーを移転しました',
-                   :content => <<"EOF"
-<p>google app engine上にサーバーを移転しました。</p>
-EOF
-                 },
-                ]
-  }
+  updates = Update.all_display
+  haml :updates, :locals => {:updates => updates}
 end
 
 get '/updates/:id' do
+  update = Update.get(params[:id])
+  haml :update, :locals => {:update => update}
 end
 
 get '/feedback' do
@@ -143,42 +130,4 @@ end
 get '/author' do
   @page_title[0,0] = "作者について"
   haml @body_id.intern
-end
-
-
-
-
-get '/admin' do
-  @page_title[0,0] = "admin"
-  haml :admin
-end
-
-get '/admin/updates' do
-  @page_title[0,0] = "更新情報"
-  updates = Update.all(:order => [:id.desc])
-  haml :'admin/updates', :locals => {
-    :updates => updates
-  }
-end
-
-post '/admin/updates' do
-  Update.create(:title => params[:title], :body => params[:body], :created_at => Time.now)
-  redirect request.path_info
-end
-
-get '/admin/updates/:id' do
-  update = Update.get(params[:id])
-  haml :'admin/update', :locals => {
-    :update => update
-  }
-end
-
-put '/admin/updates/:id' do
-  Update.get(params[:id]).update(:title => params[:title], :body => params[:body])
-  redirect '/admin/updates'
-end
-
-delete '/admin/updates/:id' do
-  Update.get(params[:id]).destroy
-  redirect '/admin/updates'
 end

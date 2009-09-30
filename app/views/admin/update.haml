@@ -3,16 +3,7 @@
 %ol
 %form{:method => "post", :action => request.path_info}
   %input{:name => "_method", :value =>"put", :type => "hidden"}
-  %dl
-    %dt title
-    %dd
-      %input{:name => "title", :type => "text", :value => update.title}>
-  %dl
-    %dt body
-    %dd
-      %textarea{:name => "body"}>= update.body
-  %p
-    %input{:type => "submit"}>
+  = haml :'partial/update_form', :locals => {:update => update}, :layout => false
 %form{:method => "post", :action => request.path_info}
   %input{:name => "_method", :value =>"delete", :type => "hidden"}
   %p

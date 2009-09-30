@@ -1,4 +1,7 @@
 %h1 更新履歴
 - updates.each do |data|
-  = haml :'partial/update', :layout => false, :locals => {:data => data}
-
+  %article.update
+    %h1
+      %a{:href => "/updates/#{data.id}"}>= data.title
+    %h2= data.date.strftime("%Y/%m/%d %a")
+    %div.content

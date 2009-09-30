@@ -4,14 +4,6 @@
 - updates.each do |update|
   %li
     %a{:href => "/admin/updates/#{update.id}"}>= update.title
-    #{h update.body}
+    （#{update.date.strftime("%Y/%m/%d %a")}）
 %form{:method => "post", :action => request.path_info}
-  %dl
-    %dt title
-    %dd
-      %input{:name => "title", :type => "text"}>
-    %dt body
-    %dd
-      %textarea{:name => "body"}>
-  %p
-    %input{:type => "submit"}>
+  = haml :'partial/update_form', :locals => {:update => Update.new}, :layout => false

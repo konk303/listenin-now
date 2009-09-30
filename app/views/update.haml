@@ -1,0 +1,6 @@
+%h1
+  %a{:href => "/updates"}> 更新履歴
+%article.update
+  %h1= update.title
+  %h2= update.date.strftime("%Y/%m/%d %a")
+  %div.content= haml update.body, :layout => false
