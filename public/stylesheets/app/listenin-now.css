@@ -18,6 +18,11 @@ body {
     margin-bottom:10px;
     background:#eeeeee;
 }
+body.home,
+body.profile {
+    /* 212px - scrollbar 17px - shadow 2px - chrome 2px */
+    width: 191px;
+}
 body > div {
     max-width:600px;
     margin-right:auto;
@@ -96,6 +101,10 @@ html>/**/body div#infoArea span.button_edit, x:-moz-any-link, x:default {
 /* tracksArea */
 div#tracksArea {
     padding-left:10px;
+}
+body.home div#tracksArea ,
+body.profile div#tracksArea {
+    padding-left:5px;
 }
 div#tracksArea dl.track {
     position:relative;
