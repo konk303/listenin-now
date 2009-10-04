@@ -11,6 +11,7 @@ body.profile {
     /* 212px - scrollbar 17px - shadow 2px */
     width: auto;
 }
+
 /* content:after, ng in ie67. */
 div#ie67 div#tracksArea dl.track {
     zoom:1;

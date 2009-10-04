@@ -18,8 +18,8 @@ body {
     margin-bottom:10px;
     background:#eeeeee;
 }
-body.home,
-body.profile {
+body.mixi.home,
+body.mixi.profile {
     /* 212px - scrollbar 17px - shadow 2px - chrome 2px */
     width: 191px;
 }

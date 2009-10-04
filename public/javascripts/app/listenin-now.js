@@ -18,9 +18,10 @@ listenin-now.js
             if (view.name == 'canvas') view.initCanvas();
             else view.initHomeProfile();
         });
-
-        // external links, use mixi.util.requestExternalNavigateTo
+        // mixi oriented
         if (window.mixi) {
+            $("body").addClass("mixi");
+            // external links, use mixi.util.requestExternalNavigateTo
             $("a.external").live("click", function(e) {
                 e.preventDefault();
                 mixi.util.requestExternalNavigateTo($(this).attr("href"));
