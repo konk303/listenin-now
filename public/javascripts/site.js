@@ -47,5 +47,13 @@ site.js
                 return false;
             })
         }
+        // haml preview in admin page
+        $("button#preview", "body#admin").click(function() {
+            var button = $(this);
+            var texts = button.prev("textarea").val();
+            var resultArea = $(this).next("div.previewArea").empty();
+            resultArea.load("/admin/preview_haml", {haml: texts});
+            return false;
+        })
     })
 })(jQuery);

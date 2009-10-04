@@ -147,6 +147,9 @@ strong {
 a#uservoice-feedback-tab {
     background-image: url(http://cdn.uservoice.com/images/widgets/en/feedback_tab_white.png) !important;
 }
+textarea {
+    width: 100%;
+}
 
 /* header */
 body > header {

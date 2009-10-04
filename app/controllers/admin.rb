@@ -3,6 +3,10 @@ get '/admin' do
   haml :admin
 end
 
+post '/admin/preview_haml' do
+  haml params[:haml], :layout => false
+end
+
 get '/admin/updates' do
   @page_title[0,0] = "更新情報"
   updates = Update.all
