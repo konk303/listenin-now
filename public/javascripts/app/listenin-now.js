@@ -342,13 +342,7 @@ listenin-now.js
     //loading image
     Class.LoadingImage = $.myUtil.createClassSingleton({
         init: function() {
-            this.img = $('<img />').attr({
-                src: "http://listenin-now.konk303.com/images/app/ajax-loader.gif",
-                alt: "now loading",
-                titile: "now loading"
-            })
-            .wrap('<div class="loading" />')
-            .parent().hide();
+            this.img = $("div.loading", "div#templates").hide();
         },
         showAt: function(area) {
             this.img.appendTo(area).show();
