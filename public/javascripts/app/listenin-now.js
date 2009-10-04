@@ -372,7 +372,7 @@ listenin-now.js
             this.loading.showAt(this.accountArea);
             var req = new Class.OsRequest();
             req.add(this.keyOwner, "newFetchPersonRequest", ['OWNER']);
-            req.add(this.keyLf, "newFetchPersonAppDataRequest", ['OWNER', this.keyLf]);
+            req.add(this.keyLf, "newFetchPersonAppDataRequest", [req.idSpec({userId: "OWNER"}), [this.keyLf]]);
             //viewerinfo, need to know if he/she has app.
             var params = {};
             params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [
@@ -549,6 +549,9 @@ listenin-now.js
         },
         add: function(key, method, param) {
             this.req.add(this.req[method].apply(this.req, param), key);
+        },
+        idSpec: function(keys) {
+            return opensocial.newIdSpec(keys);
         },
         request: function(callback) {
             this.callback = callback;
