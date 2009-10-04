@@ -154,8 +154,19 @@ listenin-now.js
             .text(data.album["#text"])
             .wrap('<p class="album" />').parent().appendTo(dd);
             //date
+            var playedDate = new Date(data.date["uts"] * 1000);
+            var now = new Date();
+            var diff = now.getTime() - playedDate.getTime();
+            var dateString;
+            if (diff < 60 * 60 * 1000) { //less than hour
+                dateString = (Math.floor(diff / 60 / 1000)) + "分前";
+            } else if (diff < 24 * 60 * 60 * 1000) { // less than day
+                dateString = (Math.floor(diff / 60/ 60 / 1000)) + "時間前";
+            } else {
+                dateString = playedDate.toLocaleDateString();
+            }
             $('<p class="date" />')
-            .text(data.date["#text"])
+            .text(dateString)
             .appendTo(dd);
             //iTS link
             var div_iTs = $('<div class="button_iTS" />')
