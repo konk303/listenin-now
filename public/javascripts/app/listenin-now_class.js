@@ -585,8 +585,8 @@ listenin-now_class.js
             find("dt").text(this.entry.Date.toLocaleDateString()).
             end().find("a").
             attr("href", this.entry.Link).
-            text(this.entry.Link).
-            appendTo(this.showArea);
+            text(this.entry.Title).
+            end().appendTo(this.showArea);
             this.showArea.show();
         }
     });
