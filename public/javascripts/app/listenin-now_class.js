@@ -5,7 +5,7 @@ listenin-now_class.js
 ============================================================ */
 (function($) {
     // classes, keep them under a namespace
-    var Class = {};
+    window.Class = {};
     // Tracks
     Class.Tracks = $.classUtil.createClass({
         init: function(account) {
