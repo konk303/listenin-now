@@ -1,3 +1,6 @@
+%link{:rel => 'stylesheet',
+      :href => 'http://yui.yahooapis.com/combo?3.0.0/build/cssreset/reset-min.css&3.0.0/build/cssfonts/fonts-min.css',
+      :type => 'text/css'}
 %style{:type => 'text/css'}= File.open('public/stylesheets/app/listenin-now.css') {|f|f.read}
 /[if lte IE 7]
   %style{:type => 'text/css'}= File.open('public/stylesheets/app/ie.css') {|f|f.read}
