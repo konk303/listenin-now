@@ -7,7 +7,7 @@ require 'appengine-apis/logger'
 require 'appengine-apis/urlfetch'
 require 'appengine-apis/users'
 require 'dm-core'
-# Load all the ruby files in app/models
+# Load all ruby files in app/models
 Dir.glob(::File.join(%w[app models ** *.rb])).each {|fn|require fn}
 # datastore lang patch
 require 'lib/datastore_patch'
@@ -62,12 +62,6 @@ before do
   @body_id = request.path_info.split('/')[1] || 'index'
   @page_title = " - mixiアプリ「リスニンなう」"
   @description = "opensocial gadget / mixiアプリ 「リスニンなう」の紹介です。"
-  #auth処理 for /admin
-  if request.path_info =~ %r{^/admin}
-    @user = AppEngine::Users.current_user
-    @admin = @user ? AppEngine::Users.admin? : nil
-    redirect AppEngine::Users.create_login_url('/admin'), 302 unless @admin
-  end
 #  p @admin, request.path_info, options.environment
 end
 
@@ -84,16 +78,18 @@ load 'app/controllers/url_optimize.rb'
 #app urls
 load 'app/controllers/app.rb'
 
-#sitemap, rss
+#sitemap
 load 'app/controllers/xml.rb'
+
+#updates
+load 'app/controllers/updates.rb'
 
 #admin
 load 'app/controllers/admin.rb'
 
 get '/' do
   @page_title[0,0] = "listenin' now"
-  haml :index, :locals => {
-  }
+  haml @body_id.intern
 end
 
 get '/help' do
@@ -104,18 +100,6 @@ end
 get '/demo' do
   @page_title[0,0] = "デモ"
   haml @body_id.intern
-end
-
-get '/updates' do
-  @page_title[0,0] = "更新履歴"
-  updates = Update.all_display
-  haml :updates, :locals => {:updates => updates}
-end
-
-get '/updates/:id' do
-  update = Update.get(params[:id])
-  @page_title[0,0] = "#{h update.title} - 更新履歴"
-  haml :update, :locals => {:update => update}
 end
 
 get '/feedback' do

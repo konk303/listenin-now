@@ -1,3 +1,13 @@
+get '/admin*' do
+  #auth処理 for /admin
+  @user = AppEngine::Users.current_user
+  @admin = @user ? AppEngine::Users.admin? : nil
+  if @admin
+    pass
+  else
+    redirect AppEngine::Users.create_login_url('/admin'), 302
+  end
+end
 get '/admin' do
   @page_title[0,0] = "admin"
   haml :admin
