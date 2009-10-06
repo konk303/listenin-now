@@ -17,8 +17,6 @@ configure do
   #gae logger
   Log = AppEngine::Logger.new
   Log.level = AppEngine::Logger::DEBUG
-  #overwrite Net::HTTP with appengine-urlfetch
-  Net::HTTP = AppEngine::URLFetch::HTTP
   #data-mapper
   DataMapper.setup(:default, "appengine://auto")
   #set config from yaml
