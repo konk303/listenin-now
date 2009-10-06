@@ -271,15 +271,15 @@ listenin-now_class.js
         }
     });
     //loading image
-    Class.LoadingImage = $.classUtil.createClassSingleton({
+    Class.LoadingImage = $.classUtil.createClass({
         init: function() {
-            this.img = $("div.loading", "div#templates").hide();
+            this.template = $("div.loading", "div#templates").clone();
         },
         showAt: function(area) {
-            this.img.appendTo(area).show();
+            this.template.appendTo(area).show();
         },
         hide: function() {
-            this.img.hide();
+            this.template.hide();
         }
     });
     // owner account
@@ -500,6 +500,29 @@ listenin-now_class.js
             this.callback(res);
         }
     });
+    // gadget io request
+    Class.IoRequest = $.classUtil.createClass({
+        init: function() {
+            this.responseHandler = $.classUtil.createHandler(this, this.response);
+            this.params = {};
+            this.io = gadgets.io;
+        },
+        param: function(key, val) {
+            this.params[this.io.RequestParameters[key]] = val;
+            return this; // chainable
+        },
+        request: function(location, callback) {
+            this.callback = callback;
+            gadgets.io.makeRequest(location, this.responseHandler, this.params);
+        },
+        response: function(res) {
+            if (res.errors && res.errors.length) {
+//                 alert("エラー:\n" + res.errors.join("\n"));
+            } else {
+                this.callback(res.data, res);
+            }
+        }
+    });
     //last.fm api
     Class.LastFm = $.classUtil.createClass({
         init: function() {
@@ -531,6 +554,40 @@ listenin-now_class.js
                 }
             }
         }
-
+    });
+    //what's new
+    Class.WhatsNew = $.classUtil.createClass({
+        init: function() {
+            this.showArea = $("#whatsnewArea");
+            this.template = $("dl.whatsnew", "#templates").clone();
+            this.rssUrl = "http://feeds.feedburner.com/listenin-now";
+            this.validDays = 5; // display until
+            this.responseHandler = $.classUtil.createHandler(this, this.response);
+        },
+        request: function() {
+            var req = new Class.IoRequest();
+            req.param("METHOD", req.io.MethodType.GET).
+            param("AUTHORIZATION", req.io.AuthorizationType.NONE).
+            param("CONTENT_TYPE", req.io.ContentType.FEED).
+            param("GET_SUMMARIES", false).
+            param("NUM_ENTRIES", 1).
+            request(this.rssUrl, this.responseHandler);
+        },
+        response: function(res) {
+            this.entry = res.Entry[0];
+            this.entry.Date = new Date(this.entry.Date);
+            var now = new Date();
+            var valid = now.setDate(now.getDate() - this.validDays);
+            if (this.entry.Date.getTime() > valid) this.show();
+        },
+        show: function() {
+            this.template.
+            find("dt").text(this.entry.Date.toLocaleDateString()).
+            end().find("a").
+            attr("href", this.entry.Link).
+            text(this.entry.Link).
+            appendTo(this.showArea);
+            this.showArea.show();
+        }
     });
 })(jQuery);
