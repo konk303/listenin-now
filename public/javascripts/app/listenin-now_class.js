@@ -575,7 +575,8 @@ listenin-now_class.js
         },
         response: function(res) {
             this.entry = res.Entry[0];
-            this.entry.Date = new Date(this.entry.Date);
+            // mixi returns js date(ms), should be uts.
+            this.entry.Date = new Date(window.mixi ? this.entry.Date : this.entry.Date * 1000);
             var now = new Date();
             var valid = now.setDate(now.getDate() - this.validDays);
             if (this.entry.Date.getTime() > valid) this.show();
