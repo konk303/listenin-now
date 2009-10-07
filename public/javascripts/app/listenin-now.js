@@ -15,8 +15,12 @@ listenin-now.js
         owner.getData(function() {
             //things to do AFTER ownerinfo are fetched.
             owner.show();
-            if (view.name == 'canvas') view.initCanvas();
-            else view.initHomeProfile();
+            if (view.name == 'canvas') {
+                view.initCanvas();
+                Class.WhatsNew().display();
+            } else {
+                view.initHomeProfile();
+            }
         });
         // mixi oriented
         if (window.mixi) {

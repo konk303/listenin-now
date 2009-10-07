@@ -271,15 +271,15 @@ listenin-now_class.js
         }
     });
     //loading image
-    Class.LoadingImage = $.classUtil.createClassSingleton({
+    Class.LoadingImage = $.classUtil.createClass({
         init: function() {
-            this.img = $("div.loading", "div#templates").hide();
+            this.template = $("div.loading", "div#templates").clone();
         },
         showAt: function(area) {
-            this.img.appendTo(area).show();
+            this.template.appendTo(area).show();
         },
         hide: function() {
-            this.img.hide();
+            this.template.hide();
         }
     });
     // owner account
@@ -500,6 +500,29 @@ listenin-now_class.js
             this.callback(res);
         }
     });
+    // gadget io request
+    Class.IoRequest = $.classUtil.createClass({
+        init: function() {
+            this.responseHandler = $.classUtil.createHandler(this, this.response);
+            this.params = {};
+            this.io = gadgets.io;
+        },
+        param: function(key, val) {
+            this.params[this.io.RequestParameters[key]] = val;
+            return this; // chainable
+        },
+        request: function(location, callback) {
+            this.callback = callback;
+            gadgets.io.makeRequest(location, this.responseHandler, this.params);
+        },
+        response: function(res) {
+            if (res.errors && res.errors.length) {
+//                 alert("エラー:\n" + res.errors.join("\n"));
+            } else {
+                this.callback(res.data, res);
+            }
+        }
+    });
     //last.fm api
     Class.LastFm = $.classUtil.createClass({
         init: function() {
@@ -531,6 +554,47 @@ listenin-now_class.js
                 }
             }
         }
-
+    });
+    //what's new
+    Class.WhatsNew = $.classUtil.createClass({
+        init: function() {
+            this.showArea = $("#whatsnewArea");
+            this.rssUrl = "http://feeds.feedburner.com/listenin-now";
+            this.maxDisplay = 1; // display entries count
+            this.validDays = 5; // display until
+            this.responseHandler = $.classUtil.createHandler(this, this.response);
+        },
+        display: function() {
+            this.showArea.show();
+            this.request();
+        },
+        request: function() {
+            var req = new Class.IoRequest();
+            req.param("METHOD", req.io.MethodType.GET).
+            param("AUTHORIZATION", req.io.AuthorizationType.NONE).
+            param("CONTENT_TYPE", req.io.ContentType.FEED).
+            param("GET_SUMMARIES", false).
+            param("NUM_ENTRIES", this.maxDisplay).
+            request(this.rssUrl, this.responseHandler);
+        },
+        response: function(res) {
+            var self = this;
+            $.each(res.Entry, function() {
+                // mixi returns js date(ms), should be uts.
+                this.Date = new Date(window.mixi ? this.Date : this.Date * 1000);
+                var now = new Date();
+                var valid = now.setDate(now.getDate() - self.validDays);
+                if (this.Date.getTime() > valid) {
+                    self.entry = this;
+                    self.show();
+                }
+            });
+        },
+        show: function() {
+            this.template = $("dl.whatsnew", "#templates").clone();
+            $("dt", this.template).text(this.entry.Date.toLocaleDateString());
+            $("dd a", this.template).attr("href", this.entry.Link).text(this.entry.Title);
+            this.showArea.append(this.template);
+        }
     });
 })(jQuery);
