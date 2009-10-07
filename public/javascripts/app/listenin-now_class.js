@@ -559,10 +559,14 @@ listenin-now_class.js
     Class.WhatsNew = $.classUtil.createClass({
         init: function() {
             this.showArea = $("#whatsnewArea");
-            this.template = $("dl.whatsnew", "#templates").clone();
             this.rssUrl = "http://feeds.feedburner.com/listenin-now";
+            this.maxDisplay = 1; // display entries count
             this.validDays = 5; // display until
             this.responseHandler = $.classUtil.createHandler(this, this.response);
+        },
+        display: function() {
+            this.showArea.show();
+            this.request();
         },
         request: function() {
             var req = new Class.IoRequest();
@@ -570,25 +574,27 @@ listenin-now_class.js
             param("AUTHORIZATION", req.io.AuthorizationType.NONE).
             param("CONTENT_TYPE", req.io.ContentType.FEED).
             param("GET_SUMMARIES", false).
-            param("NUM_ENTRIES", 1).
+            param("NUM_ENTRIES", this.maxDisplay).
             request(this.rssUrl, this.responseHandler);
         },
         response: function(res) {
-            this.entry = res.Entry[0];
-            // mixi returns js date(ms), should be uts.
-            this.entry.Date = new Date(window.mixi ? this.entry.Date : this.entry.Date * 1000);
-            var now = new Date();
-            var valid = now.setDate(now.getDate() - this.validDays);
-            if (this.entry.Date.getTime() > valid) this.show();
+            var self = this;
+            $.each(res.Entry, function() {
+                // mixi returns js date(ms), should be uts.
+                this.Date = new Date(window.mixi ? this.Date : this.Date * 1000);
+                var now = new Date();
+                var valid = now.setDate(now.getDate() - self.validDays);
+                if (this.Date.getTime() > valid) {
+                    self.entry = this;
+                    self.show();
+                }
+            });
         },
         show: function() {
-            this.template.
-            find("dt").text(this.entry.Date.toLocaleDateString()).
-            end().find("a").
-            attr("href", this.entry.Link).
-            text(this.entry.Title).
-            end().appendTo(this.showArea);
-            this.showArea.show();
+            this.template = $("dl.whatsnew", "#templates").clone();
+            $("dt", this.template).text(this.entry.Date.toLocaleDateString());
+            $("dd a", this.template).attr("href", this.entry.Link).text(this.entry.Title);
+            this.showArea.append(this.template);
         }
     });
 })(jQuery);

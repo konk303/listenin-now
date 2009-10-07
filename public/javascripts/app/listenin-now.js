@@ -17,7 +17,7 @@ listenin-now.js
             owner.show();
             if (view.name == 'canvas') {
                 view.initCanvas();
-                Class.WhatsNew().request();
+                Class.WhatsNew().display();
             } else {
                 view.initHomeProfile();
             }
