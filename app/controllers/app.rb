@@ -20,7 +20,7 @@ get '/api/lastfm' do
       content_type 'application/json'
       halt ActiveSupport::JSON.encode({:artist => {
                                           :name => artist.name,
-                                          :image => ActiveSupport::JSON.decode(artist.images),
+                                          :image => artist.images,
                                           :cached_by_listenin_now => true,
                                         }})
     end
@@ -30,7 +30,7 @@ end
 
 post '/api/artist' do
   artist = LastFmArtist.get(params[:artist]) || LastFmArtist.new(:name => params[:artist])
-  artist.images = params[:image]
+  artist.images = ActiveSupport::JSON.decode(params[:image])
   artist.save
   content_type 'application/json'
   ActiveSupport::JSON.encode({:status => "ok"})

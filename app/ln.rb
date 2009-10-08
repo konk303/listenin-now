@@ -9,6 +9,8 @@ require 'appengine-apis/logger'
 require 'appengine-apis/urlfetch'
 require 'appengine-apis/users'
 require 'dm-core'
+#data-mapper setup
+DataMapper.setup(:default, "appengine://auto")
 # Load all ruby files in app/models
 Dir.glob(::File.join(%w[app models ** *.rb])).each {|fn|require fn}
 # datastore lang patch
@@ -19,8 +21,6 @@ configure do
   #gae logger
   Log = AppEngine::Logger.new
   Log.level = AppEngine::Logger::DEBUG
-  #data-mapper
-  DataMapper.setup(:default, "appengine://auto")
   #set config from yaml
   @config = ConfigFile.instance.config
   @config['common'].each {|key,val| set key.to_sym => val}
