@@ -517,7 +517,7 @@ listenin-now_class.js
                 this.showOwnerInfo();
                 Class.Tracks(this.lf_account).display(Class.View().name == "canvas" ? 40: 5);
                 if (Class.View().name == "canvas") {
-                    Class.Ranking(this.lf_account, $("#rankingsArea")).display(800);
+                    Class.Ranking(this.lf_account, $("#rankingsArea")).display(5);
                 }
             } else {
                 if (this.isViewer)
