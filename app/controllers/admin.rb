@@ -8,6 +8,7 @@ get '/admin*' do
     redirect AppEngine::Users.create_login_url('/admin'), 302
   end
 end
+
 get '/admin' do
   @page_title[0,0] = "admin"
   haml :admin
@@ -64,4 +65,9 @@ end
 delete '/admin/updates/:id' do
   Update.get(params[:id]).destroy
   redirect '/admin/updates'
+end
+
+get '/admin/data' do
+  @page_title[0,0] = "データ"
+  haml :'admin/data'
 end
