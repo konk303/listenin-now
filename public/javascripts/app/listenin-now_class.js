@@ -124,21 +124,20 @@ listenin-now_class.js
         init: function() {
             this.FETCHING_STRING = "fetching";
             this.images = Class.ArtistImageData().images;
-            this.replaceAgainHandler = $.classUtil.createHandler(this, this.replaceAgain);
+            this.checkFetchingHandler = $.classUtil.createHandler(this, this.checkFetching);
             this.responseHandler = $.classUtil.createHandler(this, this.response);
         },
         replace: function(artistName, imgObj, size) {
             this.artist = artistName;
             this.imgObj = imgObj;
             this.size = size || 0;
-            console.log(this.images);
             if (this.images[this.artist]) {
-                this.replaceAgain();
+                this.checkFetching();
             } else {
                 this.request(artistName);
             }
         },
-        replaceAgain: function() {
+        checkFetching: function() {
             if (this.images[this.artist] == this.FETCHING_STRING) {
                 window.setTimeout(this.replaceAgainHandler, 500);
             } else {
@@ -651,7 +650,9 @@ listenin-now_class.js
         },
         request: function(queries, callback) {
             this.callback = callback;
+            console.log(queries.artist);
             var requestUrl = this.lf_apiUrl + $.param(queries);
+            console.log(requestUrl);
             var req = new Class.IoRequest();
             req.param("METHOD", req.io.MethodType.GET).
             param("AUTHORIZATION", req.io.AuthorizationType.NONE).

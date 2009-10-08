@@ -19,8 +19,8 @@ class LastFm
     }.merge(query)
   end
   def build_target_uri
-    # build query string, do I need to do this by myself?
-    query_string = URI.encode(@query.map{|i| i.join("=")}.join("&"))
+    # build query string
+    query_string = Rack::Utils::build_query(@query)
     uri = URI(@api_url)
     uri.query = query_string
     uri
