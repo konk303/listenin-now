@@ -5,12 +5,23 @@
       %img{ :src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => "" }
     %dd
       %p.name<
-        %a.external{ :href => "http://example.com/" }
+        %a.external
       %p.artist<
-        %a.external{ :href => "http://example.com/" }
+        %a.external
       %p.album<
-        %a.external{ :href => "http://example.com/" }
+        %a.external
       %p.date
+      .button_iTS{ :title => "曲をiTunes Storeで探す" }
+      .button_community{ :title => "アーティスト名でコミュニティ検索" }
+
+  / ranking
+  %dl.ranking
+    %dt.image<
+      %img{ :src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => "" }
+    %dd
+      %p.name<
+        %a.external
+      %p.playcount
       .button_iTS{ :title => "曲をiTunes Storeで探す" }
       .button_community{ :title => "アーティスト名でコミュニティ検索" }
 
@@ -19,16 +30,16 @@
     %h2 iTunes Store 検索
     %dl.tracks_iTS
       %dt.perItem<
-        %a.artist{ :href => "http://example.com/", :target => "_blank" }
+        %a.artist{:target => "_blank"}
         %br>
-        %a.image{ :href => "http://example.com/", :target => "_blank" }<
+        %a.image{:target => "_blank"}<
           %img{ :src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => "" }
       %dd.perItem
         %p.name<
-          %a{ :href => "http://example.com/", :target => "_blank" }<
+          %a{:target => "_blank"}<
             %span.price
         %p.artist<
-          %a{ :href => "http://example.com/", :target => "_blank" }<
+          %a{:target => "_blank"}<
             %span.price
     .close_button{ :title => "閉じる" }
 
@@ -40,4 +51,4 @@
   %dl.whatsnew
     %dt 2009/10/01
     %dd
-      %a{:href => "http://example.com/", :target => "_blank"}> title
+      %a{:target => "_blank"}> title
