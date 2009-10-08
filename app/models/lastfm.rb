@@ -20,8 +20,7 @@ class LastFm
   end
   def build_target_uri
     # build query string, do I need to do this by myself?
-    query_string = @query.
-      map{|i| i.join("=")}.join("&")
+    query_string = URI.encode(@query.map{|i| i.join("=")}.join("&"))
     uri = URI(@api_url)
     uri.query = query_string
     uri

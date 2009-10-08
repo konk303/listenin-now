@@ -73,11 +73,12 @@ listenin-now_class.js
 
             //image
             // $("dt.image a", showObj).attr("href", data.url);
-            $("dt.image img", showObj).attr({
+            var img = $("dt.image img", showObj).attr({
                 "src": data.image[0]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
                 "alt": data.artist["#text"] + " - " + data.name,
                 "title": data.artist["#text"] + " - " + data.name
             })
+            if (!data.image[0]["#text"]) Class.ArtistImages().replace(data.artist["#text"], img);
             //name
             $("p.name a", showObj).
             attr({"href":data.url, "title":data.name}).text(data.name);
@@ -113,6 +114,55 @@ listenin-now_class.js
         }
     });
 
+    // song image, replace with artist image
+    Class.ArtistImageData = $.classUtil.createClassSingleton({
+        init: function() {
+            this.images = {};
+        }
+    });
+    Class.ArtistImages = $.classUtil.createClass({
+        init: function() {
+            this.FETCHING_STRING = "fetching";
+            this.images = Class.ArtistImageData().images;
+            this.replaceAgainHandler = $.classUtil.createHandler(this, this.replaceAgain);
+            this.responseHandler = $.classUtil.createHandler(this, this.response);
+        },
+        replace: function(artistName, imgObj, size) {
+            this.artist = artistName;
+            this.imgObj = imgObj;
+            this.size = size || 0;
+            console.log(this.images);
+            if (this.images[this.artist]) {
+                this.replaceAgain();
+            } else {
+                this.request(artistName);
+            }
+        },
+        replaceAgain: function() {
+            if (this.images[this.artist] == this.FETCHING_STRING) {
+                window.setTimeout(this.replaceAgainHandler, 500);
+            } else {
+                this.replaceImage();
+            }
+        },
+        replaceImage: function() {
+            this.imgObj.attr("src", this.images[this.artist][this.size]["#text"]);
+        },
+        request: function(artistName) {
+            this.images[artistName] = this.FETCHING_STRING;
+            var queries = {
+                method: "artist.getInfo",
+                artist: artistName
+            };
+            Class.LastFm().request(queries, this.responseHandler);
+        },
+        response: function(res, message) {
+            if (!message.length && res.artist) {
+                this.images[res.artist.name] = res.artist.image;
+            }
+            this.replaceImage();
+        }
+    });
     // Ranking
     Class.Ranking = $.classUtil.createClass({
         init: function(account, showArea) {
