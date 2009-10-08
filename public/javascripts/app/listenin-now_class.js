@@ -10,14 +10,20 @@ listenin-now_class.js
     Class.Tracks = $.classUtil.createClass({
         init: function(account) {
             this.account = account;
+            this.template = $("dl.track", "#templates");
             this.showArea = $("#tracksArea");
             this.loading = new Class.LoadingImage();
 
             this.responseHandler = $.classUtil.createHandler(this, this.response);
             this.createEachDomHandler = $.classUtil.createHandler(this, this.createEachDom);
         },
-        request: function() {
+        display: function(showLimit) {
+            this.showLimit = showLimit || 5;
+            this.showArea.empty();
             this.loading.showAt(this.showArea);
+            this.request();
+        },
+        request: function() {
             var queries = {
                 method: "user.getRecentTracks",
                 user: this.account,
@@ -25,66 +31,34 @@ listenin-now_class.js
             };
             Class.LastFm().request(queries, this.responseHandler);
         },
-        response: function(res, status) {
-            this.loading.hide();
-            if (status) {
-                this.trackDatas = res.recenttracks.track;
-                if (this.trackDatas) {
-                    //reduce data to 5 in home/profile
-                    if (Class.View().name != 'canvas') {
-                        this.trackDatas = $.map(this.trackDatas, function(item, i) {
-                            if (i > 4) return null;
-                            else return item;
-                        })
-                    }
-                    $.each(this.trackDatas, this.createEachDomHandler);
+        response: function(res, message) {
+            this.message = message;
+            if (!message.length) {
+                if (res.recenttracks && res.recenttracks.track) {
+                    this.trackDatas = res.recenttracks.track;
+                    var self = this;
+                    //reduce data to showLimit
+                    this.trackDatas = $.grep(this.trackDatas, function(item, i) {
+                        return (i < self.showLimit);
+                    });
+                } else {
+                    this.message = this.message.add('<p>データがありません。<br>last.fm側の「設定」->「プライバシー」->「リアルタイム再生データ」の「リアルタイム再生情報を隠す」にチェックがついていないか、又はアカウント名が違わないかご確認ください。</p>');
                 }
-                else this.showArea.append('<p>データがありません。<br>last.fm側の「設定」->「プライバシー」->「リアルタイム再生データ」の「リアルタイム再生情報を隠す」にチェックがついていないか、又はアカウント名が違わないかご確認ください。</p>');
-            } else {
-                this.showArea.append(res);
             }
-            gadgets.window.adjustHeight();
+            this.show();
         },
         show: function() {
-            this.showArea.empty();
-            this.request();
+            this.loading.hide();
+            if (this.message.length) {
+                this.showArea.append(this.message);
+            } else {
+                $.each(this.trackDatas, this.createEachDomHandler);
+                gadgets.window.adjustHeight();
+            }
         },
         createEachDom: function(i, data) {
-            var dl = $('<dl class="track" />');
-            var dt = $("<dt />");
-            var dd = $("<dd />");
-
-            //image
-            //                 var a = $('<a class="external" />').attr("href", data.url);
-            $('<img />').attr({
-                "src": data.image[0]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
-                "alt": data.artist["#text"] + " - " + data.name,
-                "title": data.artist["#text"] + " - " + data.name
-            })
-            //                 .appendTo(a).parent()
-            .appendTo(dt).parent().addClass("image").appendTo(dl);
-            //name
-            $('<a class="external" />')
-            .attr({"href":data.url, "title":data.name})
-            .text(data.name)
-            .wrap('<p class="name" />').parent().appendTo(dd);
-            //artist
-            $('<a class="external" />')
-            .attr({
-                "href": "http://www.last.fm/music/" + encodeURIComponent(data.artist["#text"]),
-                "title": data.artist["#text"]
-            })
-            .text(data.artist["#text"])
-            .wrap('<p class="artist" />').parent().appendTo(dd);
-            //album
-            $('<a class="external" />')
-            .attr({
-                "href": "http://www.last.fm/music/" + encodeURIComponent(data.artist["#text"]) + "/" + encodeURIComponent(data.album["#text"]),
-                "title": data.album["#text"]
-            })
-            .text(data.album["#text"])
-            .wrap('<p class="album" />').parent().appendTo(dd);
-            //date
+            var showObj = this.template.clone();
+            // create displaying date
             var playedDate = new Date(data.date["uts"] * 1000);
             var now = new Date();
             var diff = now.getTime() - playedDate.getTime();
@@ -96,26 +70,46 @@ listenin-now_class.js
             } else {
                 dateString = playedDate.toLocaleDateString();
             }
-            $('<p class="date" />')
-            .text(dateString)
-            .appendTo(dd);
-            //iTS link
-            var div_iTs = $('<div class="button_iTS" />')
-            .attr("title", "iTunes Storeで探す")
-            .appendTo(dd);
-            new Class.Search_iTS(div_iTs, data.artist["#text"] + " " + data.name);
-            //community link
-            var div_community = $('<div class="button_community" />')
-            .attr("title","コミュニティを検索")
-            .appendTo(dd);
-            new Class.SearchCommunity(div_community, data.artist["#text"]);
 
-            dl.append(dd)
-            .hover( // only for IE6
+            //image
+            // $("dt.image a", showObj).attr("href", data.url);
+            $("dt.image img", showObj).attr({
+                "src": data.image[0]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
+                "alt": data.artist["#text"] + " - " + data.name,
+                "title": data.artist["#text"] + " - " + data.name
+            })
+            //name
+            $("p.name a", showObj).
+            attr({"href":data.url, "title":data.name}).text(data.name);
+            //artist
+            $("p.artist a", showObj).
+            attr({
+                "href": "http://www.last.fm/music/" + encodeURIComponent(data.artist["#text"]),
+                "title": data.artist["#text"]
+            }).
+            text(data.artist["#text"]);
+            //album
+            $("p.album a", showObj).
+            attr({
+                "href": "http://www.last.fm/music/" + encodeURIComponent(data.artist["#text"]) + "/" + encodeURIComponent(data.album["#text"]),
+                "title": data.album["#text"]
+            }).
+            text(data.album["#text"])
+            //date
+            $("p.date", showObj).text(dateString);
+            //iTS link
+            var button_iTS = $("div.button_iTS", showObj);
+            new Class.Search_iTS(button_iTS, data.artist["#text"] + " " + data.name);
+            //community link
+            var button_community = $("div.button_community", showObj);
+            new Class.SearchCommunity(button_community, data.artist["#text"]);
+
+            // only for IE6
+            showObj.hover( 
                 function(){$(this).addClass("hover");},
                 function(){$(this).removeClass("hover");}
             );
-            this.showArea.append(dl);
+            this.showArea.append(showObj);
         }
     });
     // search community
@@ -273,13 +267,13 @@ listenin-now_class.js
     //loading image
     Class.LoadingImage = $.classUtil.createClass({
         init: function() {
-            this.template = $("div.loading", "div#templates").clone();
+            this.showObj = $("div.loading", "div#templates").clone();
         },
         showAt: function(area) {
-            this.template.appendTo(area).show();
+            this.showObj.appendTo(area).show();
         },
         hide: function() {
-            this.template.hide();
+            this.showObj.hide();
         }
     });
     // owner account
@@ -368,7 +362,7 @@ listenin-now_class.js
             this.showArea.add(this.accountArea).empty();
             if (this.lf_account) {
                 this.showOwnerInfo();
-                Class.Tracks(this.lf_account).show();
+                Class.Tracks(this.lf_account).display(Class.View().name == "canvas" ? 40: 5);
             } else {
                 if (this.isViewer)
                     this.showInputBox();
@@ -527,45 +521,41 @@ listenin-now_class.js
     Class.LastFm = $.classUtil.createClass({
         init: function() {
             this.lf_apiUrl = ListeninNowConfig.base_uri + "/api/lastfm?";
-
             this.responseHandler = $.classUtil.createHandler(this, this.response);
         },
         request: function(queries, callback) {
             this.callback = callback;
-            var params = {};
-            params[gadgets.io.RequestParameters.METHOD] =  gadgets.io.MethodType.GET;
-            params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
-            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
             var requestUrl = this.lf_apiUrl + $.param(queries);
-            gadgets.io.makeRequest(requestUrl, this.responseHandler, params);
+            var req = new Class.IoRequest();
+            req.param("METHOD", req.io.MethodType.GET).
+            param("AUTHORIZATION", req.io.AuthorizationType.NONE).
+            param("CONTENT_TYPE", req.io.ContentType.JSON).
+            request(requestUrl, this.responseHandler);
         },
         response: function(res) {
-            if (res.errors && res.errors.length) {
-//                 alert("エラー:\n" + res.errors.join("\n"));
-            } else {
-                var result = res.data;
-                if (result.error) {
-                    this.callback(
-                        $('<p>通信エラー ' + result.error + ": " + result.message + '</p>'),
-                        false
-                    );
-                } else {
-                    this.callback(result, true);
-                }
+            var message = $([]);
+            if (res.error) {
+                message = message.add('<p>通信エラー ' + res.error + ": " + res.message + '</p>');
             }
+            this.callback(res, message);
         }
     });
     //what's new
     Class.WhatsNew = $.classUtil.createClass({
         init: function() {
+            this.template = $("dl.whatsnew", "#templates");
             this.showArea = $("#whatsnewArea");
+            this.loading = new Class.LoadingImage();
             this.rssUrl = "http://feeds.feedburner.com/listenin-now";
             this.maxDisplay = 1; // display entries count
             this.validDays = 5; // display until
+
             this.responseHandler = $.classUtil.createHandler(this, this.response);
+            this.createEachDomHandler = $.classUtil.createHandler(this, this.createEachDom);
         },
         display: function() {
-            this.showArea.show();
+            this.showArea.empty().show();
+            this.loading.showAt(this.showArea);
             this.request();
         },
         request: function() {
@@ -579,22 +569,24 @@ listenin-now_class.js
         },
         response: function(res) {
             var self = this;
-            $.each(res.Entry, function() {
+            this.entries = $.grep(res.Entry, function(entry) {
                 // mixi returns js date(ms), should be uts.
-                this.Date = new Date(window.mixi ? this.Date : this.Date * 1000);
+                entry.Date = new Date(window.mixi ? entry.Date : entry.Date * 1000);
                 var now = new Date();
                 var valid = now.setDate(now.getDate() - self.validDays);
-                if (this.Date.getTime() > valid) {
-                    self.entry = this;
-                    self.show();
-                }
+                return (entry.Date.getTime() > valid);
             });
+            this.show();
         },
         show: function() {
-            this.template = $("dl.whatsnew", "#templates").clone();
-            $("dt", this.template).text(this.entry.Date.toLocaleDateString());
-            $("dd a", this.template).attr("href", this.entry.Link).text(this.entry.Title);
-            this.showArea.append(this.template);
+            this.loading.hide();
+            $.each(this.entries, this.createEachDomHandler);
+        },
+        createEachDom: function(i, data) {
+            var showObj = this.template.clone();
+            $("dt", showObj).text(data.Date.toLocaleDateString());
+            $("dd a", showObj).attr("href", data.Link).text(data.Title);
+            this.showArea.append(showObj);
         }
     });
 })(jQuery);
