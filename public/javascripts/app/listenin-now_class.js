@@ -114,7 +114,7 @@ listenin-now_class.js
         }
     });
 
-    // song image, replace with artist image
+    // artist image, replace the song image when there's no data
     Class.ArtistImageData = $.classUtil.createClassSingleton({
         init: function() {
             this.images = {};
@@ -145,7 +145,9 @@ listenin-now_class.js
             }
         },
         replaceImage: function() {
-            this.imgObj.attr("src", this.images[this.artist][this.size]["#text"]);
+            if (this.images[this.artist][this.size]["#text"]) {
+                this.imgObj.attr("src", this.images[this.artist][this.size]["#text"]);
+            }
         },
         request: function(artistName) {
             this.images[artistName] = this.FETCHING_STRING;
