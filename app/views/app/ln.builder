@@ -18,6 +18,11 @@ xml.Module do
   xml.Content(content_attr) do
     xml.cdata!(haml :'app/head', :layout => false)
   end
+  # mixi ads
+  content_attr[:view] = "canvas"
+  xml.Content(content_attr) do
+    xml.cdata!(haml :'app/mixi_ads', :layout => false)
+  end
   %w[home profile canvas].each do |location|
     content_attr[:view] = location
     xml.Content(content_attr) do
