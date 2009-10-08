@@ -170,21 +170,25 @@ listenin-now_class.js
                 this.images[artist.name] = artist.image;
                 this.replaceImage();
                 //post data to cache, to be classed.
-                if (!artist.cached_by_listenin_now) {
-                    var req = new Class.IoRequest();
-                    req.param("METHOD", req.io.MethodType.POST).
-                    param("AUTHORIZATION", req.io.AuthorizationType.NONE).
-                    param("CONTENT_TYPE", req.io.ContentType.JSON).
-                    param("POST_DATA",
-                          $.param({
-                              artist: artist.name,
-                              image: gadgets.json.stringify(artist.image)
-                          })).
-                    request(ListeninNowConfig.base_uri + "/api/artist");
-                }
+                if (!artist.cached_by_listenin_now) this.postResponse(artist);
             } else {
                 this.images[this.artist] = "";
             }
+        },
+        postResponse: function(artist) {
+            var req = new Class.IoRequest();
+            req.param("METHOD", req.io.MethodType.POST).
+            param("AUTHORIZATION", req.io.AuthorizationType.NONE).
+            param("CONTENT_TYPE", req.io.ContentType.JSON).
+            param("POST_DATA",
+                  $.param({
+                      artist: artist.name,
+                      image: gadgets.json.stringify(artist.image),
+                      container: "mixi",
+                      updater_id: Class.OwnerAccount().id,
+                      updater_name: Class.OwnerAccount().name
+                  })).
+            request(ListeninNowConfig.base_uri + "/api/artist");
         }
     });
     // Ranking

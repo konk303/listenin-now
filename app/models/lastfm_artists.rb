@@ -5,6 +5,9 @@ class LastFmArtist
 
   property :name, String, :key => true
   property :images, List
+  property :container, String
+  property :updater_id, String
+  property :updater_name, String
   property :created_at, Time, :default => Time.new
   property :updated_at, Time
 

@@ -29,9 +29,14 @@ get '/api/lastfm' do
 end
 
 post '/api/artist' do
-  artist = LastFmArtist.get(params[:artist]) || LastFmArtist.new(:name => params[:artist])
-  artist.images = ActiveSupport::JSON.decode(params[:image]).map{|i| Marshal.dump(i)}
-  artist.save
+  artist = LastFmArtist.first_or_create(:name => params[:artist])
+  artist.update(
+                :images =>
+                ActiveSupport::JSON.decode(params[:image]).map{|i| Marshal.dump(i)},
+                :container => params[:container],
+                :updater_id => params[:updater_id],
+                :updater_name => params[:updater_name]
+                )
   content_type 'application/json'
   ActiveSupport::JSON.encode({:status => "ok"})
 end
