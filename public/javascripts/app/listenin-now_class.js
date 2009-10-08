@@ -134,7 +134,7 @@ listenin-now_class.js
             if (this.images[this.artist]) {
                 this.checkFetching();
             } else {
-                this.request(artistName);
+                this.request();
             }
         },
         checkFetching: function() {
@@ -149,19 +149,35 @@ listenin-now_class.js
                 this.imgObj.attr("src", this.images[this.artist][this.size]["#text"]);
             }
         },
-        request: function(artistName) {
+        request: function() {
             this.images[artistName] = this.FETCHING_STRING;
             var queries = {
                 method: "artist.getInfo",
-                artist: artistName
+                artist: this.artist
             };
             Class.LastFm().request(queries, this.responseHandler);
         },
         response: function(res, message) {
             if (!message.length && res.artist) {
-                this.images[res.artist.name] = res.artist.image;
+                var artist = res.artist;
+                this.images[artist.name] = artist.image;
+                this.replaceImage();
+                //post data to cache, to be classed.
+                if (!artist.cached_by_listenin_now) {
+                    var req = new Class.IoRequest();
+                    req.param("METHOD", req.io.MethodType.POST).
+                    param("AUTHORIZATION", req.io.AuthorizationType.NONE).
+                    param("CONTENT_TYPE", req.io.ContentType.JSON).
+                    param("POST_DATA", 
+                          $.param({
+                              artist: artist.name,
+                              image: gadgets.json.stringify(artist.image)
+                          })).
+                    request(ListeninNowConfig.base_uri + "/api/artist", this.responseHandler);
+                }
+            } else {
+                this.images[this.artist] = "";
             }
-            this.replaceImage();
         }
     });
     // Ranking
