@@ -139,7 +139,7 @@ listenin-now_class.js
         },
         checkFetching: function() {
             if (this.images[this.artist] == this.FETCHING_STRING) {
-                window.setTimeout(this.replaceAgainHandler, 500);
+                window.setTimeout(this.checkFetchingHandler, 500);
             } else {
                 this.replaceImage();
             }
@@ -650,9 +650,7 @@ listenin-now_class.js
         },
         request: function(queries, callback) {
             this.callback = callback;
-            console.log(queries.artist);
             var requestUrl = this.lf_apiUrl + $.param(queries);
-            console.log(requestUrl);
             var req = new Class.IoRequest();
             req.param("METHOD", req.io.MethodType.GET).
             param("AUTHORIZATION", req.io.AuthorizationType.NONE).
