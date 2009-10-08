@@ -157,7 +157,7 @@ listenin-now_class.js
             }
         },
         request: function() {
-            this.images[artistName] = this.FETCHING_STRING;
+            this.images[this.artist] = this.FETCHING_STRING;
             var queries = {
                 method: "artist.getInfo",
                 artist: this.artist
@@ -175,12 +175,12 @@ listenin-now_class.js
                     req.param("METHOD", req.io.MethodType.POST).
                     param("AUTHORIZATION", req.io.AuthorizationType.NONE).
                     param("CONTENT_TYPE", req.io.ContentType.JSON).
-                    param("POST_DATA", 
+                    param("POST_DATA",
                           $.param({
                               artist: artist.name,
                               image: gadgets.json.stringify(artist.image)
                           })).
-                    request(ListeninNowConfig.base_uri + "/api/artist", this.responseHandler);
+                    request(ListeninNowConfig.base_uri + "/api/artist");
                 }
             } else {
                 this.images[this.artist] = "";

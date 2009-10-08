@@ -19,8 +19,8 @@ get '/api/lastfm' do
     if artist = LastFmArtist.get_unexpired(params[:artist])
       content_type 'application/json'
       halt ActiveSupport::JSON.encode({:artist => {
-                                          :name => artist.artist,
-                                          :image => artist.image,
+                                          :name => artist.name,
+                                          :image => ActiveSupport::JSON.decode(artist.images),
                                           :cached_by_listenin_now => true,
                                         }})
     end
