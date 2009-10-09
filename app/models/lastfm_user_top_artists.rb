@@ -1,8 +1,7 @@
 class LastFmUserTopArtists
   include DataMapper::Resource
 
-#   EXPIRE = 60 * 60 * 24 * 7 # can be cached for 1 week
-  EXPIRE = 60 # can be cached for 1 minute
+  EXPIRE = 60 * 60 * 24 * 7 # can be cached for 1 week
 
   property :user, String, :key => true
   property :artists, List

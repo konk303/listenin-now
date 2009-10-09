@@ -22,7 +22,8 @@ get '/api/lastfm' do
     end
   when "user.getTopArtists"
     if user_top_artists = LastFmUserTopArtists.get_unexpired(params[:user])
-      user_top_artists.data[-4,0] = ',"cached_by_listenin_now":true'
+      # fix me.
+      user_top_artists.data[-3,0] = ',"cached_by_listenin_now":true'
       content_type 'application/json'
       halt user_top_artists.data
     end

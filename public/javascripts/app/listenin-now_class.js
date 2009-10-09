@@ -230,8 +230,24 @@ listenin-now_class.js
                 } else {
                     this.message = this.message.add('<p>データがありません。</p>');
                 }
+                if (!res.topartists.cached_by_listenin_now) this.postResponse(res);
             }
             this.show();
+        },
+        postResponse: function(data) {
+            var req = new Class.IoRequest();
+            req.param("METHOD", req.io.MethodType.POST).
+            param("AUTHORIZATION", req.io.AuthorizationType.NONE).
+            param("CONTENT_TYPE", req.io.ContentType.JSON).
+            param("POST_DATA",
+                  $.param({
+                      user: this.account,
+                      data: gadgets.json.stringify(data),
+                      container: "mixi",
+                      updater_id: Class.OwnerAccount().id,
+                      updater_name: Class.OwnerAccount().name
+                  })).
+            request(ListeninNowConfig.base_uri + "/api/user_topArtist");
         },
         show: function() {
             this.loading.hide();
