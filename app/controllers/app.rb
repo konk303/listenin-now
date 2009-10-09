@@ -18,11 +18,7 @@ get '/api/lastfm' do
   when "artist.getInfo"
     if artist = LastFmArtist.get_unexpired(params[:artist])
       content_type 'application/json'
-      halt ActiveSupport::JSON.encode({:artist => {
-                                          :name => artist.name,
-                                          :image => artist.images.map{|i| Marshal.load(i)},
-                                          :cached_by_listenin_now => true,
-                                        }})
+      halt '{"artist":{"name":"' + artist.name + '","image":' + artist.image + ',"cached_by_listenin_now":true}}'
     end
   end
   redirect url.to_s, 302
@@ -31,8 +27,8 @@ end
 post '/api/artist' do
   artist = LastFmArtist.first_or_create(:name => params[:artist])
   artist.update(
-                :images =>
-                ActiveSupport::JSON.decode(params[:image]).map{|i| Marshal.dump(i)},
+                #ActiveSupport::JSON.decode(params[:image]).map{|i| Marshal.dump(i)},
+                :image => params[:image],
                 :container => params[:container],
                 :updater_id => params[:updater_id],
                 :updater_name => params[:updater_name]

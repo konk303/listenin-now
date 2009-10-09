@@ -4,7 +4,7 @@ class LastFmArtist
   EXPIRE = 60 * 60 * 24 * 7 # can be cached for 1 week
 
   property :name, String, :key => true
-  property :images, List
+  property :image, Text
   property :container, String
   property :updater_id, String
   property :updater_name, String
