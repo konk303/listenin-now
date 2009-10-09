@@ -6,6 +6,29 @@
     %a{:href => '/_ah/admin'}> 管理画面
   %li
     %dl
+      %dt トップアーティストLastFmUserTopArtists
+      %dd
+        %h3 確認
+        %form{:method => "get", :action => '/api/lastfm'}
+          %dl
+            %dt ユーザー
+            %dd<
+              %input{:name => "user"}
+              %input{:name => "method", :value => "user.getTopArtists", :type => "hidden"}
+          %input{:type => "submit", :value => "確認"}>
+        %h3 登録
+        %form{:method => "post", :action => '/api/user_topArtist'}
+          %dl
+            %dt ユーザー名
+            %dd<
+              %input{:name => "user"}
+          %dl
+            %dt データ(json) should be obj with artist:[]
+            %dd<
+              %textarea{:name => "data", :rows => 7, :cols => 80}>
+          %input{:type => "submit", :value => "登録"}>
+  %li
+    %dl
       %dt アーティストLastFmArtist
       %dd
         %h3 確認
@@ -23,7 +46,7 @@
             %dd<
               %input{:name => "artist"}
           %dl
-            %dt 画像データ(json) should be list
+            %dt 画像データ(json)
             %dd<
               %textarea{:name => "image", :rows => 7, :cols => 80}>
           %input{:type => "submit", :value => "登録"}>
