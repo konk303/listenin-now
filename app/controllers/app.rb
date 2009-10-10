@@ -22,8 +22,6 @@ get '/api/lastfm' do
     end
   when "user.getTopArtists"
     if user_top_artists = LastFmUserTopArtists.get_unexpired(params[:user])
-      # fix me.
-      user_top_artists.data[-3,0] = ',"cached_by_listenin_now":true'
       content_type 'application/json'
       halt user_top_artists.data
     end
@@ -46,16 +44,18 @@ end
 post '/api/user_topArtist' do
   user_top_artists = LastFmUserTopArtists.first_or_create(:user => params[:user])
   user_top_artists.attributes = {
-    :data => params[:data],
     :artists => [],
     :container => params[:container],
     :updater_id => params[:updater_id],
     :updater_name => params[:updater_name]
   }
+  parsed_data = JSON.parse(params[:data])
+  #flag cached
+  parsed_data['topartists'][:cached_by_listenin_now] = true
+  user_top_artists.data = JSON.generate(parsed_data)
   # also update artists with info inside user.topArtist
-  # fix me.should use has_many relations when dm-appengine supported it.
-  artists_data = JSON.parse(params[:data])["topartists"]["artist"]
-  artists_data.each do |data|
+  parsed_data['topartists']["artist"].each do |data|
+    # fix me. better use has_many relations when dm-appengine supported it.
     user_top_artists.artists << data["name"]
     artist = LastFmArtist.first_or_create(:name => data["name"])
     artist.update(
