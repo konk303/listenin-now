@@ -25,6 +25,7 @@ listenin-now.js
             if (view.name == 'canvas') {
                 view.initCanvas();
                 Class.WhatsNew().display();
+                Class.Friends().display();
             } else {
                 view.initHomeProfile();
             }

@@ -588,6 +588,69 @@ listenin-now_class.js
             }
         }
     });
+    // owner's friends
+    Class.Friends = $.classUtil.createClassSingleton({
+        init: function() {
+            this.showArea = $("#friendsArea");
+            this.template = $("dl.friends", "#templates");
+            this.loading = new Class.LoadingImage();
+            this.FriendsKeyName = "friends";
+            this.DataPerPage = 5;
+            this.responseHandler = $.classUtil.createHandler(this, this.response);
+            this.createEachDomHandler = $.classUtil.createHandler(this, this.createEachDom);
+            this.displayHandler = $.classUtil.createHandler(this, this.display);
+            this.pager = new Class.Pager(this.showArea, this.DataPerPage, this.displayHandler);
+        },
+        display: function(offset) {
+            this.offset = offset || 0;
+            this.showArea.empty();
+            this.loading.showAt(this.showArea);
+            this.request();
+        },
+        request: function() {
+            var req = new Class.OsRequest();
+            var idSpec = req.idSpec({userId: "OWNER", groupId: "FRIENDS"});
+            var params = {};
+            // params[req.PeopleRequestFields("FILTER")] = req.FilterType("HAS_APP");
+            params[req.PeopleRequestFields("FIRST")] = this.offset;
+            params[req.PeopleRequestFields("MAX")] = this.DataPerPage;
+            params[req.PeopleRequestFields("PROFILE_DETAILS")] = [
+                opensocial.Person.Field.PROFILE_URL,
+                opensocial.Person.Field.GENDER,
+                opensocial.Person.Field.AGE
+            ];
+            req.add(this.FriendsKeyName, "newFetchPeopleRequest", [idSpec, params]).
+            request(this.responseHandler);
+        },
+        response: function(res) {
+            var result = res.get(this.FriendsKeyName).getData();
+            this.datas = $.map(result.asArray(), function(data) {
+                return {
+                    id: data.getId(),
+                    name: data.getDisplayName(),
+                    image: data.getField(opensocial.Person.Field.THUMBNAIL_URL) || "noimage",
+                    url: data.getField(opensocial.Person.Field.PROFILE_URL),
+                    gender: data.getField(opensocial.Person.Field.GENDER).displayValue || "",
+                    age: data.getField(opensocial.Person.Field.AGE) || ""
+                };
+            });
+            this.totalSize = result.getTotalSize();
+            this.offset = result.getOffset();
+            // fetch each personappdata
+            this.show();
+        },
+        show: function() {
+            this.loading.hide();
+            if (this.totalSize > this.DataPerPage) {
+                //this.pager.display(this.offset, this.totalSize);
+            }
+            $.each(this.datas, this.createEachDomHandler);
+        },
+        createEachDom: function(i, data) {
+            var showObj = this.template.clone();
+            console.log(i, data);
+        }
+    });
     // View
     Class.View = $.classUtil.createClassSingleton({
         init: function() {
@@ -652,18 +715,28 @@ listenin-now_class.js
         },
         add: function(key, method, param) {
             this.req.add(this.req[method].apply(this.req, param), key);
-        },
-        idSpec: function(keys) {
-            return opensocial.newIdSpec(keys);
+            return this; // chainable
         },
         request: function(callback) {
             this.callback = callback;
             this.req.send(this.responseHandler);
         },
         response: function(res) {
-            //if (res.hadError()) alert(res.getErrorMessage());
-            //else 
-            this.callback(res);
+            if (res.hadError()) {
+                // alert(res.getErrorMessage());
+            } else {
+                this.callback(res);
+            }
+        },
+        // accessors
+        idSpec: function(keys) {
+            return opensocial.newIdSpec(keys);
+        },
+        PeopleRequestFields: function(key) {
+            return opensocial.DataRequest.PeopleRequestFields[key];
+        },
+        FilterType: function(key) {
+            return opensocial.DataRequest.FilterType[key];
         }
     });
     // gadget io request
@@ -759,6 +832,56 @@ listenin-now_class.js
             $("dt", showObj).text(data.Date.toLocaleDateString());
             $("dd a", showObj).attr("href", data.Link).text(data.Title);
             this.showArea.append(showObj);
+        }
+    });
+    // pager
+    Class.Pager = $.classUtil.createClass({
+        init: function(showArea, dataPerPage, handler, totalSize) {
+            this.showArea = showArea;
+            this.dataPerPage = dataPerPage;
+            this.handler = handler;
+            this.totalSize = totalSize || 0;
+            this.template = $("ol.pager", "#templates");
+        },
+        display: function(offset, totalSize, displayPosition) {
+            this.offset = offset;
+            if (totalSize) this.totalSize = totalSize;
+            showArea[displayPosition == "top" ? "prepend" : "append"](this.createDom());
+        },
+        createDom: function() {
+            var showObj = this.template.clone();
+            this.pageSize = Math.ceil(this.totalSize / this.dataPerPage);
+            console.log("pager");
+        }
+    });
+
+    // showObjBase. currently not used, to be extendend as a base for each showing classes.
+    Class.showObjBase = $.classUtil.createClassSingleton({
+        init: function(showArea, template) {
+            this.showArea = showArea || $([]);
+            this.template = template || $([]);
+            this.loading = new Class.LoadingImage();
+
+            this.responseHandler = $.classUtil.createHandler(this, this.response);
+            this.createEachDomHandler = $.classUtil.createHandler(this, this.createEachDom);
+        },
+        display: function() {
+            this.showArea.empty();
+            this.loading.showAt(this.showArea);
+            this.request();
+        },
+        request: function() {
+        },
+        response: function(res) {
+            this.datas = res;
+            this.show();
+        },
+        show: function() {
+            this.loading.hide();
+            $.each(this.datas, this.createEachDomHandler);
+        },
+        createEachDom: function(i, data) {
+            var showObj = this.template.clone();
         }
     });
 })(jQuery);
