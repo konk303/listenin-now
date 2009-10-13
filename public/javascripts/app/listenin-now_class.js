@@ -598,9 +598,14 @@ listenin-now_class.js
             this.DataPerPage = 5;
             this.responseHandler = $.classUtil.createHandler(this, this.response);
             this.createEachDomHandler = $.classUtil.createHandler(this, this.createEachDom);
-            this.displayHandler = $.classUtil.createHandler(this, this.display);
-            this.pager = new Class.Pager(this.showArea, this.DataPerPage, this.displayHandler);
+
+            var self = this;
+            this.displayHandlerCreator = function(offset) {
+                return function() {self.display(offset);};
+            }
+            this.pager = new Class.Pager(this.showArea, this.DataPerPage, this.displayHandlerCreator);
         },
+
         display: function(offset) {
             this.offset = offset || 0;
             this.showArea.empty();
@@ -630,7 +635,7 @@ listenin-now_class.js
                     name: data.getDisplayName(),
                     image: data.getField(opensocial.Person.Field.THUMBNAIL_URL) || "noimage",
                     url: data.getField(opensocial.Person.Field.PROFILE_URL),
-                    gender: data.getField(opensocial.Person.Field.GENDER).displayValue || "",
+                    gender: (data.getField(opensocial.Person.Field.GENDER) ? data.getField(opensocial.Person.Field.GENDER).displayValue : ""),
                     age: data.getField(opensocial.Person.Field.AGE) || ""
                 };
             });
@@ -641,16 +646,15 @@ listenin-now_class.js
         },
         show: function() {
             this.loading.hide();
-            if (this.totalSize > this.DataPerPage) {
-                //this.pager.display(this.offset, this.totalSize);
-            }
             $.each(this.datas, this.createEachDomHandler);
+            this.pager.display(this.offset, this.totalSize,"top");
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();
-            $("dt a", showObj).attr("href", data.url).click(
-                Class.View().createGoToCanvasHandler(data.id)
-            );
+            $("dt a", showObj).attr("href", data.url).click(function(e) {
+                e.preventDefault();
+                Class.View().goToCanvas(data.id);
+            });
             $("dt img", showObj).attr({"src": data.image, title: data.name + "さんのリスニンなう"});
             $("dt span", showObj).text(
                 data.name + "さん " + (data.age || data.gender ? "（" + data.gender + " " + data.age + "）" : "")
@@ -669,7 +673,6 @@ listenin-now_class.js
             this.goToProfileHandler = $.classUtil.createHandler(this, this.goToProfile);
             this.goToAppHomeHandler = $.classUtil.createHandler(this, this.goToAppHome);
             this.inviteFriendsHandler = $.classUtil.createHandler(this, this.inviteFriends);
-            this.goToCanvasHandler = $.classUtil.createHandler(this, this.goToCanvas);
         },
         initCanvas: function() {
             this.owner = new Class.OwnerAccount();
@@ -693,10 +696,13 @@ listenin-now_class.js
             this.owner = new Class.OwnerAccount();
             if (!this.owner.isViewer){
                 //navigation to canvas
+                var self = this;
                 $('<p>もっと見る</p>')
                 .attr("title", this.owner.name + "さんの再生履歴をもっと見る")
-                .appendTo("div#navigationArea").click(this.goToCanvasHandler)
-                .parent().show();
+                .appendTo("div#navigationArea").click(function() {
+                    self.goToCanvas(self.owner.id);
+                }).
+                parent().show();
             }
         },
         goToProfile: function() {
@@ -711,12 +717,8 @@ listenin-now_class.js
                 //var recipientIds = response.getData()["recipientIds"];
             });
         },
-        goToCanvas: function(e, id) {
-            e.preventDefault();
+        goToCanvas: function(id) {
             gadgets.views.requestNavigateTo(this.views["canvas"], null, id || this.owner.id);
-        },
-        createGoToCanvasHandler: function(id) {
-            return $.classUtil.createHandler(this, this.goToCanvas, id);
         }
     });
     // opensocial request
@@ -851,19 +853,53 @@ listenin-now_class.js
         init: function(showArea, dataPerPage, handler, totalSize) {
             this.showArea = showArea;
             this.dataPerPage = dataPerPage;
-            this.handler = handler;
+            this.handlerCreator = handler;
             this.totalSize = totalSize || 0;
             this.template = $("ol.pager", "#templates");
         },
         display: function(offset, totalSize, displayPosition) {
-            this.offset = offset;
+            this.offset = parseInt(offset);
             if (totalSize) this.totalSize = totalSize;
-            showArea[displayPosition == "top" ? "prepend" : "append"](this.createDom());
+            this.displayPosition = displayPosition;
+            this.show();
+        },
+        show: function() {
+            if (this.totalSize > this.dataPerPage) {
+                this.createDom();
+                this.showArea[this.displayPosition == "top" ? "prepend" : "append"](this.showObj);
+            }
         },
         createDom: function() {
-            var showObj = this.template.clone();
-            this.pageSize = Math.ceil(this.totalSize / this.dataPerPage);
-            console.log("pager");
+            this.showObj = this.template.clone();
+            var prev = $("li.prev", this.showObj).empty(),
+                next = $("li.next", this.showObj).empty(),
+                perPageArea = $("li.pages > ol", this.showObj),
+                perPageTemplate = $("li", perPageArea).remove(),
+                pageLength = Math.ceil(this.totalSize / this.dataPerPage),
+                offsets = [];
+            for (var i=0, len=pageLength; i<len; i++) {
+                offsets.push(i * this.dataPerPage);
+            }
+            var self = this;
+            $.each(offsets, function(i, val) {
+                if (val == self.offset - self.dataPerPage) {
+                    prev.empty().append("<a />").children("a").text("<<").
+                    attr("href", 'javascript:void(0);').click(self.handlerCreator(val));
+                }
+                if (val == self.offset + self.dataPerPage) {
+                    next.empty().append("<a />").children("a").text(">>").
+                    attr("href", 'javascript:void(0);').click(self.handlerCreator(val));
+                }
+                var perPage = perPageTemplate.clone();
+                if (val == self.offset) {
+                    perPage.empty().text(i + 1);
+                } else {
+                    perPage.find("a").attr("href",'javascript:void(0);').
+                    click(self.handlerCreator(val)).
+                    text(i + 1);
+                }
+                perPage.appendTo(perPageArea);
+            });
         }
     });
 
