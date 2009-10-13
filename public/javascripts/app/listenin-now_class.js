@@ -648,7 +648,15 @@ listenin-now_class.js
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();
-            console.log(i, data);
+            $("dt a", showObj).attr("href", data.url).click(
+                Class.View().createGoToCanvasHandler(data.id)
+            );
+            $("dt img", showObj).attr({"src": data.image, title: data.name + "さんのリスニンなう"});
+            $("dt span", showObj).text(
+                data.name + "さん " + (data.age || data.gender ? "（" + data.gender + " " + data.age + "）" : "")
+            );
+
+            this.showArea.append(showObj);
         }
     });
     // View
@@ -703,8 +711,12 @@ listenin-now_class.js
                 //var recipientIds = response.getData()["recipientIds"];
             });
         },
-        goToCanvas: function() {
-            gadgets.views.requestNavigateTo(this.views["canvas"], null, this.owner.id);
+        goToCanvas: function(e, id) {
+            e.preventDefault();
+            gadgets.views.requestNavigateTo(this.views["canvas"], null, id || this.owner.id);
+        },
+        createGoToCanvasHandler: function(id) {
+            return $.classUtil.createHandler(this, this.goToCanvas, id);
         }
     });
     // opensocial request
@@ -882,6 +894,7 @@ listenin-now_class.js
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();
+            this.showArea.append(showObj);
         }
     });
 })(jQuery);

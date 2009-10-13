@@ -42,8 +42,12 @@ jquery.classUtil.js
                 return self.instance;
             };
         },
-        createHandler: function(thisObj, func) {
-            return function() {return func.apply(thisObj, arguments);}
+        createHandler: function(thisObj, func, args) {
+            return function() {
+                // turn arguments to Array, in order to merge it with args
+                var argumentsArray = $.makeArray(arguments);
+                argumentsArray = $.merge(argumentsArray, $.makeArray(args));
+                return func.apply(thisObj, argumentsArray);}
         }
     }});
 })(jQuery);
