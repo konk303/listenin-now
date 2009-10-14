@@ -30,6 +30,10 @@ listenin-now_class.js
             if (status) {
                 this.trackDatas = res.recenttracks.track;
                 if (this.trackDatas) {
+                    //reduce nowplaying
+                    this.trackDatas = $.grep(this.trackDatas, function(item, i) {
+                        return (item["@attr"] && item["@attr"].nowplaying);
+                    }, true);
                     //reduce data to 5 in home/profile
                     if (Class.View().name != 'canvas') {
                         this.trackDatas = $.map(this.trackDatas, function(item, i) {
