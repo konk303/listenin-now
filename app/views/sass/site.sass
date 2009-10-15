@@ -1,0 +1,241 @@
+@import common.sass
+@charset "utf-8"
+/* ============================================================
+  site.css
+    stylesheet for
+    http://listenin-now.konk303.com/
+  ============================================================
+
+/* html5
+body >
+  header, footer
+    display: block
+section, article
+  display: block
+
+/* font
+@font-face
+  font-family: 'WebFont'
+  src: url(/fonts/Ronda Regular.ttf) format('truetype')
+
+/* global
+html
+  overflow-y: scroll
+body
+  background = !color_gray
+  font:
+    family = !sanserif
+    size: 108%
+  line-height: 1.33
+  color = !color_dark
+h1, h2, h3, h4, h5, h6, dt
+  margin: 1em 0
+  font-family = !serif
+  color = !color_darker
+h1
+  padding-top: 0.5em
+  border-top: 1px dotted #{!color_red}
+  font-size: 1.5em
+h2
+  /* font-weight: bold
+  margin-right: 2em
+  padding-top: 0.5em
+  font-size: 1.1em
+  border-top: 1px dotted #{!color_blue}
+h1 + h2
+  padding-top: 0
+  border-top: none
+p, dl, ul, ol
+  margin: 1em 0
+dl
+  > dt
+    margin: 1em 0 0.1em
+  > dd
+    margin: 0.1em 2em 1em
+    padding: 5px 20px
+    background = !color_gray
+    font-size: 0.9em
+    +cornered
+ol, ul
+  padding-left: 1.5em
+ol > li
+  list-style-type: decimal
+  margin-bottom: 0.5em
+ul > li
+  list-style-type: disc
+  margin-bottom: 0.5em
+ul.notes
+  margin-right: 2em
+  padding-top: 0.5em
+  border-top: 1px dotted #{!color_dark}
+  font-size: 0.8em
+  > li
+    list-style-type: square
+blockquote
+  position: relative
+  margin: 0 3em
+  padding: 5px 20px
+  background = !color_gray
+  +cornered
+  &:before
+    content: "“"
+    position: absolute
+    top: -15px
+    left: -15px
+    font-size: 5em
+    line-height: 1
+    font-family = !serif
+  p
+    font-size: 0.8em
+  cite
+    display: block
+    font-size: 0.7em
+    text-align: right
+    &:before
+      content: "via:"
+      display: inline
+a
+  color = !color_darker
+  text-decoration: underline
+  &:hover
+    color = !color_red
+    text-decoration: none
+strong
+  font-weight: bold
+.ui-tabs-hide
+  display: none
+a#uservoice-feedback-tab
+  background-image: url(http://cdn.uservoice.com/images/widgets/en/feedback_tab_white.png) !important
+textarea
+  width: 100%
+
+/* header
+body > header
+  padding: 5px 0
+  text-align: center
+  font-size: 1.2em
+  a
+    text-decoration: none
+    &:hover
+      color = !color_black
+      text-decoration: underline
+  h1
+    margin: 0 0 10px
+    padding: 0
+    border-top: none
+    font:
+      size: 3em
+      family = !sanserif
+      weight: bold
+    line-height: 1
+    letter-spacing: -3px
+    a, a:hover
+      color = !color_black
+      text-decoration: none
+    img
+      width: 50px
+      height: 50px
+      padding-right: 15px
+      /* vertical-align: middle
+    span
+      font:
+        size: 1.1em
+        family: 'WebFont', #{!serif}
+  ul
+    margin: 0
+    padding: 0
+    li
+      +inline-block
+      margin: 0 0.5em
+
+/* footer
+body > footer
+  max-width = !body_max_width
+  min-width = !body_min_width
+  margin: 60px auto 5px
+  padding: 0
+  text-align: right
+  font-size: 0.7em
+  img
+    vertical-align: middle
+    padding-left: 2em
+
+/* div#content
+div#content
+  max-width = !body_max_width - !body_padding_lr * 2
+  min-width = !body_min_width - !body_padding_lr * 2
+  margin: 0 auto
+  padding: 0 #{!body_padding_lr} 20px
+  background = !color_white
+  border-top: 1px solid #{!color_gray}
+  +shadowed(!color_dark, 4px, 20px)
+  > h1:first-child
+    padding-top: 0
+    border-top: none
+
+/* article.update
+div#content article.update
+  margin: 5px 0 10px
+  padding: 5px 10px
+  background = !color_gray
+  +cornered
+  h1
+    float: left
+    margin-top: 0
+    padding: 0
+    border: none
+    font:
+      size: 1em
+      font-weight: bold
+  h2
+    float: right
+    margin-top: 0.5em
+    font:
+      weight: normal
+      size: 0.8em
+  div.content
+    clear: both
+
+/* p.startOrHelp
+div#content p.startOrHelp
+  margin: 2em 0 0
+  padding-top: 1em
+  text-align: center
+  span
+    margin: 0 5px
+    padding: 5px 10px
+    background = !color_red
+    +cornered_no_shadow
+    &:hover
+      background = !color_blue
+    a
+      font-weight: bold
+      text-decoration: none
+      color = !color_white
+
+/* nav.tabArea
+div#content nav.tabArea ul
+  margin: -1em 0 0
+  padding: 0
+  border-bottom: 1px solid #{!color_dark}
+  li
+    +inline-block
+    margin: 5px 0 0
+    padding: 0 1em
+    background = !color_red
+    vertical-align: top
+    +cornered_partial("top", "right", 10px)
+    a
+      color = !color_white
+      text-decoration: none
+      outline: none
+    &.ui-tabs-selected
+      margin-top: 0
+      padding-bottom: 5px
+      background = !color_dark
+      a
+        display: block
+
+div#content section.ui-tabs-panel > h1:first-child
+  padding-top: 0
+  border-top: none

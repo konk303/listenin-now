@@ -1,19 +1,17 @@
 @charset "utf-8";
 /* ============================================================
-ie.css
-additional stylesheet for IE in
- http://listenin-now.konk303.com/
-============================================================ */
+ * ie.css
+ *   additional stylesheet for IE in
+ *   http://listenin-now.konk303.com/
+ * ============================================================ */
 /* inline-block, ng in ie67. */
-body header ul li {
-    display:inline;
-}
+body header ul li,
 div#content nav.tabArea ul li {
-    display:inline;
+  display: inline;
 }
 
 /* force change the icon size, ie6  */
 body header h1 img {
-    width:50px;
-    height:50px;
+  width: 50px;
+  height: 50px;
 }

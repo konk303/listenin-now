@@ -1,0 +1,53 @@
+!color_black = #000000
+!color_white = #ffffff
+!color_gray = #eeeeee
+!color_lighter = #777777
+!color_dark = #333333
+!color_darker = #222222
+!color_whity = #e4e6d9
+!color_red = #d10039
+!color_blue = #0187c5
+!color_its = #6884ab
+!color_its_bg = #aec0d8
+!sanserif =  "'lucida grande', 'lucida sans unicade', sans-serif"
+!serif = "'georgia', 'bitstream vera serif', serif"
+!body_max_width = 790px
+!body_min_width = 540px
+!body_padding_lr = 20px
+=shadowed(!color = !color_lighter, !offset_h = 2px, !blur = !offset_h, !offset_v = !offset_h)
+  box-shadow = !offset_h !offset_v !blur !color
+  -webkit-box-shadow = !offset_h !offset_v !blur !color
+  -moz-box-shadow = !offset_h !offset_v !blur !color
+=cornered_no_shadow(!length = 10px)
+  border-radius = !length
+  -moz-border-radius = !length
+  -webkit-border-radius = !length
+=cornered_partial(!tb = "top", !lr = "right", !length = 10px)
+  border-#{!tb}-#{!lr}-radius = !length
+  -moz-border-radius-#{!tb}#{!lr} = !length
+  -webkit-border-#{!tb}-#{!lr}-radius = !length
+=cornered
+  +cornered_no_shadow
+  +shadowed
+=clearfix
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+  div#ie67 &
+    height: 1%
+=inline-block  
+  display: -moz-inline-box
+  display: inline-block
+=image_clop(!size = 34px)
+  width = !size + 2px
+  height = !size + 2px * 2
+  overflow: hidden
+  & img
+    width = !size
+    vertical-align: top
+    +shadowed(!color_black)
+  &.noimage img
+    height = !size

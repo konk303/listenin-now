@@ -64,9 +64,10 @@ listenin-now_class.js
                 "src": data.image[0]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
                 "alt": data.artist["#text"] + " - " + data.name,
                 "title": data.artist["#text"] + " - " + data.name
-            })
+            }).
             //                 .appendTo(a).parent()
-            .appendTo(dt).parent().addClass("image").appendTo(dl);
+            appendTo(dt).parent().addClass("image").
+            addClass(data.image[0]["#text"] ? "" : "noimage").appendTo(dl);
             //name
             $('<a class="external" />')
             .attr({"href":data.url, "title":data.name})
