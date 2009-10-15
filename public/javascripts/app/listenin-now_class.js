@@ -36,8 +36,12 @@ listenin-now_class.js
             if (!message.length) {
                 if (res.recenttracks && res.recenttracks.track) {
                     this.trackDatas = res.recenttracks.track;
-                    var self = this;
+                    //reduce nowplaying
+                    this.trackDatas = $.grep(this.trackDatas, function(item, i) {
+                        return (item["@attr"] && item["@attr"].nowplaying);
+                    }, true);
                     //reduce data to showLimit
+                    var self = this;
                     this.trackDatas = $.grep(this.trackDatas, function(item, i) {
                         return (i < self.showLimit);
                     });
@@ -78,7 +82,10 @@ listenin-now_class.js
                 "alt": data.artist["#text"] + " - " + data.name,
                 "title": data.artist["#text"] + " - " + data.name
             })
-            if (!data.image[0]["#text"]) Class.ArtistImages().replace(data.artist["#text"], img);
+            if (!data.image[0]["#text"]) {
+                Class.ArtistImages().replace(data.artist["#text"], img);
+                $("dt.image", showObj).addClass("noimage");
+            }
             //name
             $("p.name a", showObj).
             attr({"href":data.url, "title":data.name}).text(data.name);

@@ -1,0 +1,242 @@
+@import common.sass
+@charset "utf-8"
+/* ============================================================
+  listenin-now.css
+    stylesheet for mixi app "listenin' now"
+    http://mixi.jp/view_appli.pl?id=7793
+  ============================================================
+
+/* global */
+body
+  margin-bottom: 10px
+  background = !color_gray
+  &.mixi
+    &.home,
+    &.profile
+      /* 212px - scrollbar 17px - shadow 2px - chrome 2px */
+      width: 191px
+  > div
+    max-width: 600px
+    margin-right: auto
+a
+  color = !color_blue
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+div.loading
+  padding: 5px
+  text-align: center
+
+/* templates, don't show them.
+div#templates
+  display: none
+
+/* formAccount */
+form#formAccount
+  padding: 5px
+  font-size: 13px
+  p
+    padding-bottom: 3px
+
+/* infoArea */
+div#infoArea
+  padding: 5px 5px 0
+  background = !color_red
+  text-align: right
+  color = !color_whity
+  +cornered_partial("bottom", "left")
+  +shadowed
+  a
+    font-weight: bold
+    color = !color_white
+  span.button_edit
+    +inline-block
+    width: 13px
+    height: 13px
+    margin-left: 0.5em
+    vertical-align: baseline
+    background: url(http://listenin-now.konk303.com/images/app/icons.png) no-repeat
+    background-position: -60px 0
+    cursor: pointer
+    &:hover
+      background-position: -60px -20px
+
+/* tracksArea
+div#tracksArea
+  padding-left: 10px
+  body.home &,
+  body.profile &
+    padding-left: 5px
+  dl.track
+    position: relative
+    margin: 5px 0
+    padding: 5px 10px
+    background = !color_white
+    +cornered
+    +clearfix
+    &:hover
+      background = !color_whity
+    > dt.image
+      float: left
+      margin-right: 4px
+      +image_clop
+    > dd
+      margin-left: 40px
+      > p
+        white-space: nowrap
+        overflow: hidden
+        &.name,
+        &.artist
+          /* nothing yet.
+        &.name a
+          color = !color_red
+        &.album,
+        &.date
+          display: none
+          position: absolute
+          padding: 0 5px
+          color = !color_lighter
+          font-size: 85%
+        &.album
+          right: 0
+          top: 5px
+        &.date
+          right: 0
+          bottom: 5px
+        body.canvas &.album,
+        body.canvas &.date
+          display: block
+
+/* iTS, community
+div#tracksArea dl.track
+  dd div
+    &.button_iTS,
+    &.button_community
+      display: none
+      position: absolute
+      top: 0
+      width: 20px
+      height: 20px
+      background: url(http://listenin-now.konk303.com/images/app/icons.png) no-repeat
+      cursor: pointer
+  &:hover dd div
+    &.button_iTS,
+    &.button_community
+      display: block
+  dd div
+    &.button_iTS
+      left: 2px
+      background-position: -20px 0
+    &.button_community
+      left: 24px
+      background-position: 0 0
+    &.button_iTS:hover
+      background-position: -20px -20px
+    &.button_community:hover
+      background-position: -0 -20px
+    &.result_iTS
+      position: absolute
+      top: 0px
+      left: 12px
+      z-index: 10
+      width: 130px
+      padding: 2px 10px 10px
+      background = !color_its
+      +cornered_no_shadow(10px)
+      +cornered_partial("top", "left", 0)
+      +shadowed(!color_black, 4px)
+      h2
+        text-align: center
+        margin: 0 10px 5px
+        border: 1px solid #{!color_its_bg}
+        color = !color_white
+        +cornered_no_shadow(5px)
+      div.close_button
+        position: absolute
+        top: 0
+        right: 0
+        width: 18px
+        height: 18px
+        background: url(http://listenin-now.konk303.com/images/app/icons.png) no-repeat
+        background-position: -40px 0
+        cursor: pointer
+        &:hover
+          background-position: -40px -20px
+      dl.tracks_iTS
+        max-height: 200px
+        overflow: auto
+        font-size: 85%
+        a
+          color = !color_black
+        dt
+          background = !color_its_bg
+          padding: 5px 5px 0
+          text-align: center
+          +cornered_partial("top", "left", 5px)
+          +cornered_partial("top", "right", 5px)
+          img
+            max-width: 100px
+        dd
+          margin-bottom: 5px
+          padding: 0 5px 5px
+          background = !color_its_bg
+          +cornered_partial("bottom", "left", 5px)
+          +cornered_partial("bottom", "right", 5px)
+          p.album
+            border-top: 1px dotted #{!color_its}
+            a span.price
+              margin-left: 0.5em
+              +inline-block
+              color = !color_red
+
+/* accountArea
+div#accountArea
+  padding: 5px 0 10px 10px
+  text-align: right
+  body.profile &,
+  body.home &
+    display: none
+  p.account a
+    padding-right: 15px
+    background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat
+    span.link_button
+      width: 13px
+      height: 13px
+      +inline-block
+      vertical-align: baseline
+      background-position: 80px 0
+  &:hover span.link_button
+    background-position: 80px 20px
+
+/* navigationArea, home/profile
+body.home div#navigationArea,
+body.profile div#navigationArea
+  display: none
+  position: fixed
+  bottom: 0
+  right: 0
+  z-index: 20
+  & p
+    padding: 3px
+    background = !color_red
+    line-height: 1
+    color = !color_whity
+    cursor: pointer
+    &:hover
+      color = !color_white
+
+/* navigationArea, canvas
+body.canvas div#navigationArea
+  padding-left: 10px
+  +clearfix
+  p
+    float: right
+    margin: 0 0 1px 3px
+    padding: 3px 7px
+    background = !color_its
+    line-height: 1
+    color = !color_whity
+    cursor: pointer
+    +cornered_partial("top", "left", 10px)
+    &:hover
+      color = !color_white

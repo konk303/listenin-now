@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'haml'
+require 'sass'
 require 'yaml'
 require 'activesupport'
 require 'builder'
@@ -30,8 +31,10 @@ configure do
   #static files are served from gae static options
   disable :static
 #   disable :dump_errors
-  #haml options
-  set :haml, { :format => :html5}
+  #haml/sass options
+  set :haml, {:format => :html5}
+  set :sass_path, Proc.new{File.join(views, "sass")}
+  set :sass, {:style => :compact,:cache => false}
 end
 
 configure :development do

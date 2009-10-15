@@ -1,0 +1,104 @@
+@import common.sass
+@charset "utf-8"
+/* ============================================================
+  ie.css
+    additional stylesheet for IE in mixi app "listenin' now"
+    http://mixi.jp/view_appli.pl?id=7793
+  ============================================================
+/* reset body width.
+body
+  &.home,
+  &.profile
+    width: auto
+
+/* clearfix fail when "body" included in selector.
+body.canvas div#ie67 div#navigationArea
+  height: 1%
+
+/* background verticaly center to inline doesn't work well, in ie67.
+div#ie67 div#accountArea p.account a
+  background-position: right bottom
+
+/* child selector, ng in ie6.
+body.canvas div#ie6
+  width: 600px
+  margin-right: auto
+div#ie6 div#tracksArea dl.track
+  dt.image
+    float: left
+    margin-right: 4px
+    +image_clop
+  dd
+    margin-left: 40px
+    p
+      white-space: nowrap
+      overflow: hidden
+      &.name,
+      &.artist
+        /* nothing yet.
+      &.name a
+        color = !color_red
+      &.album,
+      &.date
+        display: none
+        position: absolute
+        padding: 0 5px
+        color = !color_lighter
+        font-size: 85%
+      &.album
+        right: 0
+        top: 5px
+      &.date
+        right: 0
+        bottom: 5px
+      body.canvas &.album,
+      body.canvas &.date
+        display: block
+
+/* white-space:nowrap & overflow:hidden needs width, ng in ie6.
+body.home div#ie6 div#tracksArea dl.track dd p,
+body.profile div#ie6 div#tracksArea dl.track dd p
+  width: 135px
+
+/* also have to cancel above changes for childs, in ie6.
+div#ie6 div#tracksArea dl.track dd div.result_iTS
+  dd
+    margin-left: 0
+  p
+    width: auto
+    white-space: normal
+    overflow: visible
+    &.album
+      position: static
+      padding: 0
+  dl.tracks_iTS a
+    color = !color_black
+
+/* position:fixed, ng in ie6.
+body.home div#ie6 div#navigationArea,
+body.profile div#ie6 div#navigationArea
+  position: absolute
+  bottom: auto
+  right: auto
+  top: 0
+  left: 0
+  & p
+    background = !color_black
+
+/* content:hover to dl,p,etc..., ng in ie6.
+div#ie6 div#tracksArea dl.track.hover
+  background = !color_whity
+  dd div
+    &.button_iTS,
+    &.button_community
+      display: block
+
+/* max-width to dl,p,etc..., ng in ie6.
+div#ie6 div#tracksArea dd div.result_iTS dl.tracks_iTS
+  height: 200px
+  dt img
+    width: 100px
+
+/* anti hover background flicker, in ie6. */
+div#ie6
+  filter: expression(document.execCommand("BackgroundImageCache", false, true))
