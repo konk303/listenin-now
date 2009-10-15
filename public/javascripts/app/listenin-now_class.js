@@ -83,8 +83,8 @@ listenin-now_class.js
                 "title": data.artist["#text"] + " - " + data.name
             })
             if (!data.image[0]["#text"]) {
+                img.addClass("noimage");
                 Class.ArtistImages().replace(data.artist["#text"], img);
-                $("dt.image", showObj).addClass("noimage");
             }
             //name
             $("p.name a", showObj).
@@ -153,7 +153,9 @@ listenin-now_class.js
         },
         replaceImage: function() {
             if (this.images[this.artist][this.size]["#text"]) {
-                this.imgObj.attr("src", this.images[this.artist][this.size]["#text"]);
+                this.imgObj.
+                attr("src", this.images[this.artist][this.size]["#text"]).
+                removeClass("noimage");
             }
         },
         request: function() {

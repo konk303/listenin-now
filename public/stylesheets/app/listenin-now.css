@@ -125,7 +125,7 @@ div#tracksArea dl.track > dt.image img {
   -webkit-box-shadow: 2px 2px 2px black;
   -moz-box-shadow: 2px 2px 2px black;
 }
-div#tracksArea dl.track > dt.image.noimage img {
+div#tracksArea dl.track > dt.image img.noimage {
   height: 34px;
 }
 div#tracksArea dl.track > dd {
