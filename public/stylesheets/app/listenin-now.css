@@ -309,16 +309,16 @@ body.profile div#navigationArea {
   right: 0;
   z-index: 20;
 }
-body.home div#navigationArea.p,
-body.profile div#navigationArea.p {
+body.home div#navigationArea p,
+body.profile div#navigationArea p {
   padding: 3px;
   background: #d10039;
   line-height: 1;
   color: #e4e6d9;
   cursor: pointer;
 }
-body.home div#navigationArea.p:hover,
-body.profile div#navigationArea.p:hover {
+body.home div#navigationArea p:hover,
+body.profile div#navigationArea p:hover {
   color: white;
 }
 
