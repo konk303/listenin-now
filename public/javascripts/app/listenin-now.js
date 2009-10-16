@@ -4,6 +4,13 @@ listenin-now.js
  http://mixi.jp/view_appli.pl?id=7793
 ============================================================ */
 (function($) {
+    // reloading while ajax request causes problem in fx.
+    // http://blog.webcreativepark.net/2009/10/09-020452.html
+    $("body").bind("ajaxSend", function(c,xhr){
+        $(window).bind('beforeunload', function() {
+            xhr.abort();
+        })
+    });
     //onload
     gadgets.util.registerOnLoadHandler(function() {
         // viewinfo can be fetched without request.
