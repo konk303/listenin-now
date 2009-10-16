@@ -656,7 +656,7 @@ listenin-now_class.js
                 Class.View().goToCanvas(data.id);
             });
             $("dt img", showObj).attr({"src": data.image, title: data.name + "さんのリスニンなう"});
-            $("dt span", showObj).text(
+            $("dt span.name", showObj).text(
                 data.name + "さん " + (data.age || data.gender ? "（" + data.gender + " " + data.age + "）" : "")
             );
 
