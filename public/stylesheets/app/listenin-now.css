@@ -123,14 +123,14 @@ div#tracksArea dl.track:hover {
 }
 div#tracksArea dl.track > dt.image {
   float: left;
-  margin-right: 4px;
-  width: 36px;
+  width: 38px;
   height: 38px;
   overflow: hidden;
+  line-height: 34px;
 }
 div#tracksArea dl.track > dt.image img {
   width: 34px;
-  vertical-align: top;
+  vertical-align: middle;
   box-shadow: 2px 2px 2px black;
   -webkit-box-shadow: 2px 2px 2px black;
   -moz-box-shadow: 2px 2px 2px black;
