@@ -5,12 +5,6 @@
  *   http://mixi.jp/view_appli.pl?id=7793
  * ============================================================ */
 /* global */
-div#container {
-  background: #eeeeee;
-}
-div#container.canvas {
-  padding-bottom: 10px;
-}
 div#container.canvas:after {
   content: ".";
   display: block;
@@ -20,10 +14,6 @@ div#container.canvas:after {
 }
 div#ie67 div#container.canvas {
   height: 1%;
-}
-div#container.mixi.home,
-div#container.mixi.profile {
-  padding-bottom: 1px;
 }
 
 a {
@@ -40,9 +30,14 @@ div.loading {
 }
 
 /* wire frame. */
+div#userArea {
+  background: #eeeeee;
+}
 div.canvas div#userArea {
   float: left;
   width: 670px;
+  padding-bottom: 10px;
+  padding-right: 10px;
 }
 div.canvas div#userArea:after {
   content: ".";
@@ -54,10 +49,18 @@ div.canvas div#userArea:after {
 div#ie67 div.canvas div#userArea {
   height: 1%;
 }
+div.home div#userArea,
+div.profile div#userArea {
+  padding-bottom: 1px;
+}
 
+div#peopleArea {
+  background: white;
+}
 div.canvas div#peopleArea {
-  float: right;
-  width: 255px;
+  float: left;
+  width: 250px;
+  padding-left: 10px;
 }
 div.home div#peopleArea,
 div.profile div#peopleArea {
@@ -170,14 +173,14 @@ div#tracksArea {
 }
 div.canvas div#tracksArea {
   float: left;
-  min-height: 500px;
-  width: 400px;
+  min-height: 300px;
+  width: 450px;
 }
 
 /* rankingsArea */
 div#rankingsArea {
   float: right;
-  width: 250px;
+  width: 200px;
 }
 div.profile div#rankingsArea,
 div.home div#rankingsArea {
@@ -187,7 +190,7 @@ div.home div#rankingsArea {
 /* accountArea */
 div#accountArea {
   float: right;
-  width: 250px;
+  width: 200px;
   padding: 5px 0 10px;
   text-align: right;
 }
@@ -216,10 +219,21 @@ div#whatsnewArea {
   position: absolute;
   top: 0;
   right: 0;
-  width: 255px;
+  width: 250px;
   height: 35px;
   overflow: hidden;
-  background: blue;
+}
+div#whatsnewArea dl.whatsnew {
+  white-space: nowrap;
+}
+div#whatsnewArea dl.whatsnew dt {
+  display: inline;
+}
+div#whatsnewArea dl.whatsnew dt:after {
+  content: ": ";
+}
+div#whatsnewArea dl.whatsnew dd {
+  display: inline;
 }
 div.profile div#whatsnewArea,
 div.home div#whatsnewArea {
@@ -229,7 +243,6 @@ div.home div#whatsnewArea {
 /* friendsArea */
 div#friendsArea {
   margin-top: 300px;
-  background: yellow;
 }
 div.profile div#friendsArea,
 div.home div#friendsArea {
@@ -282,26 +295,6 @@ dl.ranking:hover {
 dl.track > dt.image,
 dl.ranking > dt.image {
   float: left;
-  width: 38px;
-  height: 38px;
-  overflow: hidden;
-  line-height: 34px;
-}
-dl.track > dt.image img,
-dl.ranking > dt.image img {
-  width: 34px;
-  vertical-align: middle;
-  box-shadow: 2px 2px 2px black;
-  -webkit-box-shadow: 2px 2px 2px black;
-  -moz-box-shadow: 2px 2px 2px black;
-}
-dl.track > dt.image img.noimage,
-dl.ranking > dt.image img.noimage {
-  height: 34px;
-}
-dl.track > dd,
-dl.ranking > dd {
-  margin-left: 40px;
 }
 dl.track > dd > p,
 dl.ranking > dd > p {
@@ -338,11 +331,57 @@ dl.ranking > dd > p.date {
   right: 0;
   bottom: 5px;
 }
+dl.track > dd > p.playcount,
+dl.ranking > dd > p.playcount {
+  padding-top: 1em;
+  text-align: right;
+  color: #777777;
+  font-size: 85%;
+}
 div.canvas dl.track > dd > p.album,
 div.canvas dl.track > dd > p.date,
 div.canvas dl.ranking > dd > p.album,
 div.canvas dl.ranking > dd > p.date {
   display: block;
+}
+dl.track > dt.image {
+  float: left;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  line-height: 34px;
+}
+dl.track > dt.image img {
+  width: 34px;
+  vertical-align: middle;
+  box-shadow: 2px 2px 2px black;
+  -webkit-box-shadow: 2px 2px 2px black;
+  -moz-box-shadow: 2px 2px 2px black;
+}
+dl.track > dt.image img.noimage {
+  height: 34px;
+}
+dl.track > dd {
+  margin-left: 40px;
+}
+dl.ranking > dt.image {
+  width: 68px;
+  height: 68px;
+  overflow: hidden;
+  line-height: 64px;
+}
+dl.ranking > dt.image img {
+  width: 64px;
+  vertical-align: middle;
+  box-shadow: 2px 2px 2px black;
+  -webkit-box-shadow: 2px 2px 2px black;
+  -moz-box-shadow: 2px 2px 2px black;
+}
+dl.ranking > dt.image img.noimage {
+  height: 64px;
+}
+dl.ranking > dd {
+  margin-left: 70px;
 }
 
 /* iTS, community */
@@ -455,4 +494,45 @@ div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd p.album a span.price 
   display: -moz-inline-box;
   display: inline-block;
   color: #d10039;
+}
+
+/* ol.pager */
+ol.pager {
+  text-align: center;
+}
+ol.pager li {
+  padding: 3px;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+ol.pager li.prev,
+ol.pager li.next {
+  min-width: 1.5em;
+}
+
+/* dl.friends, dl.people */
+dl.friends,
+dl.people {
+  margin-bottom: 5px;
+}
+dl.friends dt img,
+dl.people dt img {
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  line-height: 76;
+}
+dl.friends dt img img,
+dl.people dt img img {
+  width: 76;
+  vertical-align: middle;
+  box-shadow: 2px 2px 2px black;
+  -webkit-box-shadow: 2px 2px 2px black;
+  -moz-box-shadow: 2px 2px 2px black;
+}
+dl.friends dt img img.noimage,
+dl.people dt img img.noimage {
+  height: 76;
 }

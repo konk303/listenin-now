@@ -8,14 +8,8 @@
 
 /* global
 div#container
-  background = !color_gray
   &.canvas
-    padding-bottom: 10px
     +clearfix
-  &.mixi
-    &.home,
-    &.profile
-      padding-bottom: 1px
 a
   color = !color_blue
   text-decoration: none
@@ -27,14 +21,23 @@ div.loading
 
 /* wire frame.
 div#userArea
+  background = !color_gray
   div.canvas &
     float: left
     width: 670px
+    padding:
+      bottom: 10px
+      right: 10px
     +clearfix
+  div.home &,
+  div.profile &
+    padding-bottom: 1px
 div#peopleArea
+  background= !color_white
   div.canvas &
-    float: right
-    width: 255px
+    float: left
+    width: 250px
+    padding-left: 10px
   div.home &,
   div.profile &
     display: none
@@ -112,13 +115,13 @@ div#tracksArea
   padding-left: 5px
   div.canvas &
     float: left
-    min-height: 500px
-    width: 400px
+    min-height: 300px
+    width: 450px
 
 /* rankingsArea
 div#rankingsArea
   float: right
-  width: 250px
+  width: 200px
   div.profile &,
   div.home &
     display: none
@@ -126,7 +129,7 @@ div#rankingsArea
 /* accountArea
 div#accountArea
   float: right
-  width: 250px
+  width: 200px
   padding: 5px 0 10px
   text-align: right
   p.account a
@@ -149,10 +152,17 @@ div#whatsnewArea
   position: absolute
   top: 0
   right: 0
-  width: 255px
+  width: 250px
   height: 35px
   overflow: hidden
-  background: blue
+  dl.whatsnew
+    white-space: nowrap
+    & dt
+      display: inline
+      &:after
+        content: ": "
+    & dd
+      display: inline
   div.profile &,
   div.home &
     display: none
@@ -160,7 +170,6 @@ div#whatsnewArea
 /* friendsArea
 div#friendsArea
   margin-top: 300px
-  background: yellow
   div.profile &,
   div.home &
     display: none
@@ -188,9 +197,7 @@ dl
       background = !color_whity
     > dt.image
       float: left
-      +image_clip
     > dd
-      margin-left: 40px
       > p
         white-space: nowrap
         overflow: hidden
@@ -212,9 +219,25 @@ dl
         &.date
           right: 0
           bottom: 5px
+        &.playcount
+          padding-top: 1em
+          text-align: right
+          color = !color_lighter
+          font-size: 85%
         div.canvas &.album,
         div.canvas &.date
           display: block
+  &.track
+    > dt.image
+      float: left
+      +image_clip
+    > dd
+      margin-left: 40px
+  &.ranking
+    > dt.image
+      +image_clip(64px)
+    > dd
+      margin-left: 70px
 
 /* iTS, community
 div#tracksArea dl.track
@@ -297,3 +320,25 @@ div#tracksArea dl.track
               margin-left: 0.5em
               +inline-block
               color = !color_red
+
+/* ol.pager
+ol.pager
+  text-align: center
+  & li
+    padding: 3px
+    +inline-block
+    &.prev,
+    &.next
+      min-width: 1.5em
+
+/* dl.friends, dl.people
+dl
+  &.friends,
+  &.people
+    margin-bottom: 5px
+    dt
+      img
+        padding:
+          right: 5px
+        vertical-align: middle
+        +image_clip(76)
