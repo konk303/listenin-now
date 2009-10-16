@@ -8,15 +8,14 @@
 
 /* global
 div#container
-  padding-bottom: 10px
   background = !color_gray
+  &.canvas
+    padding-bottom: 10px
+    +clearfix
   &.mixi
     &.home,
     &.profile
       padding-bottom: 1px
-  > div
-    max-width: 600px
-    margin-right: auto
 a
   color = !color_blue
   text-decoration: none
@@ -26,16 +25,60 @@ div.loading
   padding: 5px
   text-align: center
 
-/* templates, don't show them.
-div#templates
-  display: none
+/* wire frame.
+div#userArea
+  div.canvas &
+    float: left
+    width: 670px
+    +clearfix
+div#peopleArea
+  div.canvas &
+    float: right
+    width: 255px
+  div.home &,
+  div.profile &
+    display: none
 
 /* formAccount
+div#mm_0
+  width: 200px
 form#formAccount
   padding: 5px
   font-size: 13px
   p
     padding-bottom: 3px
+
+/* navigationArea
+div#navigationArea
+  div.home &,
+  div.profile &
+    display: none
+    position: fixed
+    bottom: 0
+    right: 0
+    z-index: 20
+    & p
+      padding: 3px
+      background = !color_red
+      line-height: 1
+      color = !color_whity
+      cursor: pointer
+      &:hover
+        color = !color_white
+  div.canvas &
+    padding-left: 10px
+    +clearfix
+    p
+      float: right
+      margin: 0 0 1px 3px
+      padding: 3px 7px
+      background = !color_its
+      line-height: 1
+      color = !color_whity
+      cursor: pointer
+      +cornered_partial("top", "left", 10px)
+      &:hover
+        color = !color_white
 
 /* infoArea
 div#infoArea
@@ -66,11 +109,70 @@ div#infoArea
 
 /* tracksArea
 div#tracksArea
-  padding-left: 10px
-  div.home &,
-  div.profile &
-    padding-left: 5px
-  dl.track
+  padding-left: 5px
+  div.canvas &
+    float: left
+    min-height: 500px
+    width: 400px
+
+/* rankingsArea
+div#rankingsArea
+  float: right
+  width: 250px
+  div.profile &,
+  div.home &
+    display: none
+
+/* accountArea
+div#accountArea
+  float: right
+  width: 250px
+  padding: 5px 0 10px
+  text-align: right
+  p.account a
+    padding-right: 15px
+    background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat
+    span.link_button
+      width: 13px
+      height: 13px
+      +inline-block
+      vertical-align: baseline
+      background-position: 80px 0
+  &:hover span.link_button
+    background-position: 80px 20px
+  div.profile &,
+  div.home &
+    display: none
+
+/* whatsnewArea
+div#whatsnewArea
+  position: absolute
+  top: 0
+  right: 0
+  width: 255px
+  height: 35px
+  overflow: hidden
+  background: blue
+  div.profile &,
+  div.home &
+    display: none
+
+/* friendsArea
+div#friendsArea
+  margin-top: 300px
+  background: yellow
+  div.profile &,
+  div.home &
+    display: none
+
+/* templates, don't show them.
+div#templates
+  display: none
+
+/* dl.track, dl.ranking
+dl
+  &.track,
+  &.ranking
     position: relative
     margin: 5px 0
     padding: 5px 10px
@@ -195,73 +297,3 @@ div#tracksArea dl.track
               margin-left: 0.5em
               +inline-block
               color = !color_red
-
-/* accountArea
-div#accountArea
-  padding: 5px 0 10px 10px
-  text-align: right
-  div.profile &,
-  div.home &
-    display: none
-  p.account a
-    padding-right: 15px
-    background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat
-    span.link_button
-      width: 13px
-      height: 13px
-      +inline-block
-      vertical-align: baseline
-      background-position: 80px 0
-  &:hover span.link_button
-    background-position: 80px 20px
-
-/* navigationArea, home/profile
-div.home div#navigationArea,
-div.profile div#navigationArea
-  display: none
-  position: fixed
-  bottom: 0
-  right: 0
-  z-index: 20
-  & p
-    padding: 3px
-    background = !color_red
-    line-height: 1
-    color = !color_whity
-    cursor: pointer
-    &:hover
-      color = !color_white
-
-/* navigationArea, canvas
-div.canvas div#navigationArea
-  padding-left: 10px
-  +clearfix
-  p
-    float: right
-    margin: 0 0 1px 3px
-    padding: 3px 7px
-    background = !color_its
-    line-height: 1
-    color = !color_whity
-    cursor: pointer
-    +cornered_partial("top", "left", 10px)
-    &:hover
-      color = !color_white
-
-/* rankingsArea
-div#rankingsArea
-  div.profile &,
-  div.home &
-    display: none
-
-/* whatsnewArea
-div#whatsnewArea
-  div.profile &,
-  div.home &
-    display: none
-
-/* friendsArea
-div#friendsArea
-  div.profile &,
-  div.home &
-    display: none

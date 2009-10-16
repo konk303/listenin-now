@@ -6,16 +6,24 @@
  * ============================================================ */
 /* global */
 div#container {
-  padding-bottom: 10px;
   background: #eeeeee;
+}
+div#container.canvas {
+  padding-bottom: 10px;
+}
+div#container.canvas:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+div#ie67 div#container.canvas {
+  height: 1%;
 }
 div#container.mixi.home,
 div#container.mixi.profile {
   padding-bottom: 1px;
-}
-div#container > div {
-  max-width: 600px;
-  margin-right: auto;
 }
 
 a {
@@ -31,18 +39,92 @@ div.loading {
   text-align: center;
 }
 
-/* templates, don't show them. */
-div#templates {
+/* wire frame. */
+div.canvas div#userArea {
+  float: left;
+  width: 670px;
+}
+div.canvas div#userArea:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+div#ie67 div.canvas div#userArea {
+  height: 1%;
+}
+
+div.canvas div#peopleArea {
+  float: right;
+  width: 255px;
+}
+div.home div#peopleArea,
+div.profile div#peopleArea {
   display: none;
 }
 
 /* formAccount */
+div#mm_0 {
+  width: 200px;
+}
+
 form#formAccount {
   padding: 5px;
   font-size: 13px;
 }
 form#formAccount p {
   padding-bottom: 3px;
+}
+
+/* navigationArea */
+div.home div#navigationArea,
+div.profile div#navigationArea {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 20;
+}
+div.home div#navigationArea p,
+div.profile div#navigationArea p {
+  padding: 3px;
+  background: #d10039;
+  line-height: 1;
+  color: #e4e6d9;
+  cursor: pointer;
+}
+div.home div#navigationArea p:hover,
+div.profile div#navigationArea p:hover {
+  color: white;
+}
+div.canvas div#navigationArea {
+  padding-left: 10px;
+}
+div.canvas div#navigationArea:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+div#ie67 div.canvas div#navigationArea {
+  height: 1%;
+}
+div.canvas div#navigationArea p {
+  float: right;
+  margin: 0 0 1px 3px;
+  padding: 3px 7px;
+  background: #6884ab;
+  line-height: 1;
+  color: #e4e6d9;
+  cursor: pointer;
+  border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+}
+div.canvas div#navigationArea p:hover {
+  color: white;
 }
 
 /* infoArea */
@@ -84,13 +166,84 @@ div#infoArea span.button_edit:hover {
 
 /* tracksArea */
 div#tracksArea {
-  padding-left: 10px;
-}
-div.home div#tracksArea,
-div.profile div#tracksArea {
   padding-left: 5px;
 }
-div#tracksArea dl.track {
+div.canvas div#tracksArea {
+  float: left;
+  min-height: 500px;
+  width: 400px;
+}
+
+/* rankingsArea */
+div#rankingsArea {
+  float: right;
+  width: 250px;
+}
+div.profile div#rankingsArea,
+div.home div#rankingsArea {
+  display: none;
+}
+
+/* accountArea */
+div#accountArea {
+  float: right;
+  width: 250px;
+  padding: 5px 0 10px;
+  text-align: right;
+}
+div#accountArea p.account a {
+  padding-right: 15px;
+  background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat;
+}
+div#accountArea p.account a span.link_button {
+  width: 13px;
+  height: 13px;
+  display: -moz-inline-box;
+  display: inline-block;
+  vertical-align: baseline;
+  background-position: 80px 0;
+}
+div#accountArea:hover span.link_button {
+  background-position: 80px 20px;
+}
+div.profile div#accountArea,
+div.home div#accountArea {
+  display: none;
+}
+
+/* whatsnewArea */
+div#whatsnewArea {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 255px;
+  height: 35px;
+  overflow: hidden;
+  background: blue;
+}
+div.profile div#whatsnewArea,
+div.home div#whatsnewArea {
+  display: none;
+}
+
+/* friendsArea */
+div#friendsArea {
+  margin-top: 300px;
+  background: yellow;
+}
+div.profile div#friendsArea,
+div.home div#friendsArea {
+  display: none;
+}
+
+/* templates, don't show them. */
+div#templates {
+  display: none;
+}
+
+/* dl.track, dl.ranking */
+dl.track,
+dl.ranking {
   position: relative;
   margin: 5px 0;
   padding: 5px 10px;
@@ -102,74 +255,93 @@ div#tracksArea dl.track {
   -webkit-box-shadow: 2px 2px 2px #777777;
   -moz-box-shadow: 2px 2px 2px #777777;
 }
-div#tracksArea dl.track:after {
+dl.track:after,
+dl.ranking:after {
   content: ".";
   display: block;
   height: 0;
   clear: both;
   visibility: hidden;
 }
-div#ie67 div#tracksArea dl.track {
+div#ie67 dl.track,
+div#ie67 dl.ranking {
   height: 1%;
 }
-div.home div#tracksArea dl.track,
-div.profile div#tracksArea dl.track {
+div.home dl.track,
+div.profile dl.track,
+div.home dl.ranking,
+div.profile dl.ranking {
   overflow: hidden;
   margin: 3px 4px 3px 0;
   padding: 3px 10px 2px;
 }
-div#tracksArea dl.track:hover {
+dl.track:hover,
+dl.ranking:hover {
   background: #e4e6d9;
 }
-div#tracksArea dl.track > dt.image {
+dl.track > dt.image,
+dl.ranking > dt.image {
   float: left;
   width: 38px;
   height: 38px;
   overflow: hidden;
   line-height: 34px;
 }
-div#tracksArea dl.track > dt.image img {
+dl.track > dt.image img,
+dl.ranking > dt.image img {
   width: 34px;
   vertical-align: middle;
   box-shadow: 2px 2px 2px black;
   -webkit-box-shadow: 2px 2px 2px black;
   -moz-box-shadow: 2px 2px 2px black;
 }
-div#tracksArea dl.track > dt.image img.noimage {
+dl.track > dt.image img.noimage,
+dl.ranking > dt.image img.noimage {
   height: 34px;
 }
-div#tracksArea dl.track > dd {
+dl.track > dd,
+dl.ranking > dd {
   margin-left: 40px;
 }
-div#tracksArea dl.track > dd > p {
+dl.track > dd > p,
+dl.ranking > dd > p {
   white-space: nowrap;
   overflow: hidden;
 }
-div#tracksArea dl.track > dd > p.name,
-div#tracksArea dl.track > dd > p.artist {
+dl.track > dd > p.name,
+dl.track > dd > p.artist,
+dl.ranking > dd > p.name,
+dl.ranking > dd > p.artist {
   /* nothing yet. */
 }
-div#tracksArea dl.track > dd > p.name a {
+dl.track > dd > p.name a,
+dl.ranking > dd > p.name a {
   color: #d10039;
 }
-div#tracksArea dl.track > dd > p.album,
-div#tracksArea dl.track > dd > p.date {
+dl.track > dd > p.album,
+dl.track > dd > p.date,
+dl.ranking > dd > p.album,
+dl.ranking > dd > p.date {
   display: none;
   position: absolute;
   padding: 0 5px;
   color: #777777;
   font-size: 85%;
 }
-div#tracksArea dl.track > dd > p.album {
+dl.track > dd > p.album,
+dl.ranking > dd > p.album {
   right: 0;
   top: 5px;
 }
-div#tracksArea dl.track > dd > p.date {
+dl.track > dd > p.date,
+dl.ranking > dd > p.date {
   right: 0;
   bottom: 5px;
 }
-div.canvas div#tracksArea dl.track > dd > p.album,
-div.canvas div#tracksArea dl.track > dd > p.date {
+div.canvas dl.track > dd > p.album,
+div.canvas dl.track > dd > p.date,
+div.canvas dl.ranking > dd > p.album,
+div.canvas dl.ranking > dd > p.date {
   display: block;
 }
 
@@ -283,99 +455,4 @@ div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd p.album a span.price 
   display: -moz-inline-box;
   display: inline-block;
   color: #d10039;
-}
-
-/* accountArea */
-div#accountArea {
-  padding: 5px 0 10px 10px;
-  text-align: right;
-}
-div.profile div#accountArea,
-div.home div#accountArea {
-  display: none;
-}
-div#accountArea p.account a {
-  padding-right: 15px;
-  background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat;
-}
-div#accountArea p.account a span.link_button {
-  width: 13px;
-  height: 13px;
-  display: -moz-inline-box;
-  display: inline-block;
-  vertical-align: baseline;
-  background-position: 80px 0;
-}
-div#accountArea:hover span.link_button {
-  background-position: 80px 20px;
-}
-
-/* navigationArea, home/profile */
-div.home div#navigationArea,
-div.profile div#navigationArea {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 20;
-}
-div.home div#navigationArea p,
-div.profile div#navigationArea p {
-  padding: 3px;
-  background: #d10039;
-  line-height: 1;
-  color: #e4e6d9;
-  cursor: pointer;
-}
-div.home div#navigationArea p:hover,
-div.profile div#navigationArea p:hover {
-  color: white;
-}
-
-/* navigationArea, canvas */
-div.canvas div#navigationArea {
-  padding-left: 10px;
-}
-div.canvas div#navigationArea:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-div#ie67 div.canvas div#navigationArea {
-  height: 1%;
-}
-div.canvas div#navigationArea p {
-  float: right;
-  margin: 0 0 1px 3px;
-  padding: 3px 7px;
-  background: #6884ab;
-  line-height: 1;
-  color: #e4e6d9;
-  cursor: pointer;
-  border-top-left-radius: 10px;
-  -moz-border-radius-topleft: 10px;
-  -webkit-border-top-left-radius: 10px;
-}
-div.canvas div#navigationArea p:hover {
-  color: white;
-}
-
-/* rankingsArea */
-div.profile div#rankingsArea,
-div.home div#rankingsArea {
-  display: none;
-}
-
-/* whatsnewArea */
-div.profile div#whatsnewArea,
-div.home div#whatsnewArea {
-  display: none;
-}
-
-/* friendsArea */
-div.profile div#friendsArea,
-div.home div#friendsArea {
-  display: none;
 }
