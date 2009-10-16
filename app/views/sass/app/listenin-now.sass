@@ -6,15 +6,14 @@
     http://mixi.jp/view_appli.pl?id=7793
   ============================================================
 
-/* global */
+/* global
 div#container
-  margin-bottom: 10px
+  padding-bottom: 10px
   background = !color_gray
   &.mixi
     &.home,
     &.profile
-      /* 212px - scrollbar 17px - shadow 2px - chrome 2px */
-      width: 191px
+      padding-bottom: 1px
   > div
     max-width: 600px
     margin-right: auto
@@ -31,14 +30,14 @@ div.loading
 div#templates
   display: none
 
-/* formAccount */
+/* formAccount
 form#formAccount
   padding: 5px
   font-size: 13px
   p
     padding-bottom: 3px
 
-/* infoArea */
+/* infoArea
 div#infoArea
   padding: 5px 5px 0
   background = !color_red
@@ -46,6 +45,10 @@ div#infoArea
   color = !color_whity
   +cornered_partial("bottom", "left")
   +shadowed
+  div.home &,
+  div.profile &
+    /* for box-shadow
+    margin-right: 4px
   a
     font-weight: bold
     color = !color_white
@@ -74,6 +77,11 @@ div#tracksArea
     background = !color_white
     +cornered
     +clearfix
+    div.home &,
+    div.profile &
+      overflow: hidden
+      margin: 3px 4px 3px 0
+      padding: 3px 10px 2px
     &:hover
       background = !color_whity
     > dt.image
@@ -240,3 +248,21 @@ div.canvas div#navigationArea
     +cornered_partial("top", "left", 10px)
     &:hover
       color = !color_white
+
+/* rankingsArea
+div#rankingsArea
+  div.profile &,
+  div.home &
+    display: none
+
+/* whatsnewArea
+div#whatsnewArea
+  div.profile &,
+  div.home &
+    display: none
+
+/* friendsArea
+div#friendsArea
+  div.profile &,
+  div.home &
+    display: none

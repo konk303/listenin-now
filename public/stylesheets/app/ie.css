@@ -4,10 +4,10 @@
  *   additional stylesheet for IE in mixi app "listenin' now"
  *   http://mixi.jp/view_appli.pl?id=7793
  * ============================================================ */
-/* reset body width. */
-div.home,
-div.profile {
-  width: auto;
+/* nested selecter not working well, in ie6. */
+div#ie6 div.home,
+div#ie6 div.profile {
+  padding-bottom: 1px !important;
 }
 
 /* background verticaly center to inline doesn't work well, in ie67. */
@@ -69,8 +69,8 @@ div#ie6 div#tracksArea dl.track dd p.date {
   bottom: 5px;
 }
 
-div#ie6 div#tracksArea dl.track dd p.album,
-div#ie6 div#tracksArea dl.track dd p.date {
+div#ie6 div.canvas div#tracksArea dl.track dd p.album,
+div#ie6 div.canvas div#tracksArea dl.track dd p.date {
   display: block;
 }
 

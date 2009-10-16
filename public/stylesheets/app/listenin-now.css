@@ -6,13 +6,12 @@
  * ============================================================ */
 /* global */
 div#container {
-  margin-bottom: 10px;
+  padding-bottom: 10px;
   background: #eeeeee;
 }
 div#container.mixi.home,
 div#container.mixi.profile {
-  /* 212px - scrollbar 17px - shadow 2px - chrome 2px */
-  width: 191px;
+  padding-bottom: 1px;
 }
 div#container > div {
   max-width: 600px;
@@ -58,6 +57,11 @@ div#infoArea {
   box-shadow: 2px 2px 2px #777777;
   -webkit-box-shadow: 2px 2px 2px #777777;
   -moz-box-shadow: 2px 2px 2px #777777;
+}
+div.home div#infoArea,
+div.profile div#infoArea {
+  /* for box-shadow */
+  margin-right: 4px;
 }
 div#infoArea a {
   font-weight: bold;
@@ -107,6 +111,12 @@ div#tracksArea dl.track:after {
 }
 div#ie67 div#tracksArea dl.track {
   height: 1%;
+}
+div.home div#tracksArea dl.track,
+div.profile div#tracksArea dl.track {
+  overflow: hidden;
+  margin: 3px 4px 3px 0;
+  padding: 3px 10px 2px;
 }
 div#tracksArea dl.track:hover {
   background: #e4e6d9;
@@ -350,4 +360,22 @@ div.canvas div#navigationArea p {
 }
 div.canvas div#navigationArea p:hover {
   color: white;
+}
+
+/* rankingsArea */
+div.profile div#rankingsArea,
+div.home div#rankingsArea {
+  display: none;
+}
+
+/* whatsnewArea */
+div.profile div#whatsnewArea,
+div.home div#whatsnewArea {
+  display: none;
+}
+
+/* friendsArea */
+div.profile div#friendsArea,
+div.home div#friendsArea {
+  display: none;
 }

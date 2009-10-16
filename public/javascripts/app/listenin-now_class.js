@@ -18,7 +18,7 @@ listenin-now_class.js
             this.createEachDomHandler = $.classUtil.createHandler(this, this.createEachDom);
         },
         display: function(showLimit) {
-            this.showLimit = showLimit || 5;
+            this.showLimit = showLimit || 4;
             this.showArea.empty();
             this.loading.showAt(this.showArea);
             this.request();
@@ -531,7 +531,7 @@ listenin-now_class.js
             this.showArea.add(this.accountArea).empty();
             if (this.lf_account) {
                 this.showOwnerInfo();
-                Class.Tracks(this.lf_account).display(Class.View().name == "canvas" ? 40: 5);
+                Class.Tracks(this.lf_account).display(Class.View().name == "canvas" ? 40: 4);
                 if (Class.View().name == "canvas") {
                     Class.Ranking(this.lf_account, $("#rankingsArea")).display(5);
                 }
