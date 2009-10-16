@@ -7,7 +7,7 @@
   ============================================================
 
 /* global */
-body
+div#container
   margin-bottom: 10px
   background = !color_gray
   &.mixi
@@ -64,8 +64,8 @@ div#infoArea
 /* tracksArea
 div#tracksArea
   padding-left: 10px
-  body.home &,
-  body.profile &
+  div.home &,
+  div.profile &
     padding-left: 5px
   dl.track
     position: relative
@@ -103,8 +103,8 @@ div#tracksArea
         &.date
           right: 0
           bottom: 5px
-        body.canvas &.album,
-        body.canvas &.date
+        div.canvas &.album,
+        div.canvas &.date
           display: block
 
 /* iTS, community
@@ -193,8 +193,8 @@ div#tracksArea dl.track
 div#accountArea
   padding: 5px 0 10px 10px
   text-align: right
-  body.profile &,
-  body.home &
+  div.profile &,
+  div.home &
     display: none
   p.account a
     padding-right: 15px
@@ -209,8 +209,8 @@ div#accountArea
     background-position: 80px 20px
 
 /* navigationArea, home/profile
-body.home div#navigationArea,
-body.profile div#navigationArea
+div.home div#navigationArea,
+div.profile div#navigationArea
   display: none
   position: fixed
   bottom: 0
@@ -226,7 +226,7 @@ body.profile div#navigationArea
       color = !color_white
 
 /* navigationArea, canvas
-body.canvas div#navigationArea
+div.canvas div#navigationArea
   padding-left: 10px
   +clearfix
   p

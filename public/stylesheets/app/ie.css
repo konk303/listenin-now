@@ -5,14 +5,9 @@
  *   http://mixi.jp/view_appli.pl?id=7793
  * ============================================================ */
 /* reset body width. */
-body.home,
-body.profile {
+div.home,
+div.profile {
   width: auto;
-}
-
-/* clearfix fail when "body" included in selector. */
-body.canvas div#ie67 div#navigationArea {
-  height: 1%;
 }
 
 /* background verticaly center to inline doesn't work well, in ie67. */
@@ -21,7 +16,7 @@ div#ie67 div#accountArea p.account a {
 }
 
 /* child selector, ng in ie6. */
-body.canvas div#ie6 {
+div#ie6 div.canvas {
   width: 600px;
   margin-right: auto;
 }
@@ -73,14 +68,15 @@ div#ie6 div#tracksArea dl.track dd p.date {
   right: 0;
   bottom: 5px;
 }
-body.canvas div#ie6 div#tracksArea dl.track dd p.album,
-body.canvas div#ie6 div#tracksArea dl.track dd p.date {
+
+div#ie6 div#tracksArea dl.track dd p.album,
+div#ie6 div#tracksArea dl.track dd p.date {
   display: block;
 }
 
 /* white-space:nowrap & overflow:hidden needs width, ng in ie6. */
-body.home div#ie6 div#tracksArea dl.track dd p,
-body.profile div#ie6 div#tracksArea dl.track dd p {
+div#ie6 div.home div#tracksArea dl.track dd p,
+div#ie6 div.profile div#tracksArea dl.track dd p {
   width: 135px;
 }
 
@@ -102,16 +98,16 @@ div#ie6 div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS a {
 }
 
 /* position:fixed, ng in ie6. */
-body.home div#ie6 div#navigationArea,
-body.profile div#ie6 div#navigationArea {
+div#ie6 div.home div#navigationArea,
+div#ie6 div.profile div#navigationArea {
   position: absolute;
   bottom: auto;
   right: auto;
   top: 0;
   left: 0;
 }
-body.home div#ie6 div#navigationArea p,
-body.profile div#ie6 div#navigationArea p {
+div#ie6 div.home div#navigationArea p,
+div#ie6 div.profile div#navigationArea p {
   background: black;
 }
 

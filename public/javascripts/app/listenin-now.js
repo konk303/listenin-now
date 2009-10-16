@@ -15,7 +15,7 @@ listenin-now.js
     gadgets.util.registerOnLoadHandler(function() {
         // viewinfo can be fetched without request.
         var view = new Class.View();
-        $("body").addClass(view.name);
+        $("#container").addClass(view.name);
 
         // get the ownerinfo
         var owner = Class.OwnerAccount()
@@ -32,7 +32,7 @@ listenin-now.js
         });
         // mixi oriented
         if (window.mixi) {
-            $("body").addClass("mixi");
+            $("#container").addClass("mixi");
             // external links, use mixi.util.requestExternalNavigateTo
             $("a.external").live("click", function(e) {
                 e.preventDefault();

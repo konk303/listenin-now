@@ -5,16 +5,16 @@
  *   http://mixi.jp/view_appli.pl?id=7793
  * ============================================================ */
 /* global */
-body {
+div#container {
   margin-bottom: 10px;
   background: #eeeeee;
 }
-body.mixi.home,
-body.mixi.profile {
+div#container.mixi.home,
+div#container.mixi.profile {
   /* 212px - scrollbar 17px - shadow 2px - chrome 2px */
   width: 191px;
 }
-body > div {
+div#container > div {
   max-width: 600px;
   margin-right: auto;
 }
@@ -82,8 +82,8 @@ div#infoArea span.button_edit:hover {
 div#tracksArea {
   padding-left: 10px;
 }
-body.home div#tracksArea,
-body.profile div#tracksArea {
+div.home div#tracksArea,
+div.profile div#tracksArea {
   padding-left: 5px;
 }
 div#tracksArea dl.track {
@@ -158,8 +158,8 @@ div#tracksArea dl.track > dd > p.date {
   right: 0;
   bottom: 5px;
 }
-body.canvas div#tracksArea dl.track > dd > p.album,
-body.canvas div#tracksArea dl.track > dd > p.date {
+div.canvas div#tracksArea dl.track > dd > p.album,
+div.canvas div#tracksArea dl.track > dd > p.date {
   display: block;
 }
 
@@ -280,8 +280,8 @@ div#accountArea {
   padding: 5px 0 10px 10px;
   text-align: right;
 }
-body.profile div#accountArea,
-body.home div#accountArea {
+div.profile div#accountArea,
+div.home div#accountArea {
   display: none;
 }
 div#accountArea p.account a {
@@ -301,42 +301,42 @@ div#accountArea:hover span.link_button {
 }
 
 /* navigationArea, home/profile */
-body.home div#navigationArea,
-body.profile div#navigationArea {
+div.home div#navigationArea,
+div.profile div#navigationArea {
   display: none;
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 20;
 }
-body.home div#navigationArea p,
-body.profile div#navigationArea p {
+div.home div#navigationArea p,
+div.profile div#navigationArea p {
   padding: 3px;
   background: #d10039;
   line-height: 1;
   color: #e4e6d9;
   cursor: pointer;
 }
-body.home div#navigationArea p:hover,
-body.profile div#navigationArea p:hover {
+div.home div#navigationArea p:hover,
+div.profile div#navigationArea p:hover {
   color: white;
 }
 
 /* navigationArea, canvas */
-body.canvas div#navigationArea {
+div.canvas div#navigationArea {
   padding-left: 10px;
 }
-body.canvas div#navigationArea:after {
+div.canvas div#navigationArea:after {
   content: ".";
   display: block;
   height: 0;
   clear: both;
   visibility: hidden;
 }
-div#ie67 body.canvas div#navigationArea {
+div#ie67 div.canvas div#navigationArea {
   height: 1%;
 }
-body.canvas div#navigationArea p {
+div.canvas div#navigationArea p {
   float: right;
   margin: 0 0 1px 3px;
   padding: 3px 7px;
@@ -348,6 +348,6 @@ body.canvas div#navigationArea p {
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
 }
-body.canvas div#navigationArea p:hover {
+div.canvas div#navigationArea p:hover {
   color: white;
 }
