@@ -20,12 +20,18 @@ h1,
 h2 {
   /* hidden by default */
   display: none;
-  margin: 5px 0 0;
+  margin-top: 5px;
   font-weight: bold;
 }
 
 h1 {
-  font-size: 138.5%;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 153.9%;
+}
+h1 img {
+  padding: 0 5px;
+  vertical-align: bottom;
 }
 
 h2 {
@@ -94,6 +100,12 @@ form#formAccount {
 }
 form#formAccount p {
   padding-bottom: 3px;
+}
+
+/* accountArea */
+div.profile div#accountArea,
+div.home div#accountArea {
+  display: none;
 }
 
 /* navigationArea */
@@ -209,22 +221,6 @@ div.home div#rankingsArea {
   display: none;
 }
 
-/* accountArea */
-div#accountArea {
-  float: right;
-  width: 180px;
-  padding: 5px 0 10px;
-  text-align: right;
-}
-div#accountArea p.account a {
-  padding-right: 15px;
-  background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat;
-}
-div.profile div#accountArea,
-div.home div#accountArea {
-  display: none;
-}
-
 /* whatsnewArea */
 div#whatsnewArea {
   position: absolute;
@@ -304,8 +300,8 @@ div.profile dl.track,
 div.home dl.ranking,
 div.profile dl.ranking {
   overflow: hidden;
-  margin: 3px 4px 3px 0;
-  padding: 2px 10px 5px;
+  margin: 2px 4px 2px 0;
+  padding: 2px 10px 4px;
 }
 dl.track:hover,
 dl.ranking:hover {
@@ -379,6 +375,9 @@ dl.track > dt.image img.noimage {
 }
 dl.track > dd {
   margin-left: 45px;
+}
+dl.ranking {
+  margin-bottom: 10px;
 }
 dl.ranking > dt.image {
   margin-bottom: 5px;
@@ -558,13 +557,13 @@ ol.pager li.next {
 }
 ol.pager li a {
   display: block;
-  padding: 0 3px;
+  padding: 0 5px;
 }
 ol.pager li a:hover {
   background: #e4e6d9;
 }
 ol.pager li span.thisPage {
-  padding: 0 3px;
+  padding: 0 5px;
 }
 
 /* dl.friends, dl.people */

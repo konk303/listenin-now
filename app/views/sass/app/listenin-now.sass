@@ -14,12 +14,17 @@ h1,
 h2
   /* hidden by default
   display: none
-  margin: 5px 0 0
+  margin-top: 5px
   font:
     weight: bold
 h1
+  margin-bottom: 5px
+  text-align: center
   font:
-    size: 138.5%
+    size: 153.9%
+  img
+    padding: 0 5px
+    vertical-align: bottom
 h2
   font:
     size: 138.5%
@@ -63,6 +68,12 @@ form#formAccount
   font-size: 13px
   p
     padding-bottom: 3px
+
+/* accountArea
+div#accountArea
+  div.profile &,
+  div.home &
+    display: none
 
 /* navigationArea
 div#navigationArea
@@ -143,19 +154,6 @@ div#rankingsArea
   div.home &
     display: none
 
-/* accountArea
-div#accountArea
-  float: right
-  width: 180px
-  padding: 5px 0 10px
-  text-align: right
-  p.account a
-    padding-right: 15px
-    background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat
-  div.profile &,
-  div.home &
-    display: none
-
 /* whatsnewArea
 div#whatsnewArea
   position: absolute
@@ -209,8 +207,8 @@ dl
     div.home &,
     div.profile &
       overflow: hidden
-      margin: 3px 4px 3px 0
-      padding: 2px 10px 5px
+      margin: 2px 4px 2px 0
+      padding: 2px 10px 4px
     &:hover
       background = !color_whity
     > dd
@@ -250,6 +248,7 @@ dl
     > dd
       margin-left: 45px
   &.ranking
+    margin-bottom: 10px
     > dt.image
       margin-bottom: 5px
       +image_clip(126px)
@@ -352,11 +351,11 @@ ol.pager
       min-width: 1.5em
     a
       display: block
-      padding: 0 3px
+      padding: 0 5px
       &:hover
         background = !color_whity
     span.thisPage
-      padding: 0 3px
+      padding: 0 5px
 
 /* dl.friends, dl.people
 dl

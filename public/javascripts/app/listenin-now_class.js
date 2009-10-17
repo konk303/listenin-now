@@ -261,7 +261,7 @@ listenin-now_class.js
             } else {
                 this.showArea.append(this.title.show());
                 $.each(this.rankingDatas, this.createEachDomHandler);
-                gadgets.window.adjustHeight();
+                //gadgets.window.adjustHeight();
             }
         },
         createEachDom: function(i, data) {
@@ -494,6 +494,8 @@ listenin-now_class.js
             this.person = res.get(this.keyOwner).getData();
             this.id = this.person.getId();
             this.name = this.person.getDisplayName();
+            this.thumbnail = this.person.getField(opensocial.Person.Field.THUMBNAIL_URL).
+            replace(/s\./,"m.");
             this.isViewer = this.person.isViewer();
             var lf_data = res.get(this.keyLf).getData();
             if (this.id in lf_data && this.keyLf in lf_data[this.id])
@@ -510,7 +512,7 @@ listenin-now_class.js
                 //do nothing
             } else {
                 if (this.isViewer) {
-                    this.loading.showAt(this.showArea);
+                    this.loading.showAt($("#userArea"));
                     var req = new Class.OsRequest();
                     req.add(
                         this.keyLf,
@@ -536,12 +538,12 @@ listenin-now_class.js
             }
         },
         show: function() {
-            this.showArea.empty();
+            this.showArea.add(this.accountArea).empty();
             if (this.lf_account) {
                 this.showOwnerInfo();
                 Class.Tracks(this.lf_account).display(Class.View().name == "canvas" ? 30: 4);
                 if (Class.View().name == "canvas") {
-                    Class.Ranking(this.lf_account, $("#rankingsArea")).display(10);
+                    Class.Ranking(this.lf_account, $("#rankingsArea")).display(9);
                 }
             } else {
                 if (this.isViewer)
@@ -566,16 +568,19 @@ listenin-now_class.js
             .text(this.lf_account)
             .wrap('<p class="accountMessage" />')
             .parent().prepend('<span>last.fm id: </span>').appendTo(this.showArea);
-            .end().end().clone()
-            .text(this.name)
-            .wrap('<p class="account" />')
-            .append('さん@last.fm')
-            .parent().appendTo(this.navigationArea);
+            if (!this.linkInNavigation) this.linkInNavigation =
+                $('<p title="' + this.name + 'さん@last.fm"><a class="external>last.fmで見る</a></p>').
+            appendTo(this.navigationArea);
+            $("a", this.linkInNavigation).attr("href", "http://www.last.fm/user/" + this.lf_account);
             if (this.isViewer) {
                 // add account update icon
                 $('<span class="button_edit" />').attr("title", "アカウント変更")
                 .click(this.showInputBoxHandler)
                 .appendTo("p.accountMessage", this.showArea);
+            } else {
+                $("<h1 />").text(this.name + "さんのリスニンなう").
+                prepend('<img src="' + this.thumbnail + '" alt="' + this.name + '" />').
+                appendTo(this.accountArea).show();
             }
         },
         showInputBox: function() {
@@ -625,7 +630,7 @@ listenin-now_class.js
             var req = new Class.OsRequest();
             var idSpec = req.idSpec({userId: "OWNER", groupId: "FRIENDS"});
             var params = {};
-            // params[req.PeopleRequestFields("FILTER")] = req.FilterType("HAS_APP");
+            params[req.PeopleRequestFields("FILTER")] = req.FilterType("HAS_APP");
             params[req.PeopleRequestFields("FIRST")] = this.offset;
             params[req.PeopleRequestFields("MAX")] = this.DataPerPage;
             params[req.PeopleRequestFields("PROFILE_DETAILS")] = [
@@ -696,6 +701,9 @@ listenin-now_class.js
                 attr("title", this.owner.name + "さんのプロフィールを見る").
                 appendTo("div#navigationArea").click(this.goToProfileHandler);
             }
+            $('<p><a href="http://listenin.uservoice.com/" target="_blank">フィードバック</a></p>')
+            .attr("title", "フィードバックフォーラム")
+            .appendTo("div#navigationArea");
             if (this.owner.viewerHasApp) {
                 //invite friends
                 $('<p>マイミクを招待！</p>')
@@ -706,9 +714,6 @@ listenin-now_class.js
                 .attr("title", "このアプリを使ってみる")
                 .appendTo("div#navigationArea").click(this.goToAppHomeHandler);
             }
-            $('<p><a href="http://listenin.uservoice.com/" target="_blank">フィードバック</a></p>')
-            .attr("title", "フィードバックフォーラム")
-            .appendTo("div#navigationArea");
         },
         initHomeProfile: function() {
             this.owner = new Class.OwnerAccount();
