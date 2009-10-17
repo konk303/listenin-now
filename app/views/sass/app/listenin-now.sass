@@ -10,6 +10,9 @@
 div#container
   &.canvas
     +clearfix
+h1
+  /* hidden by default
+  display: none
 a
   color = !color_blue
   text-decoration: none
@@ -81,6 +84,11 @@ div#navigationArea
       +cornered_partial("top", "left", 10px)
       &:hover
         color = !color_white
+      a
+        color = !color_whity
+      &:hover
+        color = !color_white
+        text-decoration: none
 
 /* infoArea
 div#infoArea
@@ -326,7 +334,6 @@ div#tracksArea dl.track
 ol.pager
   text-align: center
   & li
-    padding: 3px
     +inline-block
     &.prev,
     &.next

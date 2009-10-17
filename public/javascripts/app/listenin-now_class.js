@@ -12,6 +12,7 @@ listenin-now_class.js
             this.account = account;
             this.template = $("dl.track", "#templates");
             this.showArea = $("#tracksArea");
+            this.title = $("h1", this.showArea);
             this.loading = new Class.LoadingImage();
 
             this.responseHandler = $.classUtil.createHandler(this, this.response);
@@ -56,6 +57,9 @@ listenin-now_class.js
             if (this.message.length) {
                 this.showArea.append(this.message);
             } else {
+                if (Class.View().name == "canvas") {
+                    this.showArea.append(this.title.show());
+                }
                 $.each(this.trackDatas, this.createEachDomHandler);
                 gadgets.window.adjustHeight();
             }
@@ -198,6 +202,7 @@ listenin-now_class.js
         init: function(account, showArea) {
             this.account = account;
             this.showArea = showArea;
+            this.title = $("h1", this.showArea);
             this.template = $("dl.ranking", "#templates");
             this.loading = new Class.LoadingImage();
 
@@ -254,6 +259,7 @@ listenin-now_class.js
             if (this.message.length) {
                 this.showArea.append(this.message);
             } else {
+                this.showArea.append(this.title.show());
                 $.each(this.rankingDatas, this.createEachDomHandler);
             }
         },
@@ -592,6 +598,7 @@ listenin-now_class.js
     Class.Friends = $.classUtil.createClassSingleton({
         init: function() {
             this.showArea = $("#friendsArea");
+            this.title = $("h1", this.showArea);
             this.template = $("dl.friends", "#templates");
             this.loading = new Class.LoadingImage();
             this.FriendsKeyName = "friends";
@@ -646,9 +653,12 @@ listenin-now_class.js
         },
         show: function() {
             this.loading.hide();
-            $.each(this.datas, this.createEachDomHandler);
-            this.pager.display(this.offset, this.totalSize,"top");
-            gadgets.window.adjustHeight();
+            if (this.datas.length) {
+                this.showArea.append(this.title.show());
+                this.pager.display(this.offset, this.totalSize);
+                $.each(this.datas, this.createEachDomHandler);
+                gadgets.window.adjustHeight();
+            }
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();
@@ -678,9 +688,9 @@ listenin-now_class.js
         initCanvas: function() {
             this.owner = new Class.OwnerAccount();
             if (!this.owner.isViewer) {
-                $('<p>プロフィール</p>')
-                .attr("title", this.owner.name + "さんのプロフィールを見る")
-                .appendTo("div#navigationArea").click(this.goToProfileHandler);
+                $('<p>プロフィール</p>').
+                attr("title", this.owner.name + "さんのプロフィールを見る").
+                appendTo("div#navigationArea").click(this.goToProfileHandler);
             }
             if (this.owner.viewerHasApp) {
                 //invite friends
@@ -692,6 +702,9 @@ listenin-now_class.js
                 .attr("title", "このアプリを使ってみる")
                 .appendTo("div#navigationArea").click(this.goToAppHomeHandler);
             }
+            $('<p><a href="http://listenin.uservoice.com/" class="external">フィードバック</a></p>')
+                .attr("title", "フィードバックフォーラム")
+                .appendTo("div#navigationArea");
         },
         initHomeProfile: function() {
             this.owner = new Class.OwnerAccount();
@@ -805,10 +818,11 @@ listenin-now_class.js
         init: function() {
             this.template = $("dl.whatsnew", "#templates");
             this.showArea = $("#whatsnewArea");
+            this.title = $("h1", this.showArea);
             this.loading = new Class.LoadingImage();
             this.rssUrl = "http://feeds.feedburner.com/listenin-now";
             this.maxDisplay = 1; // display entries count
-            this.validDays = 5; // display until
+            this.validDays = 30; // display until
 
             this.responseHandler = $.classUtil.createHandler(this, this.response);
             this.createEachDomHandler = $.classUtil.createHandler(this, this.createEachDom);
@@ -840,7 +854,10 @@ listenin-now_class.js
         },
         show: function() {
             this.loading.hide();
-            $.each(this.entries, this.createEachDomHandler);
+            if (this.entries.length) {
+                this.showArea.append(this.title.show());
+                $.each(this.entries, this.createEachDomHandler);
+            }
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();

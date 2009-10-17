@@ -16,6 +16,11 @@ div#ie67 div#container.canvas {
   height: 1%;
 }
 
+h1 {
+  /* hidden by default */
+  display: none;
+}
+
 a {
   color: #0187c5;
   text-decoration: none;
@@ -127,6 +132,13 @@ div.canvas div#navigationArea p {
 }
 div.canvas div#navigationArea p:hover {
   color: white;
+}
+div.canvas div#navigationArea p a {
+  color: #e4e6d9;
+}
+div.canvas div#navigationArea p:hover {
+  color: white;
+  text-decoration: none;
 }
 
 /* infoArea */
@@ -346,8 +358,9 @@ div.canvas dl.ranking > dd > p.date {
 dl.track > dt.image {
   float: left;
   width: 38px;
-  max-height: 38px;
+  height: 38px;
   overflow: hidden;
+  line-height: 34px;
 }
 dl.track > dt.image img {
   width: 34px;
@@ -364,8 +377,9 @@ dl.track > dd {
 }
 dl.ranking > dt.image {
   width: 130px;
-  max-height: 130px;
+  height: 130px;
   overflow: hidden;
+  line-height: 126px;
 }
 dl.ranking > dt.image img {
   width: 126px;
@@ -498,7 +512,6 @@ ol.pager {
   text-align: center;
 }
 ol.pager li {
-  padding: 3px;
   display: -moz-inline-box;
   display: inline-block;
 }
@@ -525,8 +538,9 @@ dl.people dt span.image {
   padding-right: 10px;
   vertical-align: middle;
   width: 80px;
-  max-height: 80px;
+  height: 80px;
   overflow: hidden;
+  line-height: 76px;
 }
 dl.friends dt span.image img,
 dl.people dt span.image img {
