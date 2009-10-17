@@ -226,7 +226,15 @@ div#whatsnewArea {
   height: 35px;
   overflow: hidden;
 }
+div#whatsnewArea h1 {
+  float: left;
+  line-height: 35px;
+  margin-top: 0;
+  margin-right: 1em;
+  font-size: 100%;
+}
 div#whatsnewArea dl.whatsnew {
+  display: inline;
   font-size: 85%;
 }
 div#whatsnewArea dl.whatsnew dt {
@@ -510,6 +518,7 @@ div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd p.album a span.price 
 
 /* ol.pager */
 ol.pager {
+  margin: 10px 0;
   text-align: center;
 }
 ol.pager li {
@@ -522,22 +531,64 @@ ol.pager li.next {
 }
 ol.pager li a {
   display: block;
-  padding: 3px;
+  padding: 0 3px;
 }
 ol.pager li a:hover {
   background: #e4e6d9;
+}
+ol.pager li span.thisPage {
+  padding: 0 3px;
 }
 
 /* dl.friends, dl.people */
 dl.friends,
 dl.people {
-  margin-bottom: 10px;
+  margin: 5px;
+  padding: 5px 10px;
+  background: #e4e6d9;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  box-shadow: 2px 2px 2px #777777;
+  -webkit-box-shadow: 2px 2px 2px #777777;
+  -moz-box-shadow: 2px 2px 2px #777777;
+}
+dl.friends:after,
+dl.people:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+div#ie67 dl.friends,
+div#ie67 dl.people {
+  height: 1%;
+}
+dl.friends:hover,
+dl.people:hover {
+  background: #eeeeee;
+}
+dl.friends dt,
+dl.people dt {
+  margin-bottom: 5px;
+}
+dl.friends dt:after,
+dl.people dt:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+div#ie67 dl.friends dt,
+div#ie67 dl.people dt {
+  height: 1%;
 }
 dl.friends dt span.image,
 dl.people dt span.image {
   display: block;
-  padding-right: 10px;
-  vertical-align: middle;
+  float: left;
   max-width: 80px;
   max-height: 80px;
   overflow: hidden;
@@ -555,6 +606,14 @@ dl.people dt span.image img {
 dl.friends dt span.image img.noimage,
 dl.people dt span.image img.noimage {
   height: 76px;
+}
+dl.friends dt span.name,
+dl.people dt span.name {
+  display: none;
+}
+dl.friends dd p.toCanvas,
+dl.people dd p.toCanvas {
+  text-align: right;
 }
 dl.friends dd p.toCanvas a,
 dl.people dd p.toCanvas a {

@@ -158,8 +158,15 @@ div#whatsnewArea
   width: 250px
   height: 35px
   overflow: hidden
+  h1
+    float: left
+    line-height: 35px
+    margin:
+      top: 0
+      right: 1em
+    font-size: 100%
   dl.whatsnew
-    //white-space: nowrap
+    display: inline
     font:
       size: 85%
     & dt
@@ -197,7 +204,7 @@ dl
     div.profile &
       overflow: hidden
       margin: 3px 4px 3px 0
-      padding: 1px 10px 4px
+      padding: 2px 10px 5px
     &:hover
       background = !color_whity
     > dd
@@ -329,6 +336,7 @@ div#tracksArea dl.track
 
 /* ol.pager
 ol.pager
+  margin: 10px 0
   text-align: center
   & li
     +inline-block
@@ -337,23 +345,35 @@ ol.pager
       min-width: 1.5em
     a
       display: block
-      padding: 3px
+      padding: 0 3px
       &:hover
         background = !color_whity
+    span.thisPage
+      padding: 0 3px
 
 /* dl.friends, dl.people
 dl
   &.friends,
   &.people
-    margin-bottom: 10px
+    margin: 5px
+    padding: 5px 10px
+    background = !color_whity
+    +cornered
+    +clearfix
+    &:hover
+      background= !color_gray
     dt
+      margin-bottom: 5px
+      +clearfix
       span.image
         display: block
-        padding:
-          right: 10px
-        vertical-align: middle
+        float: left
         +image_clip(76px)
+      span.name
+        display: none
     dd
-      p.toCanvas a
-        padding-right: 15px
-        background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat
+      p.toCanvas
+        text-align: right
+        a
+          padding-right: 15px
+          background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat

@@ -657,7 +657,7 @@ listenin-now_class.js
                 this.showArea.append(this.title.show());
                 this.pager.display(this.offset, this.totalSize);
                 $.each(this.datas, this.createEachDomHandler);
-                gadgets.window.adjustHeight();
+                //gadgets.window.adjustHeight();
             }
         },
         createEachDom: function(i, data) {
@@ -912,7 +912,8 @@ listenin-now_class.js
                 }
                 var perPage = perPageTemplate.clone();
                 if (val == self.offset) {
-                    perPage.empty().text(i + 1);
+                    perPage.empty()
+                    $('<span class="thisPage" />').text(i + 1).appendTo(perPage);
                 } else {
                     perPage.find("a").attr("href",'javascript:void(0);').
                     click(self.handlerCreator(val)).
