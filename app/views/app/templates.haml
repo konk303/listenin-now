@@ -2,7 +2,7 @@
   / tracks
   %dl.track
     %dt.image<
-      %img{ :src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => "" }
+      %img{:src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => ""}
     %dd
       %p.name<
         %a.external
@@ -11,19 +11,20 @@
       %p.album<
         %a.external
       %p.date
-      .button_iTS{ :title => "曲をiTunes Storeで探す" }
-      .button_community{ :title => "アーティスト名でコミュニティ検索" }
+      .button_iTS{:title => "曲をiTunes Storeで探す"}
+      .button_community{:title => "アーティスト名でコミュニティ検索"}
 
   / ranking
   %dl.ranking
     %dt.image<
-      %img{ :src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => "" }
+      %a.external
+        %img{:src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => ""}>
     %dd
       %p.name<
         %a.external
       %p.playcount
-      .button_iTS{ :title => "曲をiTunes Storeで探す" }
-      .button_community{ :title => "アーティスト名でコミュニティ検索" }
+      .button_iTS{:title => "曲をiTunes Storeで探す"}
+      .button_community{:title => "アーティスト名でコミュニティ検索"}
 
   / result_iTS
   .result_iTS
@@ -33,7 +34,7 @@
         %a.artist{:target => "_blank"}
         %br>
         %a.image{:target => "_blank"}<
-          %img{ :src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => "" }
+          %img{:src => "http://listenin-now.konk303.com/images/app/noimage.png", :alt => ""}
       %dd.perItem
         %p.name<
           %a{:target => "_blank"}<
@@ -45,7 +46,7 @@
 
   / loading
   .loading<
-    %img{ :title => "now loading", :src => "http://listenin-now.konk303.com/images/app/ajax-loader.gif", :alt => "now loading" }
+    %img{:title => "now loading", :src => "http://listenin-now.konk303.com/images/app/ajax-loader.gif", :alt => "now loading"}
 
   / what's new
   %dl.whatsnew

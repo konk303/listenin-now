@@ -10,13 +10,19 @@
 div#container
   &.canvas
     +clearfix
-h1
+h1,
+h2
   /* hidden by default
   display: none
   margin: 5px 0 0
   font:
-    size: 138.5%
     weight: bold
+h1
+  font:
+    size: 138.5%
+h2
+  font:
+    size: 138.5%
 a
   color = !color_blue
   text-decoration: none
@@ -158,7 +164,7 @@ div#whatsnewArea
   width: 250px
   height: 35px
   overflow: hidden
-  h1
+  h2
     float: left
     line-height: 35px
     margin:
@@ -253,7 +259,8 @@ dl
         float: left
 
 /* iTS, community
-div#tracksArea dl.track
+dl.track,
+dl.ranking
   dd div
     &.button_iTS,
     &.button_community

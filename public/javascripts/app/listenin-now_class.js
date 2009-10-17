@@ -12,7 +12,7 @@ listenin-now_class.js
             this.account = account;
             this.template = $("dl.track", "#templates");
             this.showArea = $("#tracksArea");
-            this.title = $("h1", this.showArea);
+            this.title = $("h2", this.showArea);
             this.loading = new Class.LoadingImage();
 
             this.responseHandler = $.classUtil.createHandler(this, this.response);
@@ -28,7 +28,7 @@ listenin-now_class.js
             var queries = {
                 method: "user.getRecentTracks",
                 user: this.account,
-                limit: 40
+                limit: 30
             };
             Class.LastFm().request(queries, this.responseHandler);
         },
@@ -202,7 +202,7 @@ listenin-now_class.js
         init: function(account, showArea) {
             this.account = account;
             this.showArea = showArea;
-            this.title = $("h1", this.showArea);
+            this.title = $("h2", this.showArea);
             this.template = $("dl.ranking", "#templates");
             this.loading = new Class.LoadingImage();
 
@@ -261,12 +261,13 @@ listenin-now_class.js
             } else {
                 this.showArea.append(this.title.show());
                 $.each(this.rankingDatas, this.createEachDomHandler);
+                gadgets.window.adjustHeight();
             }
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();
             //image
-            // $("dt.image a", showObj).attr("href", data.url);
+            $("dt.image a", showObj).attr("href", data.url);
             $("dt.image img", showObj).attr({
                 "src": data.image[2]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
                 "alt": data.name,
@@ -455,6 +456,7 @@ listenin-now_class.js
     Class.OwnerAccount = $.classUtil.createClassSingleton({
         init: function() {
             this.showArea = $("#infoArea");
+            this.navigationArea = $("#navigationArea");
             this.accountArea = $("#accountArea");
             this.keyOwner = "owner";
             this.keyViewer = "viewer";
@@ -534,12 +536,12 @@ listenin-now_class.js
             }
         },
         show: function() {
-            this.showArea.add(this.accountArea).empty();
+            this.showArea.empty();
             if (this.lf_account) {
                 this.showOwnerInfo();
                 Class.Tracks(this.lf_account).display(Class.View().name == "canvas" ? 30: 4);
                 if (Class.View().name == "canvas") {
-                    Class.Ranking(this.lf_account, $("#rankingsArea")).display(5);
+                    Class.Ranking(this.lf_account, $("#rankingsArea")).display(10);
                 }
             } else {
                 if (this.isViewer)
@@ -563,12 +565,12 @@ listenin-now_class.js
             })
             .text(this.lf_account)
             .wrap('<p class="accountMessage" />')
-            .parent().prepend('<span>last.fm id: </span>').appendTo(this.showArea)
+            .parent().prepend('<span>last.fm id: </span>').appendTo(this.showArea);
             .end().end().clone()
             .text(this.name)
             .wrap('<p class="account" />')
             .append('さん@last.fm')
-            .parent().appendTo(this.accountArea);
+            .parent().appendTo(this.navigationArea);
             if (this.isViewer) {
                 // add account update icon
                 $('<span class="button_edit" />').attr("title", "アカウント変更")
@@ -598,7 +600,7 @@ listenin-now_class.js
     Class.Friends = $.classUtil.createClassSingleton({
         init: function() {
             this.showArea = $("#friendsArea");
-            this.title = $("h1", this.showArea);
+            this.title = $("h2", this.showArea);
             this.template = $("dl.friends", "#templates");
             this.loading = new Class.LoadingImage();
             this.FriendsKeyName = "friends";
@@ -705,8 +707,8 @@ listenin-now_class.js
                 .appendTo("div#navigationArea").click(this.goToAppHomeHandler);
             }
             $('<p><a href="http://listenin.uservoice.com/" target="_blank">フィードバック</a></p>')
-                .attr("title", "フィードバックフォーラム")
-                .appendTo("div#navigationArea");
+            .attr("title", "フィードバックフォーラム")
+            .appendTo("div#navigationArea");
         },
         initHomeProfile: function() {
             this.owner = new Class.OwnerAccount();
@@ -820,7 +822,7 @@ listenin-now_class.js
         init: function() {
             this.template = $("dl.whatsnew", "#templates");
             this.showArea = $("#whatsnewArea");
-            this.title = $("h1", this.showArea);
+            this.title = $("h2", this.showArea);
             this.loading = new Class.LoadingImage();
             this.rssUrl = "http://feeds.feedburner.com/listenin-now";
             this.maxDisplay = 1; // display entries count

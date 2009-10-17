@@ -16,12 +16,20 @@ div#ie67 div#container.canvas {
   height: 1%;
 }
 
-h1 {
+h1,
+h2 {
   /* hidden by default */
   display: none;
   margin: 5px 0 0;
-  font-size: 138.5%;
   font-weight: bold;
+}
+
+h1 {
+  font-size: 138.5%;
+}
+
+h2 {
+  font-size: 138.5%;
 }
 
 a {
@@ -226,7 +234,7 @@ div#whatsnewArea {
   height: 35px;
   overflow: hidden;
 }
-div#whatsnewArea h1 {
+div#whatsnewArea h2 {
   float: left;
   line-height: 35px;
   margin-top: 0;
@@ -297,7 +305,7 @@ div.home dl.ranking,
 div.profile dl.ranking {
   overflow: hidden;
   margin: 3px 4px 3px 0;
-  padding: 1px 10px 4px;
+  padding: 2px 10px 5px;
 }
 dl.track:hover,
 dl.ranking:hover {
@@ -405,8 +413,10 @@ dl.ranking > dd p.name {
 }
 
 /* iTS, community */
-div#tracksArea dl.track dd div.button_iTS,
-div#tracksArea dl.track dd div.button_community {
+dl.track dd div.button_iTS,
+dl.track dd div.button_community,
+dl.ranking dd div.button_iTS,
+dl.ranking dd div.button_community {
   display: none;
   position: absolute;
   top: 0;
@@ -415,25 +425,32 @@ div#tracksArea dl.track dd div.button_community {
   background: url(http://listenin-now.konk303.com/images/app/icons.png) no-repeat;
   cursor: pointer;
 }
-div#tracksArea dl.track:hover dd div.button_iTS,
-div#tracksArea dl.track:hover dd div.button_community {
+dl.track:hover dd div.button_iTS,
+dl.track:hover dd div.button_community,
+dl.ranking:hover dd div.button_iTS,
+dl.ranking:hover dd div.button_community {
   display: block;
 }
-div#tracksArea dl.track dd div.button_iTS {
+dl.track dd div.button_iTS,
+dl.ranking dd div.button_iTS {
   left: 2px;
   background-position: -20px 0;
 }
-div#tracksArea dl.track dd div.button_community {
+dl.track dd div.button_community,
+dl.ranking dd div.button_community {
   left: 24px;
   background-position: 0 0;
 }
-div#tracksArea dl.track dd div.button_iTS:hover {
+dl.track dd div.button_iTS:hover,
+dl.ranking dd div.button_iTS:hover {
   background-position: -20px -20px;
 }
-div#tracksArea dl.track dd div.button_community:hover {
+dl.track dd div.button_community:hover,
+dl.ranking dd div.button_community:hover {
   background-position: -0 -20px;
 }
-div#tracksArea dl.track dd div.result_iTS {
+dl.track dd div.result_iTS,
+dl.ranking dd div.result_iTS {
   position: absolute;
   top: 0px;
   left: 12px;
@@ -451,7 +468,8 @@ div#tracksArea dl.track dd div.result_iTS {
   -webkit-box-shadow: 4px 4px 4px black;
   -moz-box-shadow: 4px 4px 4px black;
 }
-div#tracksArea dl.track dd div.result_iTS h2 {
+dl.track dd div.result_iTS h2,
+dl.ranking dd div.result_iTS h2 {
   text-align: center;
   margin: 0 10px 5px;
   border: 1px solid #aec0d8;
@@ -460,7 +478,8 @@ div#tracksArea dl.track dd div.result_iTS h2 {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
-div#tracksArea dl.track dd div.result_iTS div.close_button {
+dl.track dd div.result_iTS div.close_button,
+dl.ranking dd div.result_iTS div.close_button {
   position: absolute;
   top: 0;
   right: 0;
@@ -470,18 +489,22 @@ div#tracksArea dl.track dd div.result_iTS div.close_button {
   background-position: -40px 0;
   cursor: pointer;
 }
-div#tracksArea dl.track dd div.result_iTS div.close_button:hover {
+dl.track dd div.result_iTS div.close_button:hover,
+dl.ranking dd div.result_iTS div.close_button:hover {
   background-position: -40px -20px;
 }
-div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS {
+dl.track dd div.result_iTS dl.tracks_iTS,
+dl.ranking dd div.result_iTS dl.tracks_iTS {
   max-height: 200px;
   overflow: auto;
   font-size: 85%;
 }
-div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS a {
+dl.track dd div.result_iTS dl.tracks_iTS a,
+dl.ranking dd div.result_iTS dl.tracks_iTS a {
   color: black;
 }
-div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dt {
+dl.track dd div.result_iTS dl.tracks_iTS dt,
+dl.ranking dd div.result_iTS dl.tracks_iTS dt {
   background: #aec0d8;
   padding: 5px 5px 0;
   text-align: center;
@@ -492,10 +515,12 @@ div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dt {
   -moz-border-radius-topright: 5px;
   -webkit-border-top-right-radius: 5px;
 }
-div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dt img {
+dl.track dd div.result_iTS dl.tracks_iTS dt img,
+dl.ranking dd div.result_iTS dl.tracks_iTS dt img {
   max-width: 100px;
 }
-div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd {
+dl.track dd div.result_iTS dl.tracks_iTS dd,
+dl.ranking dd div.result_iTS dl.tracks_iTS dd {
   margin-bottom: 5px;
   padding: 0 5px 5px;
   background: #aec0d8;
@@ -506,10 +531,12 @@ div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd {
   -moz-border-radius-bottomright: 5px;
   -webkit-border-bottom-right-radius: 5px;
 }
-div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd p.album {
+dl.track dd div.result_iTS dl.tracks_iTS dd p.album,
+dl.ranking dd div.result_iTS dl.tracks_iTS dd p.album {
   border-top: 1px dotted #6884ab;
 }
-div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS dd p.album a span.price {
+dl.track dd div.result_iTS dl.tracks_iTS dd p.album a span.price,
+dl.ranking dd div.result_iTS dl.tracks_iTS dd p.album a span.price {
   margin-left: 0.5em;
   display: -moz-inline-box;
   display: inline-block;
