@@ -24,9 +24,8 @@ div#ie6 div.canvas {
 div#ie6 div#tracksArea dl.track dt.image {
   float: left;
   width: 38px;
-  height: 38px;
+  max-height: 38px;
   overflow: hidden;
-  line-height: 34px;
 }
 div#ie6 div#tracksArea dl.track dt.image img {
   width: 34px;

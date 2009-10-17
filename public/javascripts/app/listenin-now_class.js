@@ -262,7 +262,7 @@ listenin-now_class.js
             //image
             // $("dt.image a", showObj).attr("href", data.url);
             $("dt.image img", showObj).attr({
-                "src": data.image[1]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
+                "src": data.image[2]["#text"] || "http://listenin-now.konk303.com/images/app/noimage.png",
                 "alt": data.name,
                 "title": data.name
             })
@@ -648,6 +648,7 @@ listenin-now_class.js
             this.loading.hide();
             $.each(this.datas, this.createEachDomHandler);
             this.pager.display(this.offset, this.totalSize,"top");
+            gadgets.window.adjustHeight();
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();

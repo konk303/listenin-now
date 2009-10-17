@@ -58,9 +58,8 @@ div#peopleArea {
   background: white;
 }
 div.canvas div#peopleArea {
-  float: left;
+  float: right;
   width: 250px;
-  padding-left: 10px;
 }
 div.home div#peopleArea,
 div.profile div#peopleArea {
@@ -224,7 +223,7 @@ div#whatsnewArea {
   overflow: hidden;
 }
 div#whatsnewArea dl.whatsnew {
-  white-space: nowrap;
+  font-size: 85%;
 }
 div#whatsnewArea dl.whatsnew dt {
   display: inline;
@@ -347,9 +346,8 @@ div.canvas dl.ranking > dd > p.date {
 dl.track > dt.image {
   float: left;
   width: 38px;
-  height: 38px;
+  max-height: 38px;
   overflow: hidden;
-  line-height: 34px;
 }
 dl.track > dt.image img {
   width: 34px;
@@ -365,20 +363,19 @@ dl.track > dd {
   margin-left: 40px;
 }
 dl.ranking > dt.image {
-  width: 68px;
-  height: 68px;
+  width: 130px;
+  max-height: 130px;
   overflow: hidden;
-  line-height: 64px;
 }
 dl.ranking > dt.image img {
-  width: 64px;
+  width: 126px;
   vertical-align: middle;
   box-shadow: 2px 2px 2px black;
   -webkit-box-shadow: 2px 2px 2px black;
   -moz-box-shadow: 2px 2px 2px black;
 }
 dl.ranking > dt.image img.noimage {
-  height: 64px;
+  height: 126px;
 }
 dl.ranking > dd {
   margin-left: 70px;
@@ -509,30 +506,37 @@ ol.pager li.prev,
 ol.pager li.next {
   min-width: 1.5em;
 }
+ol.pager li a {
+  display: block;
+  padding: 3px;
+}
+ol.pager li a:hover {
+  background: #e4e6d9;
+}
 
 /* dl.friends, dl.people */
 dl.friends,
 dl.people {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
-dl.friends dt img,
-dl.people dt img {
-  padding-right: 5px;
+dl.friends dt span.image,
+dl.people dt span.image {
+  display: block;
+  padding-right: 10px;
   vertical-align: middle;
   width: 80px;
-  height: 80px;
+  max-height: 80px;
   overflow: hidden;
-  line-height: 76;
 }
-dl.friends dt img img,
-dl.people dt img img {
-  width: 76;
+dl.friends dt span.image img,
+dl.people dt span.image img {
+  width: 76px;
   vertical-align: middle;
   box-shadow: 2px 2px 2px black;
   -webkit-box-shadow: 2px 2px 2px black;
   -moz-box-shadow: 2px 2px 2px black;
 }
-dl.friends dt img img.noimage,
-dl.people dt img img.noimage {
-  height: 76;
+dl.friends dt span.image img.noimage,
+dl.people dt span.image img.noimage {
+  height: 76px;
 }

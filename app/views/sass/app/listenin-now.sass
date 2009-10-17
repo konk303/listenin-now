@@ -35,9 +35,8 @@ div#userArea
 div#peopleArea
   background= !color_white
   div.canvas &
-    float: left
+    float: right
     width: 250px
-    padding-left: 10px
   div.home &,
   div.profile &
     display: none
@@ -156,7 +155,9 @@ div#whatsnewArea
   height: 35px
   overflow: hidden
   dl.whatsnew
-    white-space: nowrap
+    //white-space: nowrap
+    font:
+      size: 85%
     & dt
       display: inline
       &:after
@@ -235,7 +236,7 @@ dl
       margin-left: 40px
   &.ranking
     > dt.image
-      +image_clip(64px)
+      +image_clip(126px)
     > dd
       margin-left: 70px
 
@@ -330,15 +331,21 @@ ol.pager
     &.prev,
     &.next
       min-width: 1.5em
+    a
+      display: block
+      padding: 3px
+      &:hover
+        background = !color_whity
 
 /* dl.friends, dl.people
 dl
   &.friends,
   &.people
-    margin-bottom: 5px
+    margin-bottom: 10px
     dt
       span.image
+        display: block
         padding:
-          right: 5px
+          right: 10px
         vertical-align: middle
-        +image_clip(76)
+        +image_clip(76px)
