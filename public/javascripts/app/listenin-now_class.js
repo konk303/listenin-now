@@ -475,7 +475,7 @@ listenin-now_class.js
             }
         },
         request: function() {
-            this.loading.showAt(this.accountArea);
+            this.loading.showAt($("#userArea"));
             var req = new Class.OsRequest();
             req.add(this.keyOwner, "newFetchPersonRequest", ['OWNER']);
             req.add(this.keyLf, "newFetchPersonAppDataRequest", [req.idSpec({userId: "OWNER"}), [this.keyLf]]);
@@ -662,14 +662,16 @@ listenin-now_class.js
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();
-            $("dt a", showObj).attr("href", data.url).click(function(e) {
+            $("dt a", showObj).attr("href", data.url);
+            $("dt img", showObj).attr({"src": data.image, title: data.name + "さん"});
+//             $("dt span.name", showObj).text(
+//                 data.name + "さん " + (data.age || data.gender ? "（" + data.gender + " " + data.age + "）" : "")
+//             );
+            $("dd p.toCanvas a", showObj).attr("href", 'javascript:void(0);').
+            text(data.name + "さんのリスニンなう").click(function(e) {
                 e.preventDefault();
                 Class.View().goToCanvas(data.id);
             });
-            $("dt img", showObj).attr({"src": data.image, title: data.name + "さんのリスニンなう"});
-            $("dt span.name", showObj).text(
-                data.name + "さん " + (data.age || data.gender ? "（" + data.gender + " " + data.age + "）" : "")
-            );
 
             this.showArea.append(showObj);
         }
@@ -702,7 +704,7 @@ listenin-now_class.js
                 .attr("title", "このアプリを使ってみる")
                 .appendTo("div#navigationArea").click(this.goToAppHomeHandler);
             }
-            $('<p><a href="http://listenin.uservoice.com/" class="external">フィードバック</a></p>')
+            $('<p><a href="http://listenin.uservoice.com/" target="_blank">フィードバック</a></p>')
                 .attr("title", "フィードバックフォーラム")
                 .appendTo("div#navigationArea");
         },

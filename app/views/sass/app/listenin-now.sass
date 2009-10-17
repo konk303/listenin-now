@@ -19,6 +19,7 @@ a
   &:hover
     text-decoration: underline
 div.loading
+  clear: both
   padding: 5px
   text-align: center
 
@@ -86,9 +87,9 @@ div#navigationArea
         color = !color_white
       a
         color = !color_whity
-      &:hover
-        color = !color_white
-        text-decoration: none
+        &:hover
+          color = !color_white
+          text-decoration: none
 
 /* infoArea
 div#infoArea
@@ -142,14 +143,6 @@ div#accountArea
   p.account a
     padding-right: 15px
     background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat
-    span.link_button
-      width: 13px
-      height: 13px
-      +inline-block
-      vertical-align: baseline
-      background-position: 80px 0
-  &:hover span.link_button
-    background-position: 80px 20px
   div.profile &,
   div.home &
     display: none
@@ -356,3 +349,7 @@ dl
           right: 10px
         vertical-align: middle
         +image_clip(76px)
+    dd
+      p.toCanvas a
+        padding-right: 15px
+        background: url(http://listenin-now.konk303.com/images/app/ext-link.png) right center no-repeat
