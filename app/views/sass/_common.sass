@@ -42,13 +42,14 @@
   display: -moz-inline-box
   display: inline-block
 =image_clip(!size = 34px)
-  width = !size + 4px
-  height = !size + 4px
+  max-width = !size + 4px
+  max-height = !size + 4px
   overflow: hidden
-  line-height = !size
+  line-height: 0
+  +shadowed(!color_lighter)
   & img
     width = !size
-    vertical-align: middle
-    +shadowed(!color_black)
+    padding: 1px
+    border: 1px solid #{!color_lighter}
     &.noimage
       height = !size

@@ -19,6 +19,9 @@ div#ie67 div#container.canvas {
 h1 {
   /* hidden by default */
   display: none;
+  margin: 5px 0 0;
+  font-size: 138.5%;
+  font-weight: bold;
 }
 
 a {
@@ -41,7 +44,7 @@ div#userArea {
 }
 div.canvas div#userArea {
   float: left;
-  width: 670px;
+  width: 660px;
   padding-bottom: 10px;
   padding-right: 10px;
 }
@@ -185,14 +188,13 @@ div#tracksArea {
 }
 div.canvas div#tracksArea {
   float: left;
-  min-height: 300px;
-  width: 450px;
+  width: 460px;
 }
 
 /* rankingsArea */
 div#rankingsArea {
   float: right;
-  width: 200px;
+  width: 180px;
 }
 div.profile div#rankingsArea,
 div.home div#rankingsArea {
@@ -202,7 +204,7 @@ div.home div#rankingsArea {
 /* accountArea */
 div#accountArea {
   float: right;
-  width: 200px;
+  width: 180px;
   padding: 5px 0 10px;
   text-align: right;
 }
@@ -287,15 +289,11 @@ div.home dl.ranking,
 div.profile dl.ranking {
   overflow: hidden;
   margin: 3px 4px 3px 0;
-  padding: 3px 10px 2px;
+  padding: 1px 10px 4px;
 }
 dl.track:hover,
 dl.ranking:hover {
   background: #e4e6d9;
-}
-dl.track > dt.image,
-dl.ranking > dt.image {
-  float: left;
 }
 dl.track > dd > p,
 dl.ranking > dd > p {
@@ -317,7 +315,14 @@ dl.track > dd > p.date,
 dl.ranking > dd > p.album,
 dl.ranking > dd > p.date {
   display: none;
+}
+div.canvas dl.track > dd > p.album,
+div.canvas dl.track > dd > p.date,
+div.canvas dl.ranking > dd > p.album,
+div.canvas dl.ranking > dd > p.date {
+  display: block;
   position: absolute;
+  max-width: 60%;
   padding: 0 5px;
   color: #777777;
   font-size: 85%;
@@ -334,55 +339,61 @@ dl.ranking > dd > p.date {
 }
 dl.track > dd > p.playcount,
 dl.ranking > dd > p.playcount {
-  padding-top: 1em;
-  text-align: right;
+  float: right;
   color: #777777;
   font-size: 85%;
 }
-div.canvas dl.track > dd > p.album,
-div.canvas dl.track > dd > p.date,
-div.canvas dl.ranking > dd > p.album,
-div.canvas dl.ranking > dd > p.date {
-  display: block;
-}
 dl.track > dt.image {
   float: left;
-  width: 38px;
-  height: 38px;
+  max-width: 38px;
+  max-height: 38px;
   overflow: hidden;
-  line-height: 34px;
+  line-height: 0;
+  box-shadow: 2px 2px 2px #777777;
+  -webkit-box-shadow: 2px 2px 2px #777777;
+  -moz-box-shadow: 2px 2px 2px #777777;
 }
 dl.track > dt.image img {
   width: 34px;
-  vertical-align: middle;
-  box-shadow: 2px 2px 2px black;
-  -webkit-box-shadow: 2px 2px 2px black;
-  -moz-box-shadow: 2px 2px 2px black;
+  padding: 1px;
+  border: 1px solid #777777;
 }
 dl.track > dt.image img.noimage {
   height: 34px;
 }
 dl.track > dd {
-  margin-left: 40px;
+  margin-left: 45px;
 }
 dl.ranking > dt.image {
-  width: 130px;
-  height: 130px;
+  margin-bottom: 5px;
+  max-width: 130px;
+  max-height: 130px;
   overflow: hidden;
-  line-height: 126px;
+  line-height: 0;
+  box-shadow: 2px 2px 2px #777777;
+  -webkit-box-shadow: 2px 2px 2px #777777;
+  -moz-box-shadow: 2px 2px 2px #777777;
 }
 dl.ranking > dt.image img {
   width: 126px;
-  vertical-align: middle;
-  box-shadow: 2px 2px 2px black;
-  -webkit-box-shadow: 2px 2px 2px black;
-  -moz-box-shadow: 2px 2px 2px black;
+  padding: 1px;
+  border: 1px solid #777777;
 }
 dl.ranking > dt.image img.noimage {
   height: 126px;
 }
-dl.ranking > dd {
-  margin-left: 70px;
+dl.ranking > dd:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+div#ie67 dl.ranking > dd {
+  height: 1%;
+}
+dl.ranking > dd p.name {
+  float: left;
 }
 
 /* iTS, community */
@@ -527,18 +538,19 @@ dl.people dt span.image {
   display: block;
   padding-right: 10px;
   vertical-align: middle;
-  width: 80px;
-  height: 80px;
+  max-width: 80px;
+  max-height: 80px;
   overflow: hidden;
-  line-height: 76px;
+  line-height: 0;
+  box-shadow: 2px 2px 2px #777777;
+  -webkit-box-shadow: 2px 2px 2px #777777;
+  -moz-box-shadow: 2px 2px 2px #777777;
 }
 dl.friends dt span.image img,
 dl.people dt span.image img {
   width: 76px;
-  vertical-align: middle;
-  box-shadow: 2px 2px 2px black;
-  -webkit-box-shadow: 2px 2px 2px black;
-  -moz-box-shadow: 2px 2px 2px black;
+  padding: 1px;
+  border: 1px solid #777777;
 }
 dl.friends dt span.image img.noimage,
 dl.people dt span.image img.noimage {

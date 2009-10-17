@@ -23,17 +23,18 @@ div#ie6 div.canvas {
 
 div#ie6 div#tracksArea dl.track dt.image {
   float: left;
-  width: 38px;
-  height: 38px;
+  max-width: 38px;
+  max-height: 38px;
   overflow: hidden;
-  line-height: 34px;
+  line-height: 0;
+  box-shadow: 2px 2px 2px #777777;
+  -webkit-box-shadow: 2px 2px 2px #777777;
+  -moz-box-shadow: 2px 2px 2px #777777;
 }
 div#ie6 div#tracksArea dl.track dt.image img {
   width: 34px;
-  vertical-align: middle;
-  box-shadow: 2px 2px 2px black;
-  -webkit-box-shadow: 2px 2px 2px black;
-  -moz-box-shadow: 2px 2px 2px black;
+  padding: 1px;
+  border: 1px solid #777777;
 }
 div#ie6 div#tracksArea dl.track dt.image img.noimage {
   height: 34px;

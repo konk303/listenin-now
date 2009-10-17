@@ -13,6 +13,10 @@ div#container
 h1
   /* hidden by default
   display: none
+  margin: 5px 0 0
+  font:
+    size: 138.5%
+    weight: bold
 a
   color = !color_blue
   text-decoration: none
@@ -28,7 +32,7 @@ div#userArea
   background = !color_gray
   div.canvas &
     float: left
-    width: 670px
+    width: 660px
     padding:
       bottom: 10px
       right: 10px
@@ -123,13 +127,12 @@ div#tracksArea
   padding-left: 5px
   div.canvas &
     float: left
-    min-height: 300px
-    width: 450px
+    width: 460px
 
 /* rankingsArea
 div#rankingsArea
   float: right
-  width: 200px
+  width: 180px
   div.profile &,
   div.home &
     display: none
@@ -137,7 +140,7 @@ div#rankingsArea
 /* accountArea
 div#accountArea
   float: right
-  width: 200px
+  width: 180px
   padding: 5px 0 10px
   text-align: right
   p.account a
@@ -194,11 +197,9 @@ dl
     div.profile &
       overflow: hidden
       margin: 3px 4px 3px 0
-      padding: 3px 10px 2px
+      padding: 1px 10px 4px
     &:hover
       background = !color_whity
-    > dt.image
-      float: left
     > dd
       > p
         white-space: nowrap
@@ -211,7 +212,11 @@ dl
         &.album,
         &.date
           display: none
+        div.canvas &.album,
+        div.canvas &.date
+          display: block
           position: absolute
+          max-width: 60%
           padding: 0 5px
           color = !color_lighter
           font-size: 85%
@@ -222,24 +227,23 @@ dl
           right: 0
           bottom: 5px
         &.playcount
-          padding-top: 1em
-          text-align: right
+          float: right
           color = !color_lighter
           font-size: 85%
-        div.canvas &.album,
-        div.canvas &.date
-          display: block
   &.track
     > dt.image
       float: left
       +image_clip
     > dd
-      margin-left: 40px
+      margin-left: 45px
   &.ranking
     > dt.image
+      margin-bottom: 5px
       +image_clip(126px)
     > dd
-      margin-left: 70px
+      +clearfix
+      p.name
+        float: left
 
 /* iTS, community
 div#tracksArea dl.track
