@@ -61,7 +61,7 @@ listenin-now_class.js
                     this.title.appendTo(this.showArea).show();
                 }
                 $.each(this.trackDatas, this.createEachDomHandler);
-                window.setTimeout(function() {gadgets.window.adjustHeight();}, 1000);
+                gadgets.window.adjustHeight($('html').attr('scrollHeight'));
             }
         },
         createEachDom: function(i, data) {
@@ -594,13 +594,13 @@ listenin-now_class.js
                 $('<span class="button_edit" />').attr("title", "アカウント変更")
                 .click(this.showInputBoxHandler)
                 .appendTo("p.accountMessage", this.showArea);
-            } else {}
-            if (Class.View().name == "canvas") {
-                $("<h1 />").text(this.name + "さんのリスニンなう").
-                prepend('<img src="' + this.thumbnail + '" alt="' + this.name + '" />').
-                appendTo(this.accountArea).show();
+            } else {
+                if (Class.View().name == "canvas") {
+                    $("<h1 />").text(this.name + "さんのリスニンなう").
+                    prepend('<img src="' + this.thumbnail + '" alt="' + this.name + '" />').
+                    appendTo(this.accountArea).show();
+                }
             }
-//            }
         },
         showInputBox: function() {
             if (!this.messageArea) {
@@ -649,7 +649,7 @@ listenin-now_class.js
             var req = new Class.OsRequest();
             var idSpec = req.idSpec({userId: "OWNER", groupId: "FRIENDS"});
             var params = {};
-            //params[req.PeopleRequestFields("FILTER")] = req.FilterType("HAS_APP");
+            params[req.PeopleRequestFields("FILTER")] = req.FilterType("HAS_APP");
             params[req.PeopleRequestFields("FIRST")] = this.offset;
             params[req.PeopleRequestFields("MAX")] = this.DataPerPage;
             params[req.PeopleRequestFields("PROFILE_DETAILS")] = [

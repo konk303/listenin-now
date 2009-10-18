@@ -75,6 +75,7 @@ div#ie67 div.canvas div#userArea {
 div.home div#userArea,
 div.profile div#userArea {
   padding-bottom: 1px;
+  overflow: hidden;
 }
 
 div#peopleArea {
