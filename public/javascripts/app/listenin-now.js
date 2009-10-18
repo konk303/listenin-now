@@ -23,7 +23,7 @@ listenin-now.js
             //things to do AFTER ownerinfo are fetched.
             owner.show();
             if (view.name == 'canvas') {
-                gadgets.window.adjustHeight(1750);
+                gadgets.window.adjustHeight(1700);
                 view.initCanvas();
                 Class.WhatsNew().display();
                 Class.Friends().display();

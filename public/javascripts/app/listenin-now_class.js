@@ -61,7 +61,10 @@ listenin-now_class.js
                     this.title.appendTo(this.showArea).show();
                 }
                 $.each(this.trackDatas, this.createEachDomHandler);
-                gadgets.window.adjustHeight($('html').attr('scrollHeight'));
+                var windowHeight = $('body').attr('scrollHeight') + (
+                    Class.View().name == 'canvas' ? 15 : 0
+                );
+                gadgets.window.adjustHeight(windowHeight);
             }
         },
         createEachDom: function(i, data) {
