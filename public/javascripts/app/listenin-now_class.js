@@ -283,7 +283,7 @@ listenin-now_class.js
             $("p.playcount", showObj).text(data.playcount + "回再生");
             //iTS link
             var button_iTS = $("div.button_iTS", showObj);
-            new Class.Search_iTS(button_iTS, data.name);
+            new Class.Search_iTS(button_iTS, data.name,{entity: "album"});
             //community link
             var button_community = $("div.button_community", showObj);
             new Class.SearchCommunity(button_community, data.name);
@@ -337,9 +337,17 @@ listenin-now_class.js
     // search_iTS
     // see http://www.apple.com/itunesaffiliates/API/AffiliatesSearch2.1.pdf
     Class.Search_iTS = $.classUtil.createClass({
-        init: function(targetArea, term) {
+        init: function(targetArea, term, queryOption) {
             this.targetArea = targetArea;
             this.term = term;
+            this.queries = $.extend({
+                term: this.term,
+                country: "JP",
+                media: "music",
+                entity: "musicTrack",
+                limit: 20,
+                lang: "ja_jp"
+            },queryOption);
             this.iTS_apiUrl = "http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStoreServices.woa/wa/wsSearch?";
             this.requested = false;
             this.loading = new Class.LoadingImage();
@@ -356,15 +364,7 @@ listenin-now_class.js
             params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
             params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.NONE;
             params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-            var queries = {
-                term: this.term,
-                country: "JP",
-                media: "music",
-                entity: "musicTrack",
-                limit: 20,
-                lang: "ja_jp"
-            };
-            var requestUrl = this.iTS_apiUrl + $.param(queries);
+            var requestUrl = this.iTS_apiUrl + $.param(this.queries);
             gadgets.io.makeRequest(requestUrl, this.responseHandler, params);
         },
         response: function(res) {
@@ -423,13 +423,15 @@ listenin-now_class.js
             })
             .appendTo(a).parent().appendTo(dt).parent().appendTo(this.dl);
             //track(name)
-            $('<a />')
-            .attr({"href": data.trackViewUrl, "target": "_blank"})
-            .text(data.trackName)
-            .append('<span class="price">' + data.trackPrice + '円</span>')
-            .wrap('<p class="name" />')
-            .parent()
-            .appendTo(dd);
+            if (data.wrapperType != "collection") {
+                $('<a />')
+                .attr({"href": data.trackViewUrl, "target": "_blank"})
+                .text(data.trackName)
+                .append('<span class="price">' + data.trackPrice + '円</span>')
+                .wrap('<p class="name" />')
+                .parent()
+                .appendTo(dd);
+            }
             //album
             if (data.collectionId) {
                 $('<a />')
