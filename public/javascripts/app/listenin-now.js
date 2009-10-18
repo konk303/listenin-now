@@ -27,6 +27,7 @@ listenin-now.js
                 Class.WhatsNew().display();
                 Class.Friends().display();
             } else {
+                gadgets.window.adjustHeight(212);
                 view.initHomeProfile();
             }
         });

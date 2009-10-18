@@ -61,7 +61,9 @@ listenin-now_class.js
                     this.title.appendTo(this.showArea).show();
                 }
                 $.each(this.trackDatas, this.createEachDomHandler);
-                window.setTimeout(function() {gadgets.window.adjustHeight();}, 500);
+                if (Class.View().name == "canvas") {
+                    window.setTimeout(function() {gadgets.window.adjustHeight();}, 1000);
+                }
             }
         },
         createEachDom: function(i, data) {
@@ -383,7 +385,7 @@ listenin-now_class.js
         show: function() {
             if (!this.showArea) {
                 this.showArea = $('<div class="result_iTS" />')
-                .append('<h2>iTunes Store 検索</h2>')
+                .append('<h3>iTunes Store 検索</h3>')
                 .insertAfter(this.targetArea)
                 .click(function(e) {e.stopPropagation();});
                 this.closeButton = $('<div class="close_button" />').attr("title","閉じる")
@@ -569,21 +571,29 @@ listenin-now_class.js
             .text(this.lf_account)
             .wrap('<p class="accountMessage" />')
             .parent().prepend('<span>last.fm id: </span>').appendTo(this.showArea);
-            if (!this.linkInNavigation) {
-                this.linkInNavigation =
-                    $('<p title="' + this.name + 'さん@last.fm"><a class="external">last.fmで見る</a>').
-                appendTo(this.navigationArea);
+            if (Class.View().name == "canvas") {
+                if (!this.linkInNavigation) {
+                    this.linkInNavigation =
+                        $(
+                            '<p title="' + this.name +
+                                'さん@last.fm"><a class="external">last.fmで見る</a>'
+                        ).
+                    appendTo(this.navigationArea);
+                }
+                $("a", this.linkInNavigation).
+                attr("href", "http://www.last.fm/user/" + this.lf_account);
             }
-            $("a", this.linkInNavigation).attr("href", "http://www.last.fm/user/" + this.lf_account);
             if (this.isViewer) {
                 // add account update icon
                 $('<span class="button_edit" />').attr("title", "アカウント変更")
                 .click(this.showInputBoxHandler)
                 .appendTo("p.accountMessage", this.showArea);
             } else {}
+            if (Class.View().name == "canvas") {
                 $("<h1 />").text(this.name + "さんのリスニンなう").
                 prepend('<img src="' + this.thumbnail + '" alt="' + this.name + '" />').
                 appendTo(this.accountArea).show();
+            }
 //            }
         },
         showInputBox: function() {
@@ -672,7 +682,12 @@ listenin-now_class.js
         },
         createEachDom: function(i, data) {
             var showObj = this.template.clone();
-            $("dt a", showObj).attr("href", data.url);
+            $("dt a", showObj).attr("href", data.url).click(function(e) {
+                e.preventDefault();
+                gadgets.views.requestNavigateTo(
+                    Class.View().views["profile"], null, data.id
+                );
+            });
             $("dt img", showObj).attr({"src": data.image, title: data.name + "さん"});
 //             $("dt span.name", showObj).text(
 //                 data.name + "さん " + (data.age || data.gender ? "（" + data.gender + " " + data.age + "）" : "")

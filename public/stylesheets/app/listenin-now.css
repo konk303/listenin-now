@@ -90,7 +90,7 @@ div.profile div#peopleArea {
 }
 
 /* formAccount */
-div#mm_0 {
+div#mm_0 table {
   width: 200px;
 }
 
@@ -461,8 +461,8 @@ dl.ranking dd div.result_iTS {
   -webkit-box-shadow: 4px 4px 4px black;
   -moz-box-shadow: 4px 4px 4px black;
 }
-dl.track dd div.result_iTS h2,
-dl.ranking dd div.result_iTS h2 {
+dl.track dd div.result_iTS h3,
+dl.ranking dd div.result_iTS h3 {
   text-align: center;
   margin: 0 10px 5px;
   border: 1px solid #aec0d8;
@@ -541,21 +541,26 @@ ol.pager {
   margin: 10px 0;
   text-align: center;
 }
+ol.pager ol,
 ol.pager li {
   display: -moz-inline-box;
   display: inline-block;
 }
+ol.pager ol.prev,
+ol.pager ol.next,
 ol.pager li.prev,
 ol.pager li.next {
   min-width: 1.5em;
 }
+ol.pager ol a,
 ol.pager li a {
-  display: block;
   padding: 0 5px;
 }
+ol.pager ol a:hover,
 ol.pager li a:hover {
   background: #e4e6d9;
 }
+ol.pager ol span.thisPage,
 ol.pager li span.thisPage {
   padding: 0 5px;
 }
@@ -593,22 +598,10 @@ dl.friends dt,
 dl.people dt {
   margin-bottom: 5px;
 }
-dl.friends dt:after,
-dl.people dt:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-div#ie67 dl.friends dt,
-div#ie67 dl.people dt {
-  height: 1%;
-}
 dl.friends dt span.image,
 dl.people dt span.image {
-  display: block;
-  float: left;
+  display: -moz-inline-box;
+  display: inline-block;
   max-width: 80px;
   max-height: 80px;
   overflow: hidden;

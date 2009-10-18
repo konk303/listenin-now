@@ -62,7 +62,8 @@ div#peopleArea
 
 /* formAccount
 div#mm_0
-  width: 200px
+  table
+    width: 200px
 form#formAccount
   padding: 5px
   font-size: 13px
@@ -293,7 +294,7 @@ dl.ranking
       +cornered_no_shadow(10px)
       +cornered_partial("top", "left", 0)
       +shadowed(!color_black, 4px)
-      h2
+      h3
         text-align: center
         margin: 0 10px 5px
         border: 1px solid #{!color_its_bg}
@@ -341,13 +342,13 @@ dl.ranking
 ol.pager
   margin: 10px 0
   text-align: center
+  & ol,
   & li
     +inline-block
     &.prev,
     &.next
       min-width: 1.5em
     a
-      display: block
       padding: 0 5px
       &:hover
         background = !color_whity
@@ -367,10 +368,8 @@ dl
       background= !color_gray
     dt
       margin-bottom: 5px
-      +clearfix
       span.image
-        display: block
-        float: left
+        +inline-block
         +image_clip(76px)
       span.name
         display: none

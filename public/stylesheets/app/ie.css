@@ -10,6 +10,13 @@ div#ie6 div.profile {
   padding-bottom: 1px !important;
 }
 
+/* display inline-block to block elements, in ie67 */
+div#ie67 ol.pager ol,
+div#ie67 ol.pager li {
+  display: inline;
+  height: 1%;
+}
+
 /* background verticaly center to inline doesn't work well, in ie67. */
 div#ie67 div#accountArea p.account a {
   background-position: right bottom;
