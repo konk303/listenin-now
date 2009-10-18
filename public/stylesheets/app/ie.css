@@ -23,12 +23,7 @@ div#ie67 div#accountArea p.account a {
 }
 
 /* child selector, ng in ie6. */
-div#ie6 div.canvas {
-  width: 600px;
-  margin-right: auto;
-}
-
-div#ie6 div#tracksArea dl.track dt.image {
+div#ie6 dl.track dt.image {
   float: left;
   max-width: 38px;
   max-height: 38px;
@@ -37,71 +32,127 @@ div#ie6 div#tracksArea dl.track dt.image {
   box-shadow: 2px 2px 2px #777777;
   -webkit-box-shadow: 2px 2px 2px #777777;
   -moz-box-shadow: 2px 2px 2px #777777;
+  width: 38px;
+  height: 38px;
 }
-div#ie6 div#tracksArea dl.track dt.image img {
+div#ie6 div#ie6 dl.track dt.image {
+  width: 38px;
+  height: 38px;
+}
+div#ie6 dl.track dt.image img {
   width: 34px;
   padding: 1px;
   border: 1px solid #777777;
 }
-div#ie6 div#tracksArea dl.track dt.image img.noimage {
+div#ie6 dl.track dt.image img.noimage {
   height: 34px;
 }
-div#ie6 div#tracksArea dl.track dd {
+div#ie6 dl.track dd {
   margin-left: 40px;
 }
-div#ie6 div#tracksArea dl.track dd p {
+div#ie6 dl.ranking dt.image {
+  margin-bottom: 5px;
+  max-width: 130px;
+  max-height: 130px;
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: 2px 2px 2px #777777;
+  -webkit-box-shadow: 2px 2px 2px #777777;
+  -moz-box-shadow: 2px 2px 2px #777777;
+  width: 130px;
+  height: 130px;
+}
+div#ie6 div#ie6 dl.ranking dt.image {
+  width: 130px;
+  height: 130px;
+}
+div#ie6 dl.ranking dt.image img {
+  width: 126px;
+  padding: 1px;
+  border: 1px solid #777777;
+}
+div#ie6 dl.ranking dt.image img.noimage {
+  height: 126px;
+}
+div#ie6 dl.ranking dd:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+div#ie67 div#ie6 dl.ranking dd {
+  height: 1%;
+}
+div#ie6 dl.ranking dd p.name {
+  float: left;
+}
+div#ie6 dl.track dd p,
+div#ie6 dl.ranking dd p {
   white-space: nowrap;
   overflow: hidden;
 }
-div#ie6 div#tracksArea dl.track dd p.name,
-div#ie6 div#tracksArea dl.track dd p.artist {
-  /* nothing yet. */
-}
-div#ie6 div#tracksArea dl.track dd p.name a {
+div#ie6 dl.track dd p.name a,
+div#ie6 dl.ranking dd p.name a {
   color: #d10039;
 }
-div#ie6 div#tracksArea dl.track dd p.album,
-div#ie6 div#tracksArea dl.track dd p.date {
+div#ie6 dl.track dd p.album,
+div#ie6 dl.track dd p.date,
+div#ie6 dl.ranking dd p.album,
+div#ie6 dl.ranking dd p.date {
   display: none;
+}
+div#ie6 div.canvas dl.track dd p.album,
+div#ie6 div.canvas dl.track dd p.date,
+div#ie6 div.canvas dl.ranking dd p.album,
+div#ie6 div.canvas dl.ranking dd p.date {
+  display: block;
   position: absolute;
   padding: 0 5px;
   color: #777777;
   font-size: 85%;
 }
-div#ie6 div#tracksArea dl.track dd p.album {
+div#ie6 dl.track dd p.album,
+div#ie6 dl.ranking dd p.album {
   right: 0;
   top: 5px;
 }
-div#ie6 div#tracksArea dl.track dd p.date {
+div#ie6 dl.track dd p.date,
+div#ie6 dl.ranking dd p.date {
   right: 0;
   bottom: 5px;
 }
-
-div#ie6 div.canvas div#tracksArea dl.track dd p.album,
-div#ie6 div.canvas div#tracksArea dl.track dd p.date {
-  display: block;
+div#ie6 dl.track dd p.playcount,
+div#ie6 dl.ranking dd p.playcount {
+  float: right;
+  color: #777777;
+  font-size: 85%;
 }
 
 /* white-space:nowrap & overflow:hidden needs width, ng in ie6. */
-div#ie6 div.home div#tracksArea dl.track dd p,
-div#ie6 div.profile div#tracksArea dl.track dd p {
-  width: 135px;
+div#ie6 div.home dl.track dd p,
+div#ie6 div.profile dl.track dd p {
+  width: 133px;
 }
 
 /* also have to cancel above changes for childs, in ie6. */
-div#ie6 div#tracksArea dl.track dd div.result_iTS dd {
+div#ie6 dl.track dd div.result_iTS dd,
+div#ie6 dl.ranking dd div.result_iTS dd {
   margin-left: 0;
 }
-div#ie6 div#tracksArea dl.track dd div.result_iTS p {
+div#ie6 dl.track dd div.result_iTS dd p,
+div#ie6 dl.ranking dd div.result_iTS dd p {
   width: auto;
   white-space: normal;
   overflow: visible;
 }
-div#ie6 div#tracksArea dl.track dd div.result_iTS p.album {
+div#ie6 dl.track dd div.result_iTS dd p.album,
+div#ie6 dl.ranking dd div.result_iTS dd p.album {
   position: static;
   padding: 0;
 }
-div#ie6 div#tracksArea dl.track dd div.result_iTS dl.tracks_iTS a {
+div#ie6 dl.track dd div.result_iTS dl.tracks_iTS a,
+div#ie6 dl.ranking dd div.result_iTS dl.tracks_iTS a {
   color: black;
 }
 
@@ -120,19 +171,24 @@ div#ie6 div.profile div#navigationArea p {
 }
 
 /* content:hover to dl,p,etc..., ng in ie6. */
-div#ie6 div#tracksArea dl.track.hover {
+div#ie6 dl.track.hover,
+div#ie6 dl.ranking.hover {
   background: #e4e6d9;
 }
-div#ie6 div#tracksArea dl.track.hover dd div.button_iTS,
-div#ie6 div#tracksArea dl.track.hover dd div.button_community {
+div#ie6 dl.track.hover dd div.button_iTS,
+div#ie6 dl.track.hover dd div.button_community,
+div#ie6 dl.ranking.hover dd div.button_iTS,
+div#ie6 dl.ranking.hover dd div.button_community {
   display: block;
 }
 
 /* max-width to dl,p,etc..., ng in ie6. */
-div#ie6 div#tracksArea dd div.result_iTS dl.tracks_iTS {
+div#ie6 dl.track dd div.result_iTS dl.tracks_iTS,
+div#ie6 dl.ranking dd div.result_iTS dl.tracks_iTS {
   height: 200px;
 }
-div#ie6 div#tracksArea dd div.result_iTS dl.tracks_iTS dt img {
+div#ie6 dl.track dd div.result_iTS dl.tracks_iTS dt img,
+div#ie6 dl.ranking dd div.result_iTS dl.tracks_iTS dt img {
   width: 100px;
 }
 

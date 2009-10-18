@@ -204,42 +204,14 @@ dl
     padding: 5px 10px
     background = !color_white
     +cornered
-    +clearfix
     div.home &,
     div.profile &
-      overflow: hidden
       margin: 2px 4px 2px 0
       padding: 2px 10px 4px
     &:hover
       background = !color_whity
-    > dd
-      > p
-        white-space: nowrap
-        overflow: hidden
-        &.name a
-          color = !color_red
-        &.album,
-        &.date
-          display: none
-        div.canvas &.album,
-        div.canvas &.date
-          display: block
-          position: absolute
-          max-width: 60%
-          padding: 0 5px
-          color = !color_lighter
-          font-size: 85%
-        &.album
-          right: 0
-          top: 5px
-        &.date
-          right: 0
-          bottom: 5px
-        &.playcount
-          float: right
-          color = !color_lighter
-          font-size: 85%
   &.track
+    +clearfix
     > dt.image
       float: left
       +image_clip
@@ -254,6 +226,34 @@ dl
       +clearfix
       p.name
         float: left
+  &.track,
+  &.ranking
+    > dd
+      > p
+        white-space: nowrap
+        overflow: hidden
+        &.name a
+          color = !color_red
+        &.album,
+        &.date
+          display: none
+          div.canvas &
+            display: block
+            position: absolute
+            max-width: 60%
+            padding: 0 5px
+            color = !color_lighter
+            font-size: 85%
+        &.album
+          right: 0
+          top: 5px
+        &.date
+          right: 0
+          bottom: 5px
+        &.playcount
+          float: right
+          color = !color_lighter
+          font-size: 85%
 
 /* iTS, community
 dl.track,

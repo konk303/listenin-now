@@ -61,9 +61,7 @@ listenin-now_class.js
                     this.title.appendTo(this.showArea).show();
                 }
                 $.each(this.trackDatas, this.createEachDomHandler);
-                if (Class.View().name == "canvas") {
-                    window.setTimeout(function() {gadgets.window.adjustHeight();}, 1000);
-                }
+                window.setTimeout(function() {gadgets.window.adjustHeight();}, 1000);
             }
         },
         createEachDom: function(i, data) {
@@ -287,6 +285,12 @@ listenin-now_class.js
             //community link
             var button_community = $("div.button_community", showObj);
             new Class.SearchCommunity(button_community, data.name);
+
+            // only for IE6
+            showObj.hover( 
+                function(){$(this).addClass("hover");},
+                function(){$(this).removeClass("hover");}
+            );
 
             this.showArea.append(showObj);
         }

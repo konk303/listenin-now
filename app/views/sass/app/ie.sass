@@ -24,84 +24,118 @@ div#ie67 div#accountArea p.account a
   background-position: right bottom
 
 /* child selector, ng in ie6.
-div#ie6 div.canvas
-  width: 600px
-  margin-right: auto
-div#ie6 div#tracksArea dl.track
-  dt.image
-    float: left
-    +image_clip
-  dd
-    margin-left: 40px
-    p
-      white-space: nowrap
-      overflow: hidden
-      &.name,
-      &.artist
-        /* nothing yet.
-      &.name a
-        color = !color_red
-      &.album,
-      &.date
-        display: none
-        position: absolute
-        padding: 0 5px
-        color = !color_lighter
-        font-size: 85%
-      &.album
-        right: 0
-        top: 5px
-      &.date
-        right: 0
-        bottom: 5px
-div#ie6 div.canvas div#tracksArea dl.track dd p
-  &.album,
-  &.date
-    display: block
+div#ie6
+  dl
+    &.track
+      dt.image
+        float: left
+        +image_clip
+        width= 34px + 4px
+        height= 34px + 4px
+      dd
+        margin-left: 40px
+    &.ranking
+      dt.image
+        margin-bottom: 5px
+        +image_clip(126px)
+        width= 126px + 4px
+        height= 126px + 4px
+      dd
+        +clearfix
+        p.name
+          float: left
+    &.track,
+    &.ranking
+      dd p
+        white-space: nowrap
+        overflow: hidden
+        &.name a
+          color = !color_red
+        &.album,
+        &.date
+          display: none
+  div.canvas
+    dl.track,
+    dl.ranking
+      dd p
+        &.album,
+        &.date
+          display: block
+          position: absolute
+          padding: 0 5px
+          color = !color_lighter
+          font-size: 85%
+  dl
+    &.track,
+    &.ranking
+      dd p
+        &.album
+          right: 0
+          top: 5px
+        &.date
+          right: 0
+          bottom: 5px
+        &.playcount
+          float: right
+          color = !color_lighter
+          font-size: 85%
 
 /* white-space:nowrap & overflow:hidden needs width, ng in ie6.
-div#ie6 div.home div#tracksArea dl.track dd p,
-div#ie6 div.profile div#tracksArea dl.track dd p
-  width: 135px
+div#ie6
+  div.home,
+  div.profile
+    dl.track dd p
+      width= 212px - 5px - 4px - 20px - 45px - 5px
 
 /* also have to cancel above changes for childs, in ie6.
-div#ie6 div#tracksArea dl.track dd div.result_iTS
-  dd
-    margin-left: 0
-  p
-    width: auto
-    white-space: normal
-    overflow: visible
-    &.album
-      position: static
-      padding: 0
-  dl.tracks_iTS a
-    color = !color_black
+div#ie6
+  dl.track,
+  dl.ranking
+    dd div.result_iTS
+      dd
+        margin-left: 0
+        p
+          width: auto
+          white-space: normal
+          overflow: visible
+          &.album
+            position: static
+            padding: 0
+      dl.tracks_iTS a
+        color = !color_black
 
 /* position:fixed, ng in ie6.
-div#ie6 div.home div#navigationArea,
-div#ie6 div.profile div#navigationArea
-  position: absolute
-  bottom: auto
-  right: auto
-  top: 0
-  left: 0
-  & p
-    background = !color_black
+div#ie6
+  div.home,
+  div.profile
+    div#navigationArea
+      position: absolute
+      bottom: auto
+      right: auto
+      top: 0
+      left: 0
+      & p
+        background = !color_black
 
 /* content:hover to dl,p,etc..., ng in ie6.
-div#ie6 div#tracksArea dl.track.hover
-  background = !color_whity
-  dd div
-    &.button_iTS,
-    &.button_community
-      display: block
+div#ie6
+  dl.track,
+  dl.ranking
+    &.hover
+      background = !color_whity
+      dd div
+        &.button_iTS,
+        &.button_community
+          display: block
 
 /* max-width to dl,p,etc..., ng in ie6.
-div#ie6 div#tracksArea dd div.result_iTS dl.tracks_iTS
-  height: 200px
-  dt img
-    width: 100px
+div#ie6 
+  dl.track,
+  dl.ranking
+    dd div.result_iTS dl.tracks_iTS
+      height: 200px
+      dt img
+        width: 100px
 
 /* anti hover background flicker, in ie6. */
 div#ie6
