@@ -58,10 +58,10 @@ listenin-now_class.js
                 this.showArea.append(this.message);
             } else {
                 if (Class.View().name == "canvas") {
-                    this.showArea.append(this.title.show());
+                    this.title.appendTo(this.showArea).show();
                 }
                 $.each(this.trackDatas, this.createEachDomHandler);
-                gadgets.window.adjustHeight();
+                window.setTimeout(function() {gadgets.window.adjustHeight();}, 500);
             }
         },
         createEachDom: function(i, data) {
@@ -160,6 +160,7 @@ listenin-now_class.js
                 this.imgObj.
                 attr("src", this.images[this.artist][this.size]["#text"]).
                 removeClass("noimage");
+                //gadgets.window.adjustHeight();
             }
         },
         request: function() {
@@ -259,7 +260,7 @@ listenin-now_class.js
             if (this.message.length) {
                 this.showArea.append(this.message);
             } else {
-                this.showArea.append(this.title.show());
+                this.title.appendTo(this.showArea).show();
                 $.each(this.rankingDatas, this.createEachDomHandler);
                 //gadgets.window.adjustHeight();
             }
@@ -568,20 +569,22 @@ listenin-now_class.js
             .text(this.lf_account)
             .wrap('<p class="accountMessage" />')
             .parent().prepend('<span>last.fm id: </span>').appendTo(this.showArea);
-            if (!this.linkInNavigation) this.linkInNavigation =
-                $('<p title="' + this.name + 'さん@last.fm"><a class="external>last.fmで見る</a></p>').
-            appendTo(this.navigationArea);
+            if (!this.linkInNavigation) {
+                this.linkInNavigation =
+                    $('<p title="' + this.name + 'さん@last.fm"><a class="external">last.fmで見る</a>').
+                appendTo(this.navigationArea);
+            }
             $("a", this.linkInNavigation).attr("href", "http://www.last.fm/user/" + this.lf_account);
             if (this.isViewer) {
                 // add account update icon
                 $('<span class="button_edit" />').attr("title", "アカウント変更")
                 .click(this.showInputBoxHandler)
                 .appendTo("p.accountMessage", this.showArea);
-            } else {
+            } else {}
                 $("<h1 />").text(this.name + "さんのリスニンなう").
                 prepend('<img src="' + this.thumbnail + '" alt="' + this.name + '" />').
                 appendTo(this.accountArea).show();
-            }
+//            }
         },
         showInputBox: function() {
             if (!this.messageArea) {
@@ -630,7 +633,7 @@ listenin-now_class.js
             var req = new Class.OsRequest();
             var idSpec = req.idSpec({userId: "OWNER", groupId: "FRIENDS"});
             var params = {};
-            params[req.PeopleRequestFields("FILTER")] = req.FilterType("HAS_APP");
+            //params[req.PeopleRequestFields("FILTER")] = req.FilterType("HAS_APP");
             params[req.PeopleRequestFields("FIRST")] = this.offset;
             params[req.PeopleRequestFields("MAX")] = this.DataPerPage;
             params[req.PeopleRequestFields("PROFILE_DETAILS")] = [
@@ -661,7 +664,7 @@ listenin-now_class.js
         show: function() {
             this.loading.hide();
             if (this.datas.length) {
-                this.showArea.append(this.title.show());
+                this.title.appendTo(this.showArea).show();
                 this.pager.display(this.offset, this.totalSize);
                 $.each(this.datas, this.createEachDomHandler);
                 //gadgets.window.adjustHeight();
@@ -864,7 +867,7 @@ listenin-now_class.js
         show: function() {
             this.loading.hide();
             if (this.entries.length) {
-                this.showArea.append(this.title.show());
+                this.title.appendTo(this.showArea).show();
                 $.each(this.entries, this.createEachDomHandler);
             }
         },

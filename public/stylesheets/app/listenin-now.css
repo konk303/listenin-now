@@ -312,12 +312,6 @@ dl.ranking > dd > p {
   white-space: nowrap;
   overflow: hidden;
 }
-dl.track > dd > p.name,
-dl.track > dd > p.artist,
-dl.ranking > dd > p.name,
-dl.ranking > dd > p.artist {
-  /* nothing yet. */
-}
 dl.track > dd > p.name a,
 dl.ranking > dd > p.name a {
   color: #d10039;
