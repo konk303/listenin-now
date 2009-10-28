@@ -39,30 +39,33 @@ post '/api/artist' do
 end
 
 post '/api/user_topArtist' do
-  user_top_artists = LastFmUserTopArtists.first_or_create(:user => params[:user])
-  user_top_artists.attributes = {
-    :artists => [],
-    :container => params[:container],
-    :updater_id => params[:updater_id],
-    :updater_name => params[:updater_name]
-  }
   parsed_data = JSON.parse(params[:data])
-  #flag cached
-  parsed_data['topartists'][:cached_by_listenin_now] = true
-  user_top_artists.data = JSON.generate(parsed_data)
-  # also update artists with info inside user.topArtist
-  parsed_data['topartists']["artist"].each do |data|
-    # fix me. better use has_many relations when dm-appengine supported it.
-    user_top_artists.artists << data["name"]
-    artist = LastFmArtist.first_or_create(:name => data["name"])
-    artist.update(
-                  :image => JSON.generate(data["image"]),
-                  :container => params[:container],
-                  :updater_id => params[:updater_id],
-                  :updater_name => params[:updater_name]
-                  )
+  if parsed_data['topartists']['artist']
+    user_top_artists = LastFmUserTopArtists.first_or_create(:user => params[:user])
+    user_top_artists.attributes = {
+      :artists => [],
+      :container => params[:container],
+      :updater_id => params[:updater_id],
+      :updater_name => params[:updater_name]
+    }
+    #flag cached
+    parsed_data['topartists'][:cached_by_listenin_now] = true
+    user_top_artists.data = JSON.generate(parsed_data)
+    # also update artists with info inside user.topArtist
+    parsed_data['topartists']["artist"].each do |data|
+      # fix me. better use has_many relations when dm-appengine supported it.
+      user_top_artists.artists << data["name"]
+      #user_top_artists.artists << java.lang.String.new(data["name"])
+      artist = LastFmArtist.first_or_create(:name => data["name"])
+      artist.update(
+                    :image => JSON.generate(data["image"]),
+                    :container => params[:container],
+                    :updater_id => params[:updater_id],
+                    :updater_name => params[:updater_name]
+                    )
+    end
+    user_top_artists.save
   end
-  user_top_artists.save
   content_type 'application/json'
   JSON.generate({:status => "ok"})
 end
