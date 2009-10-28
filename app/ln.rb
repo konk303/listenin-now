@@ -2,9 +2,9 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'sass'
+require 'builder'
 require 'yaml'
 require 'json'
-require 'builder'
 require 'appengine-apis/logger'
 require 'appengine-apis/urlfetch'
 require 'appengine-apis/users'
@@ -13,6 +13,8 @@ require 'dm-core'
 DataMapper.setup(:default, "appengine://auto")
 # Load all ruby files in app/models
 Dir.glob(::File.join(%w[app models ** *.rb])).each {|fn|require fn}
+# Load all ruby files in app/services
+Dir.glob(::File.join(%w[app services ** *.rb])).each {|fn|require fn}
 # datastore lang patch
 require 'lib/datastore_patch'
 
@@ -64,7 +66,7 @@ before do
   @body_id = request.path_info.split('/')[1] || 'index'
   @page_title = " - mixiアプリ「リスニンなう」"
   @description = "opensocial gadget / mixiアプリ 「リスニンなう」の紹介です。"
-#  p @admin, request.path_info, options.environment
+  #p request.path_info, options.environment
 end
 
 

@@ -9,12 +9,11 @@
       %dt トップアーティストLastFmUserTopArtists
       %dd
         %h3 確認
-        %form{:method => "get", :action => '/api/lastfm'}
+        %form{:method => "get", :action => '/api/lastfm/user.getTopArtists'}
           %dl
             %dt ユーザー
             %dd<
               %input{:name => "user"}
-              %input{:name => "method", :value => "user.getTopArtists", :type => "hidden"}
           %input{:type => "submit", :value => "確認"}>
         %h3 登録
         %form{:method => "post", :action => '/api/user_topArtist'}
@@ -32,12 +31,11 @@
       %dt アーティストLastFmArtist
       %dd
         %h3 確認
-        %form{:method => "get", :action => '/api/lastfm'}
+        %form{:method => "get", :action => '/api/lastfm/artist.getInfo'}
           %dl
             %dt アーティスト名
             %dd<
               %input{:name => "artist"}
-              %input{:name => "method", :value => "artist.getInfo", :type => "hidden"}
           %input{:type => "submit", :value => "確認"}>
         %h3 登録
         %form{:method => "post", :action => '/api/artist'}

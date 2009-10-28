@@ -3,30 +3,27 @@ get '/xml/listenin-now.xml' do
   builder :'app/ln'
 end
 
-get '/api/lastfm' do
+#redirect deprecated url
+get '/api/lastfm$' do
+  # fixme. should move params too.
+  redirect File.join(request.path_info, params[:method]), 301
+end
+
+get '/api/lastfm/:method' do
 #   response = LastFm.new(options.last_fm['api_key']).get(params)
 #   content_type response[:content_type], :charset => response[:charset]
 #   status response[:code]
 #   response[:body]
   #memcache doesn't expire as I expected. use redirect
-  lastfm = LastFm.new(options.last_fm['api_key'])
-  lastfm.build_query(params)
-  url = lastfm.build_target_uri
-
-  # should be moved to last.fm class
-  case params[:method]
-  when "artist.getInfo"
-    if artist = LastFmArtist.get_unexpired(params[:artist])
-      content_type 'application/json'
-      halt '{"artist":{"name":"' + artist.name + '","image":' + artist.image + ',"cached_by_listenin_now":true}}'
-    end
-  when "user.getTopArtists"
-    if user_top_artists = LastFmUserTopArtists.get_unexpired(params[:user])
-      content_type 'application/json'
-      halt user_top_artists.data
-    end
+  lastfm = Service::LastFm.new(options.last_fm['api_key'], params[:method]).
+    params(params)
+  begin
+    content_type 'application/json'
+    lastfm.get
+  rescue => e
+    Log.warn(e)
+    redirect lastfm.redirect_uri, 302
   end
-  redirect url.to_s, 302
 end
 
 post '/api/artist' do

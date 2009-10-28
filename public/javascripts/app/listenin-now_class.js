@@ -26,11 +26,10 @@ listenin-now_class.js
         },
         request: function() {
             var queries = {
-                method: "user.getRecentTracks",
                 user: this.account,
                 limit: 30
             };
-            Class.LastFm().request(queries, this.responseHandler);
+            Class.LastFm("user.getRecentTracks").request(queries, this.responseHandler);
         },
         response: function(res, message) {
             this.message = message;
@@ -169,10 +168,9 @@ listenin-now_class.js
         request: function() {
             this.images[this.artist] = this.FETCHING_STRING;
             var queries = {
-                method: "artist.getInfo",
                 artist: this.artist
             };
-            Class.LastFm().request(queries, this.responseHandler);
+            Class.LastFm("artist.getInfo").request(queries, this.responseHandler);
         },
         response: function(res, message) {
             if (!message.length && res.artist) {
@@ -221,10 +219,9 @@ listenin-now_class.js
         },
         request: function() {
             var queries = {
-                method: "user.getTopArtists",
                 user: this.account
             };
-            Class.LastFm().request(queries, this.responseHandler);
+            Class.LastFm("user.getTopArtists").request(queries, this.responseHandler);
         },
         response: function(res, message) {
             this.message = message;
@@ -828,13 +825,13 @@ listenin-now_class.js
     });
     //last.fm api
     Class.LastFm = $.classUtil.createClass({
-        init: function() {
-            this.lf_apiUrl = ListeninNowConfig.base_uri + "/api/lastfm?";
+        init: function(method) {
+            this.lf_apiUrl = ListeninNowConfig.base_uri + "/api/lastfm/" + method;
             this.responseHandler = $.classUtil.createHandler(this, this.response);
         },
         request: function(queries, callback) {
             this.callback = callback;
-            var requestUrl = this.lf_apiUrl + $.param(queries);
+            var requestUrl = this.lf_apiUrl + "?" + $.param(queries);
             var req = new Class.IoRequest();
             req.param("METHOD", req.io.MethodType.GET).
             param("AUTHORIZATION", req.io.AuthorizationType.NONE).
